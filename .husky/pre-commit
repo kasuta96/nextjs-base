@@ -39,7 +39,3 @@ npm run check-types ||
   false;
 )
 echo "${green}[Type Check OK]${reset}"
-
-# Now we can commit
-echo "${green}[All Check SUCCESS]${reset} You're doing great, Babe. ✅👍🎉✅
-❤️ I am committing this now ❤️\n"

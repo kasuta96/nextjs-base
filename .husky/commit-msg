@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+reset=`tput sgr0`
+red=`tput setaf 1`
+green=`tput setaf 2`
+cyan=`tput setaf 6`
+
+error=false
+
+# Check branch name
+branchRegex="^(feature|fix|hotfix)/.*$"
+if ! [[ $(git rev-parse --abbrev-ref HEAD) =~ $branchRegex ]];
+then
+  error=true
+  echo "🚨 ${red}Wrong branch name!${reset} 😕"
+  echo "It must start with ${cyan}feature/${reset} or ${cyan}fix/${reset} or ${cyan}hotfix/${reset}"
+fi
+
+# # Check commit msg
+# msg="$(cat $1)"
+# msgRegex="^\[[A-Z0-9-]+\] .*$"
+# if ! [[ $msg =~ $msgRegex ]];
+# then
+#   error=true
+#   echo "🚨 ${red}Wrong commit message!${reset} 😕"
+#   echo "It must start with ticket ID"
+#   echo "Exp: \"[TICKET-69] Fixed your ass =))\""
+# fi
+
+if $error;
+then false;
+fi
+
+# Now we can commit
+echo "${green}[All Check SUCCESS]${reset} You're doing great, Babe. ✅👍🎉✅
+❤️ I am committing this now ❤️\n"
