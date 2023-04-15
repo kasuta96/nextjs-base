@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+  @apply rounded-lg bg-gray-100 p-px shadow-lg dark:bg-gray-800 dark:shadow-black/20;
+}
