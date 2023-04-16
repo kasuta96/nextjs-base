@@ -52,7 +52,7 @@ export default function Dropdown({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={`absolute z-30 w-max max-w-sm origin-top-right divide-y divide-gray-200 rounded-md bg-gray-50 text-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:ring-gray-700 ${menu?.className}`}
+          className={`absolute z-30 max-w-sm origin-top-right divide-y divide-gray-200 rounded-md bg-gray-50 text-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:ring-gray-700 ${menu?.className}`}
         >
           {header && header}
           {menu && (

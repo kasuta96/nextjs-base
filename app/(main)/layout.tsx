@@ -15,19 +15,24 @@ export default async function RootLayout({
   }
 
   return (
-    <main className="h-screen overflow-y-scroll bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-gray-300">
-      <div className="lg:pl-60 xl:pl-72">
-        <div className="max-w-8xl mx-auto space-y-8 px-2 py-4 lg:px-8">
-          <div className="card">
-            <AddressBar />
-          </div>
+    <div className="flex h-screen flex-col justify-between">
+      <header></header>
+      <main className="mb-auto bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-gray-300">
+        <div className="mb-16 lg:mb-2 lg:pl-60">
+          <div className="max-w-8xl mx-auto space-y-8 px-2 py-4 lg:px-8">
+            <div className="card">
+              <AddressBar />
+            </div>
 
-          <div className="card">
-            <div className="rounded-lg p-3.5 lg:p-6">{children}</div>
+            <div className="card">
+              <div className="rounded-lg p-3.5 lg:p-6">{children}</div>
+            </div>
           </div>
         </div>
-      </div>
-      <Sidebar user={user} />
-    </main>
+      </main>
+      <footer>
+        <Sidebar user={user} />
+      </footer>
+    </div>
   )
 }

@@ -19,6 +19,8 @@ This project using the following stack:
 
 #### First Installation
 
+_I will be using pnpm as the default option. However, you still have the choice to use either npm or yarn._
+
 ```bash
 npm install
 # or
@@ -40,24 +42,20 @@ docker-compose up --build -d
 Generate the Prisma Client
 
 ```bash
-npx prisma generate
+pnpm prisma generate
 ```
 
 Run migrate on development:
 Should be use root user or use [shadow database](https://pris.ly/d/migrate-shadow)
 
 ```bash
-npx prisma migrate dev
-# or
-pnpx prisma migrate dev
+pnpm prisma migrate dev
 ```
 
 Run migrate on production:
 
 ```bash
-npx prisma migrate deploy
-# or
-pnpx prisma migrate deploy
+pnpm prisma migrate deploy
 ```
 
 #### Application
@@ -65,10 +63,6 @@ pnpx prisma migrate deploy
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
 ```
 
@@ -76,7 +70,31 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Learn More
 
+### Next.js
+
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Next.js Documentation](https://beta.nextjs.org/docs) - learn about Next.js features and API (Beta docs)
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+### Prisma
+
+Prisma is an open source next-generation ORM
+
+- [Prisma docs](https://www.prisma.io/docs/concepts/overview/what-is-prisma)
+- [Prisma schema reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference)
+
+When update database schema
+
+```bash
+# run migrate on development
+pnpm prisma migrate dev --name added_somethings
+# run
+pnpm prisma generate
+```
+
+### Design - UI/UX
+
+- [Tailwindcss](https://tailwindcss.com/docs/) - A utility-first CSS framework packed with classes
+- [HeadlessUI](https://headlessui.com/react/menu) - A Tailwindcss components library
+- [heroicons](https://heroicons.com/) - Icon components

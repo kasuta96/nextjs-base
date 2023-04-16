@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import clsx from 'clsx'
 import { useState } from 'react'
-import Byline from '@/components/navigation/byline'
+import Nav from '@/components/layout/nav'
 import { User } from '@/types/next-auth'
 
 export function Sidebar({ user }: { user: User }) {
@@ -14,7 +14,7 @@ export function Sidebar({ user }: { user: User }) {
 
   return (
     <>
-      <div className="fixed top-0 z-10 flex w-full flex-col border border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300 lg:bottom-0 lg:z-auto lg:w-60 2xl:w-72">
+      <div className="fixed top-0 z-10 flex w-full flex-col border border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300 lg:bottom-0 lg:z-auto lg:w-60">
         <div
           className={clsx('overflow-y-auto lg:static lg:block', {
             'fixed inset-x-0 bottom-0 top-0 mt-px bg-gray-50 dark:bg-gray-700':
@@ -51,11 +51,11 @@ export function Sidebar({ user }: { user: User }) {
               )
             })}
           </nav>
-          <Byline className="absolute hidden lg:block" user={user} />
+          <Nav className="absolute hidden lg:block" user={user} />
         </div>
       </div>
-      <Byline
-        className="absolute z-50 lg:hidden"
+      <Nav
+        className="fixed z-50 pb-4 lg:hidden"
         user={user}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -81,7 +81,7 @@ function SidebarItem({
       className={clsx(
         'flex space-x-2 rounded-md px-3 py-2 font-medium hover:bg-gray-200 dark:hover:bg-gray-800',
         {
-          'font-semibold text-sky-900 dark:text-sky-300': isActive,
+          'font-semibold text-sky-700 dark:text-sky-300': isActive,
         }
       )}
     >
