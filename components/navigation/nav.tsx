@@ -13,7 +13,7 @@ import {
 import { signOut } from 'next-auth/react'
 import { Dispatch, SetStateAction } from 'react'
 
-export default function Byline({
+export default function Nav({
   className,
   user,
   isOpen,
@@ -25,8 +25,10 @@ export default function Byline({
   setIsOpen?: Dispatch<SetStateAction<boolean>>
 }) {
   return (
-    <div className={`${className} inset-x-0 bottom-0 shadow-lg`}>
-      <div className="flex justify-between space-x-4 rounded-t-3xl bg-gray-50 px-5 py-3 text-gray-700 dark:bg-gray-700 dark:text-gray-300 lg:rounded-none lg:border-t lg:border-gray-300 lg:bg-inherit lg:dark:border-gray-700 lg:dark:bg-inherit">
+    <div
+      className={`inset-x-0 bottom-0 rounded-t-3xl bg-gray-50 px-5 py-3 text-gray-700 shadow-lg dark:bg-gray-700 dark:text-gray-300 lg:rounded-none lg:border-t lg:border-gray-300 lg:bg-inherit lg:dark:border-gray-700 lg:dark:bg-inherit ${className}`}
+    >
+      <div className="flex justify-between space-x-4">
         <div className="flex items-center space-x-4">
           {setIsOpen && (
             <button
@@ -56,7 +58,7 @@ function UserDropdown({ user }: { user: User }) {
     <Dropdown
       btn={
         <Image
-          className="inline-block h-10 w-10 rounded-full ring-1 ring-gray-500"
+          className="m-0.5 inline-block h-10 w-10 rounded-full p-0.5 ring-1 ring-gray-300 dark:ring-gray-500"
           src={user.image || '/media/avatar.png'}
           width="40"
           height="40"
@@ -66,7 +68,7 @@ function UserDropdown({ user }: { user: User }) {
       header={
         <div className="flex items-center space-x-2 p-4">
           <Image
-            className="inline-block h-10 w-10 rounded-full ring-1 ring-gray-500"
+            className="inline-block h-10 w-10 rounded-full"
             src={user.image || '/media/avatar.png'}
             width="40"
             height="40"
