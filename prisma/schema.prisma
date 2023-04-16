@@ -47,16 +47,58 @@ enum UserRole {
   USER
 }
 
+enum UserStatus {
+  Active
+  Inactive
+  Pending
+  Blocked
+}
+
+enum Gender {
+  Male
+  Female
+  Other
+  Unknown
+}
+
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  name          String?   @db.VarChar(255)
+  email         String?   @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  image         String?   @db.VarChar(255)
 
-  role UserRole @default(USER) @map(name: "role")
+  firstName    String?   @map(name: "first_name") @db.VarChar(255)
+  lastName     String?   @map(name: "last_name") @db.VarChar(255)
+  gender       Gender?
+  dateOfBirth  DateTime? @map(name: "date_of_birth") @db.Date()
+  languageCode String    @default("en") @map(name: "language_code") @db.VarChar(32)
+  phoneNumber  String?   @map(name: "phone_number") @db.VarChar(32)
+  zipCode      String?   @map(name: "zip_code") @db.VarChar(32)
+  address1     String?   @db.VarChar(255)
+  address2     String?   @db.VarChar(255)
+  bio          String?   @db.VarChar(255)
+  remarks      String?   @db.VarChar(255)
+
+  role   UserRole   @default(USER) @map(name: "role")
+  status UserStatus @default(Pending)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  updatedAt     DateTime @default(now()) @map(name: "updated_at")
+  updatedUserId String?  @map(name: "updated_user_id")
+  updatedUser   User?    @relation("UpdatedUsers", fields: [updatedUserId], references: [id])
+  updatedUsers  User[]   @relation("UpdatedUsers")
+
+  approveredAt     DateTime? @map(name: "approved_at")
+  approveredUserId String?   @map(name: "approved_user_id")
+  approveredUser   User?     @relation("ApproveredUsers", fields: [approveredUserId], references: [id])
+  approveredUsers  User[]    @relation("ApproveredUsers")
+
+  deletedAt     DateTime? @map(name: "deleted_at")
+  deletedUserId String?   @map(name: "deleted_user_id")
+  deletedUser   User?     @relation("DeletedUsers", fields: [deletedUserId], references: [id])
+  deletedUsers  User[]    @relation("DeletedUsers")
 
   accounts Account[]
   sessions Session[]
