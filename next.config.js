@@ -5,7 +5,11 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@prisma/client'],
   },
   images: {
-    domains: ['images.unsplash.com', 'lh3.googleusercontent.com'],
+    domains: [
+      'images.unsplash.com',
+      'lh3.googleusercontent.com',
+      'avatars.githubusercontent.com',
+    ],
   },
   env: {
     APP_NAME: process.env.APP_NAME ?? 'ReDine',

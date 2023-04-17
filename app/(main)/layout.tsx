@@ -1,18 +1,13 @@
 import { AddressBar } from '@/components/layout/addressBar'
 import { Sidebar } from '@/components/layout/sidebar'
-import { getCurrentUser } from '@/lib/session'
-import { notFound } from 'next/navigation'
+import { CheckUser } from '@/lib/user'
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await getCurrentUser()
-
-  if (!user) {
-    return notFound()
-  }
+  const user = await CheckUser()
 
   return (
     <div className="flex h-screen flex-col justify-between">
