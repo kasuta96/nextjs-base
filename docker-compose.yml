@@ -18,6 +18,14 @@ services:
     networks:
       - mynetwork
 
+  # app:
+  #   container_name: ${APP_NAME}-app
+  #   build: .
+  #   ports:
+  #     - ${APP_PORT}:3000
+  #   networks:
+  #     - mynetwork
+
 networks:
   mynetwork:
     name: ${APP_NAME}-network
