@@ -20,7 +20,7 @@ export const sidebar: { name: string; items: Item[] }[] = [
       },
       {
         name: 'Users',
-        slug: 'user',
+        slug: 'dashboard/user',
         icon: <UsersIcon />,
       },
     ],

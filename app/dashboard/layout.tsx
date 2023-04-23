@@ -2,7 +2,7 @@ import { AddressBar } from '@/components/layout/addressBar'
 import { Sidebar } from '@/components/layout/sidebar'
 import { CheckUser } from '@/lib/user'
 
-export default async function RootLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
