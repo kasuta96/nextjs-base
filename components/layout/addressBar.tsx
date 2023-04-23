@@ -2,8 +2,8 @@
 
 import React, { Suspense } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { HomeIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { Home } from 'lucide-react'
 
 export function AddressBar() {
   const pathname = usePathname()
@@ -11,9 +11,9 @@ export function AddressBar() {
 
   return (
     <div className="flex items-center gap-x-2 overflow-hidden p-3.5 text-gray-600 dark:text-gray-400 lg:px-5 lg:py-3">
-      <div className="h-5 w-5">
-        <HomeIcon />
-      </div>
+      <Link href="/">
+        <Home className="h-4 w-4" />
+      </Link>
       <div className="flex gap-x-1 text-sm font-medium">
         {pathname ? (
           <>

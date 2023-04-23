@@ -97,5 +97,5 @@ pnpm prisma generate
 ### Design - UI/UX
 
 - [Tailwindcss](https://tailwindcss.com/docs/) - A utility-first CSS framework packed with classes
-- [HeadlessUI](https://headlessui.com/react/menu) - A Tailwindcss components library
-- [heroicons](https://heroicons.com/) - Icon components
+- [Shadcn UI](https://ui.shadcn.com/docs) - [Radix UI](https://www.radix-ui.com/) - A Tailwindcss components library
+- [Lucide Icon](https://lucide.dev/) - Icon components

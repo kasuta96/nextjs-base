@@ -1,6 +1,6 @@
 'use client'
 
-import { ChartBarIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { LayoutDashboard, Users } from 'lucide-react'
 
 export type Item = {
   name: string
@@ -16,12 +16,12 @@ export const sidebar: { name: string; items: Item[] }[] = [
       {
         name: 'Dashboard',
         slug: 'dashboard',
-        icon: <ChartBarIcon />,
+        icon: <LayoutDashboard />,
       },
       {
         name: 'Users',
         slug: 'dashboard/user',
-        icon: <UsersIcon />,
+        icon: <Users />,
       },
     ],
   },

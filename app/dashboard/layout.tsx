@@ -12,16 +12,14 @@ export default async function DashboardLayout({
   return (
     <div className="flex h-screen flex-col justify-between">
       <header></header>
-      <main className="mb-auto bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-gray-300">
+      <main className="mb-auto">
         <div className="mb-16 lg:mb-2 lg:pl-60">
           <div className="max-w-8xl mx-auto space-y-8 px-2 py-4 lg:px-8">
             <div className="card">
               <AddressBar />
             </div>
 
-            <div className="card">
-              <div className="rounded-lg p-3.5 lg:p-6">{children}</div>
-            </div>
+            <div>{children}</div>
           </div>
         </div>
       </main>
