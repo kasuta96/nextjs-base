@@ -10,7 +10,8 @@ export default withAuth(
 
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
+        let from = req.nextUrl.searchParams.get('from')
+        return NextResponse.redirect(new URL(from ?? '/dashboard', req.url))
       }
 
       return null
@@ -41,5 +42,5 @@ export default withAuth(
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/dashboard/:path*', '/login'],
 }

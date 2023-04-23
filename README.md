@@ -14,6 +14,7 @@ This project using the following stack:
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Linting - [ESLint](https://eslint.org)
 - Formatting - [Prettier](https://prettier.io)
+- Schema validation - [Zod](https://zod.dev/)
 
 ## Getting Started
 

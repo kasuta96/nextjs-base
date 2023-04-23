@@ -1,6 +1,6 @@
 'use client'
 
-import { ChartBarIcon } from '@heroicons/react/24/outline'
+import { ChartBarIcon, UsersIcon } from '@heroicons/react/24/outline'
 
 export type Item = {
   name: string
@@ -11,12 +11,17 @@ export type Item = {
 
 export const sidebar: { name: string; items: Item[] }[] = [
   {
-    name: 'Dashboard',
+    name: 'Management',
     items: [
       {
         name: 'Dashboard',
         slug: 'dashboard',
         icon: <ChartBarIcon />,
+      },
+      {
+        name: 'Users',
+        slug: 'dashboard/user',
+        icon: <UsersIcon />,
       },
     ],
   },
