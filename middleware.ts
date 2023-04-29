@@ -2,11 +2,20 @@ import { getToken } from 'next-auth/jwt'
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
+const protectedRoutes = ['/dashboard']
+
 export default withAuth(
   async function middleware(req) {
+    const pathname = req.nextUrl.pathname
+
+    // Manage route protection
     const token = await getToken({ req })
     const isAuth = !!token
-    const isAuthPage = req.nextUrl.pathname.startsWith('/login')
+    const isAuthPage = pathname.startsWith('/login')
+
+    const isAccessingProtectedRoutes = protectedRoutes.some((route) =>
+      pathname.startsWith(route)
+    )
 
     if (isAuthPage) {
       if (isAuth) {
@@ -14,11 +23,11 @@ export default withAuth(
         return NextResponse.redirect(new URL(from ?? '/dashboard', req.url))
       }
 
-      return null
+      return NextResponse.next()
     }
 
-    if (!isAuth) {
-      let from = req.nextUrl.pathname
+    if (!isAuth && isAccessingProtectedRoutes) {
+      let from = pathname
       if (req.nextUrl.search) {
         from += req.nextUrl.search
       }
@@ -31,9 +40,6 @@ export default withAuth(
   {
     callbacks: {
       async authorized() {
-        // This is a work-around for handling redirect on auth pages.
-        // We return true here so that the middleware function above
-        // is always called.
         return true
       },
     },
@@ -41,6 +47,8 @@ export default withAuth(
 )
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: [
+    // Match all request paths except:
+    '/((?!api|_next/static|_next/image|favicon.ico|error).*)',
+  ],
 }

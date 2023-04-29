@@ -9,6 +9,7 @@ declare module 'next-auth/jwt' {
     id: UserId
     role: UserRole
     status: UserStatus
+    lang: string
   }
 }
 
@@ -22,4 +23,5 @@ interface User extends AuthUser {
   id: UserId
   role: UserRole
   status: UserStatus
+  lang: string
 }

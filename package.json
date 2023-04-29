@@ -12,7 +12,7 @@
     "format": "prettier --write --ignore-path .gitignore '**/*.{js,jsx,ts,tsx,json}'",
     "prepare": "husky install",
     "postinstall": "prisma generate",
-    "build:prod": "prisma generate && next build"
+    "build:prod": "prisma generate && prisma db push && next build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
