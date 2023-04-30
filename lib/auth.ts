@@ -60,6 +60,9 @@ export const authOptions: NextAuthOptions = {
       }
     },
     redirect({ url }) {
+      /**
+       * This fix duplicate callbackUrl when has error
+       */
       const urlParams = new URLSearchParams(url)
       const error = urlParams.get('error')
 
