@@ -15,6 +15,8 @@ This project using the following stack:
 - Linting - [ESLint](https://eslint.org)
 - Formatting - [Prettier](https://prettier.io)
 - Schema validation - [Zod](https://zod.dev/)
+- Internationalization (i18n) - [next-intl](https://next-intl-docs.vercel.app/docs/next-13)
+- Notification - [react-hot-toast](https://react-hot-toast.com/)
 
 ## Getting Started
 
@@ -71,12 +73,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Learn More
 
-### Next.js
+### Next.js 13 - App Route
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://beta.nextjs.org/docs) - learn about Next.js features and API (Beta docs)
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
 
 ### Prisma
 
@@ -88,9 +89,9 @@ Prisma is an open source next-generation ORM
 When update database schema
 
 ```bash
-# run migrate on development
+# Run migrate on development
 pnpm prisma migrate dev --name added_somethings
-# run
+# Reads schema and generates code
 pnpm prisma generate
 ```
 

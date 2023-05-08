@@ -1,0 +1,26 @@
+{
+  "common": {
+    "Languages": "Ngôn ngữ",
+    "lang-en": "English",
+    "lang-vi": "Tiếng Việt",
+    "lang-ja": "日本語",
+    "Light": "Sáng",
+    "Dark": "Tối",
+    "System": "Hệ thống",
+
+    "Management Page": "Trang quản lý",
+    "Dashboard": "Bảng điều khiển",
+    "Users": "Người dùng",
+    "Profile": "Hồ sơ",
+    "Setting": "Cài đặt",
+    "Login": "Đăng nhập",
+    "Logout": "Đăng xuất",
+    "Login with Google": "Đăng nhập bằng Google",
+    "Login with GitHub": "Đăng nhập bằng GitHub",
+    "Login successfully": "Đăng nhập thành công"
+  },
+  "error": {
+    "Something went wrong!": "Có gì đó không ổn!",
+    "Try again": "Thử lại"
+  }
+}

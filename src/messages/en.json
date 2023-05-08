@@ -1,0 +1,26 @@
+{
+  "common": {
+    "Languages": "Languages",
+    "lang-en": "English",
+    "lang-vi": "Tiếng Việt",
+    "lang-ja": "日本語",
+    "Light": "Light",
+    "Dark": "Dark",
+    "System": "System",
+
+    "Management Page": "Management Page",
+    "Dashboard": "Dashboard",
+    "Users": "Users",
+    "Profile": "Profile",
+    "Setting": "Setting",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Login with Google": "Login with Google",
+    "Login with GitHub": "Login with GitHub",
+    "Login successfully": "Login successfully"
+  },
+  "error": {
+    "Something went wrong!": "Something went wrong!",
+    "Try again": "Try again"
+  }
+}

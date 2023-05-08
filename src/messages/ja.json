@@ -1,0 +1,26 @@
+{
+  "common": {
+    "Languages": "言語",
+    "lang-en": "English",
+    "lang-vi": "Tiếng Việt",
+    "lang-ja": "日本語",
+    "Light": "ライト",
+    "Dark": "ダーク",
+    "System": "システム",
+
+    "Management Page": "管理ページ",
+    "Dashboard": "ダッシュボード",
+    "Users": "ユーザー",
+    "Profile": "プロフィール",
+    "Setting": "設定",
+    "Login": "ログイン",
+    "Logout": "ログアウト",
+    "Login with Google": "Googleでログインする",
+    "Login with GitHub": "GitHubでログインする",
+    "Login successfully": "ログインに成功しました。"
+  },
+  "error": {
+    "Something went wrong!": "何か問題が発生しました！",
+    "Try again": "もう一度"
+  }
+}
