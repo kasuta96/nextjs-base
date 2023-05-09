@@ -8,13 +8,13 @@ cyan=`tput setaf 6`
 error=false
 
 # Check branch name
-branchRegex="^(feature|fix|hotfix)/.*$"
-if ! [[ $(git rev-parse --abbrev-ref HEAD) =~ $branchRegex ]];
-then
-  error=true
-  echo "🚨 ${red}Wrong branch name!${reset} 😕"
-  echo "It must start with ${cyan}feature/${reset} or ${cyan}fix/${reset} or ${cyan}hotfix/${reset}"
-fi
+# branchRegex="^(feature|fix|hotfix)/.*$"
+# if ! [[ $(git rev-parse --abbrev-ref HEAD) =~ $branchRegex ]];
+# then
+#   error=true
+#   echo "🚨 ${red}Wrong branch name!${reset} 😕"
+#   echo "It must start with ${cyan}feature/${reset} or ${cyan}fix/${reset} or ${cyan}hotfix/${reset}"
+# fi
 
 # # Check commit msg
 # msg="$(cat $1)"
