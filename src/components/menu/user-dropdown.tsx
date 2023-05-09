@@ -80,7 +80,7 @@ function UserDropdown({ user }: { user?: User }) {
                     locale={locale}
                     key={locale}
                   >
-                    <DropdownMenuItem className="cursor-pointer text-popover-foreground">
+                    <DropdownMenuItem className="cursor-pointer">
                       <span className="w-8 font-medium uppercase opacity-70">
                         {locale}
                       </span>

@@ -15,9 +15,7 @@ export default async function DashboardLayout({
       <main className="mb-auto">
         <div className="mb-16 lg:mb-2 lg:pl-60">
           <div className="max-w-8xl mx-auto space-y-8 px-2 py-4 lg:px-8">
-            <div className="card">
-              <AddressBar />
-            </div>
+            <AddressBar />
 
             <div>{children}</div>
           </div>

@@ -24,6 +24,10 @@ module.exports = {
           DEFAULT: 'var(--sky)',
           foreground: 'var(--sky-foreground)',
         },
+        gray: {
+          DEFAULT: 'var(--gray)',
+          foreground: 'var(--gray-foreground)',
+        },
         primary: {
           DEFAULT: 'var(--primary)',
           foreground: 'var(--primary-foreground)',

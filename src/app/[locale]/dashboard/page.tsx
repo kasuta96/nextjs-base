@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl'
-import Error from 'next/error'
 
 export const metadata = {
   title: 'Dashboard',
