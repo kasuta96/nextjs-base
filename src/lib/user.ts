@@ -3,7 +3,7 @@ import { getCurrentUser } from '@/lib/session'
 import { activeUserStatus } from '@/lib/constants/auth'
 import { ROUTE_403, ROUTE_LOGIN, ROUTE_LOGOUT } from '@/lib/constants/route'
 
-export async function CheckActiveUser() {
+export async function getActiveUser() {
   const user = await getCurrentUser()
   if (!user) {
     return redirect(ROUTE_LOGOUT)
@@ -14,7 +14,7 @@ export async function CheckActiveUser() {
   return redirect(ROUTE_403)
 }
 
-export async function checkBlock() {
+export async function getUnblockUser() {
   const user = await getCurrentUser()
   if (!user) {
     return redirect(ROUTE_LOGIN)

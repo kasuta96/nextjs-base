@@ -2,14 +2,11 @@ import { User as AuthUser } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import { UserRole, UserStatus } from '@prisma/client'
 
-type UserId = string
-
 declare module 'next-auth/jwt' {
-  interface JWT {
-    id: UserId
-    role: UserRole
-    status: UserStatus
-    lang: string
+  interface JWT extends User {
+    id: string
+    name: string
+    email: string
   }
 }
 
@@ -19,8 +16,11 @@ declare module 'next-auth' {
   }
 }
 
-interface User extends AuthUser {
-  id: UserId
+interface User {
+  id: string
+  name: string
+  email: string
+  image?: string | null
   role: UserRole
   status: UserStatus
   lang: string

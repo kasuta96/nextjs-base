@@ -17,7 +17,45 @@
     "Logout": "ログアウト",
     "Login with Google": "Googleでログインする",
     "Login with GitHub": "GitHubでログインする",
-    "Login successfully": "ログインに成功しました。"
+    "Login successfully": "ログインに成功しました。",
+    "Detailed information": "詳細情報",
+
+    "Cancel": "キャンセル",
+    "Save": "保存",
+    "Reset": "リセット",
+    "Close": "閉じる"
+  },
+  "user": {
+    "name": "表示名",
+    "email": "メールアドレス",
+    "bio": "バイオ",
+    "firstName": "名",
+    "lastName": "姓",
+    "gender": "性別",
+    "dateOfBirth": "生年月日",
+    "phoneNumber": "電話番号",
+    "zipCode": "郵便番号",
+    "address1": "住所1",
+    "address2": "住所2",
+    "role": "役割",
+    "status": "状態",
+    "emailVerified": "メールアドレス確認済み",
+    "remarks": "備考",
+    "createdAt": "作成日時",
+    "updatedAt": "更新日時",
+    "updatedUser": "更新者",
+    "approveredAt": "承認日時",
+    "approveredUser": "承認者",
+    "deletedAt": "削除日時",
+    "deletedUser": "削除者",
+    "Male": "男性",
+    "Female": "女性",
+    "Other": "その他",
+    "Unknown": "不明"
+  },
+  "notify": {
+    "error": "何か問題が発生しました！。 後でもう一度試してください。",
+    "updateSuccess": "正常に更新されました。"
   },
   "error": {
     "Something went wrong!": "何か問題が発生しました！",

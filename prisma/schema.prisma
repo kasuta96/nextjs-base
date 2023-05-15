@@ -63,25 +63,25 @@ enum Gender {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?   @db.VarChar(255)
-  email         String?   @unique @db.VarChar(255)
+  name          String    @db.VarChar(255)
+  email         String    @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
   image         String?   @db.VarChar(255)
+  bio           String?   @db.VarChar(255)
 
   firstName    String?   @map(name: "first_name") @db.VarChar(255)
   lastName     String?   @map(name: "last_name") @db.VarChar(255)
   gender       Gender?
   dateOfBirth  DateTime? @map(name: "date_of_birth") @db.Date()
-  languageCode String    @default("en") @map(name: "language_code") @db.VarChar(32)
   phoneNumber  String?   @map(name: "phone_number") @db.VarChar(32)
   zipCode      String?   @map(name: "zip_code") @db.VarChar(32)
   address1     String?   @db.VarChar(255)
   address2     String?   @db.VarChar(255)
-  bio          String?   @db.VarChar(255)
+  languageCode String    @default("en") @map(name: "language_code") @db.VarChar(32)
   remarks      String?   @db.VarChar(255)
 
   role   UserRole   @default(USER) @map(name: "role")
-  status UserStatus @default(Pending)
+  status UserStatus @default(Inactive)
 
   createdAt DateTime @default(now()) @map(name: "created_at")
 

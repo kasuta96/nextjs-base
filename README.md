@@ -14,9 +14,8 @@ This project using the following stack:
 - Styling - [Tailwind CSS](https://tailwindcss.com)
 - Linting - [ESLint](https://eslint.org)
 - Formatting - [Prettier](https://prettier.io)
-- Schema validation - [Zod](https://zod.dev/)
+- Schema validation - [Zod](https://zod.dev/), [React Hook Form](https://react-hook-form.com/get-started/)
 - Internationalization (i18n) - [next-intl](https://next-intl-docs.vercel.app/docs/next-13)
-- Notification - [react-hot-toast](https://react-hot-toast.com/)
 
 ## Getting Started
 
@@ -100,3 +99,11 @@ pnpm prisma generate
 - [Tailwindcss](https://tailwindcss.com/docs/) - A utility-first CSS framework packed with classes
 - [Shadcn UI](https://ui.shadcn.com/docs) - [Radix UI](https://www.radix-ui.com/) - A Tailwindcss components library
 - [Lucide Icon](https://lucide.dev/) - Icon components
+- [react-hot-toast](https://react-hot-toast.com/) - Notification
+
+### Schema validation, Form
+
+- Zod:
+  - Docs: [Zod](https://zod.dev/)
+  - validations in `src/lib/validations`
+- [React Hook Form](https://react-hook-form.com/get-started/)

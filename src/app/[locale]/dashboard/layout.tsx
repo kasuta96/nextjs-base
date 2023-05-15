@@ -1,13 +1,13 @@
 import { AddressBar } from '@/components/layout/address-bar'
 import { Sidebar } from '@/components/layout/sidebar'
-import { CheckActiveUser } from '@/lib/user'
+import { getActiveUser } from '@/lib/user'
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await CheckActiveUser()
+  const user = await getActiveUser()
 
   return (
     <div className="flex h-screen flex-col justify-between">

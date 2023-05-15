@@ -17,7 +17,45 @@
     "Logout": "Logout",
     "Login with Google": "Login with Google",
     "Login with GitHub": "Login with GitHub",
-    "Login successfully": "Login successfully"
+    "Login successfully": "Login successfully",
+    "Detailed information": "Detailed information",
+
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "Reset": "Reset",
+    "Close": "Close"
+  },
+  "user": {
+    "name": "Display name",
+    "email": "Email",
+    "bio": "Bio",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "dateOfBirth": "Date of Birth",
+    "phoneNumber": "Phone Number",
+    "zipCode": "Zip Code",
+    "address1": "Address 1",
+    "address2": "Address 2",
+    "role": "Role",
+    "status": "Status",
+    "emailVerified": "Email Verified",
+    "remarks": "Remarks",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "updatedUser": "Updated User",
+    "approveredAt": "Approved At",
+    "approveredUser": "Approved User",
+    "deletedAt": "Deleted At",
+    "deletedUser": "Deleted User",
+    "Male": "Male",
+    "Female": "Female",
+    "Other": "Other",
+    "Unknown": "Unknown"
+  },
+  "notify": {
+    "error": "Something went wrong!. Please try again later.",
+    "updateSuccess": "Update successfully."
   },
   "error": {
     "Something went wrong!": "Something went wrong!",

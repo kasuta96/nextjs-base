@@ -13,7 +13,7 @@ export default async function HomeLayout({ children }: HomeLayoutProps) {
   const user = await getCurrentUser()
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4 lg:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <Link
           href={ROUTE_HOME}
