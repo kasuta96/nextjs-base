@@ -12,7 +12,7 @@ export type UserStatusType = `${z.infer<typeof UserStatusSchema>}`
 
 export const ProfileSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3),
+  name: z.string().min(2),
   image: z.string().optional(),
   bio: z.string().optional(),
   firstName: z.string().optional(),
@@ -26,8 +26,6 @@ export const ProfileSchema = z.object({
   languageCode: z.string().optional(),
 })
 export type ProfileType = z.infer<typeof ProfileSchema>
-
-// export profileList = ProfileSchema
 
 export const UserSchema = ProfileSchema.merge(
   z.object({

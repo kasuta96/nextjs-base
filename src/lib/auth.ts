@@ -4,7 +4,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { db } from '@/lib/db'
 import { env } from '~/env.mjs'
 
-const auth: AuthOptions = {
+const authOptions: AuthOptions = {
   // debug: env.NODE_ENV !== 'production',
   adapter: PrismaAdapter(db as any),
   session: {
@@ -68,4 +68,4 @@ const auth: AuthOptions = {
   },
 }
 
-export default auth
+export default authOptions

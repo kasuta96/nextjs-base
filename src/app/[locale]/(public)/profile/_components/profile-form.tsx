@@ -18,7 +18,7 @@ import {
 } from '@/lib/validations/user'
 import { useTranslations } from 'next-intl'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, FieldError } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { Loader2 } from 'lucide-react'
 import { SelectRef } from '@/components/ui/custom-form'
@@ -30,12 +30,15 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Skeleton } from '@/components/ui/skeleton'
+import { User } from '@prisma/client'
+import { useRouter } from 'next/navigation'
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: ProfileType
+  user: User
 }
 
 export function ProfileForm({ user, ...props }: UserNameFormProps) {
+  const router = useRouter()
   const t = useTranslations()
   const {
     handleSubmit,
@@ -47,15 +50,15 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
       name: user.name,
-      bio: user.bio,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      gender: user.gender,
-      dateOfBirth: user.dateOfBirth?.slice(0, 10),
-      phoneNumber: user.phoneNumber,
-      zipCode: user.zipCode,
-      address1: user.address1,
-      address2: user.address2,
+      bio: user.bio || '',
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
+      gender: user.gender || undefined,
+      dateOfBirth: user.dateOfBirth?.toISOString().slice(0, 10) || undefined,
+      phoneNumber: user.phoneNumber || '',
+      zipCode: user.zipCode || '',
+      address1: user.address1 || '',
+      address2: user.address2 || '',
     },
   })
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
@@ -63,7 +66,7 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
   async function onSubmit(data: ProfileType) {
     setIsSaving(true)
 
-    const response = await fetch(`/api/users/${user.id}`, {
+    const response = await fetch(`/api/profile/${user.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -80,6 +83,7 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
     }
 
     toast.success(t('notify.updateSuccess'), { icon: '👌' })
+    router.refresh()
   }
 
   const resetForm = () => {
@@ -94,18 +98,12 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
         </CardHeader>
         <CardContent>
           <div className="grid items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="name">
-                {t('user.name')}
-              </Label>
+            <InputGroup label={t('user.name')} error={errors.name}>
               <Input id="name" {...register('name')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="bio">
-                {t('user.bio')}
-              </Label>
-              <Textarea id="bio" {...register('bio')} />
-            </div>
+            </InputGroup>
+            <InputGroup label={t('user.bio')} error={errors.bio}>
+              <Textarea className="h-24" id="bio" {...register('bio')} />
+            </InputGroup>
           </div>
         </CardContent>
       </Card>
@@ -115,22 +113,13 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
         </CardHeader>
         <CardContent>
           <div className="grid items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="firstName">
-                {t('user.firstName')}
-              </Label>
+            <InputGroup label={t('user.firstName')} error={errors.firstName}>
               <Input id="firstName" {...register('firstName')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="lastName">
-                {t('user.lastName')}
-              </Label>
+            </InputGroup>
+            <InputGroup label={t('user.lastName')} error={errors.lastName}>
               <Input id="lastName" {...register('lastName')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="gender">
-                {t('user.gender')}
-              </Label>
+            </InputGroup>
+            <InputGroup label={t('user.gender')} error={errors.gender}>
               <Controller
                 name="gender"
                 control={control}
@@ -151,51 +140,33 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
                   </SelectRef>
                 )}
               />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="dateOfBirth">
-                {t('user.dateOfBirth')}
-              </Label>
+            </InputGroup>
+            <InputGroup
+              label={t('user.dateOfBirth')}
+              error={errors.dateOfBirth}
+            >
               <Input
                 type="date"
                 id="dateOfBirth"
                 {...register('dateOfBirth')}
               />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="phoneNumber">
-                {t('user.phoneNumber')}
-              </Label>
+            </InputGroup>
+            <InputGroup
+              label={t('user.phoneNumber')}
+              error={errors.phoneNumber}
+            >
               <Input id="phoneNumber" {...register('phoneNumber')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="zipCode">
-                {t('user.zipCode')}
-              </Label>
+            </InputGroup>
+            <InputGroup label={t('user.zipCode')} error={errors.zipCode}>
               <Input id="zipCode" {...register('zipCode')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="address1">
-                {t('user.address1')}
-              </Label>
+            </InputGroup>
+            <InputGroup label={t('user.address1')} error={errors.address1}>
               <Input id="address1" {...register('address1')} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label className="text-gray" htmlFor="address2">
-                {t('user.address2')}
-              </Label>
+            </InputGroup>
+            <InputGroup label={t('user.address2')} error={errors.address2}>
               <Input id="address2" {...register('address2')} />
-            </div>
+            </InputGroup>
           </div>
-          {errors && (
-            <div className="space-x-2 px-1 py-4 text-xs text-destructive">
-              {Object.entries(errors).map(([key, value]) => (
-                <p key={key}>
-                  {t(`user.${key}`)}: {value.message}
-                </p>
-              ))}
-            </div>
-          )}
         </CardContent>
         <CardFooter className="flex items-center justify-center">
           <Button type="button" variant="ghost" onClick={resetForm}>
@@ -211,35 +182,26 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
   )
 }
 
-export function SkeletonProfile() {
+const InputGroup = ({
+  label,
+  error,
+  children,
+}: {
+  label: string
+  error: FieldError | undefined
+  children: React.ReactNode
+}) => {
   return (
-    <div className="space-y-8">
-      <Card>
-        <CardHeaderSkeleton />
-        <CardContent>
-          <div className="grid items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Skeleton className="h-4 w-1/4" />
-              <Skeleton className="h-8 w-full" />
-            </div>
-            <InputSkeleton />
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeaderSkeleton />
-        <CardContent>
-          <div className="grid items-center gap-4">
-            <InputSkeleton />
-            <InputSkeleton />
-            <InputSkeleton />
-            <InputSkeleton />
-            <InputSkeleton />
-            <InputSkeleton />
-            <InputSkeleton />
-          </div>
-        </CardContent>
-      </Card>
+    <div className="flex flex-col space-y-1.5">
+      <div className="flex items-center space-x-3">
+        <Label className="w-[100px] flex-none text-right text-gray max-[400px]:w-[60px]">
+          {label}
+        </Label>
+        {children}
+      </div>
+      {error && (
+        <div className="px-1 text-xs text-destructive">{error.message}</div>
+      )}
     </div>
   )
 }
@@ -247,8 +209,10 @@ export function SkeletonProfile() {
 const InputSkeleton = () => {
   return (
     <div className="flex flex-col space-y-1.5">
-      <Skeleton className="h-4 w-1/4" />
-      <Skeleton className="h-8 w-full" />
+      <div className="flex items-center space-x-3">
+        <Skeleton className="h-6 w-[100px] flex-none text-right text-gray max-[400px]:w-[60px]" />
+        <Skeleton className="h-10 w-full" />
+      </div>
     </div>
   )
 }
@@ -260,5 +224,36 @@ const CardHeaderSkeleton = () => {
         <Skeleton className="h-5 w-1/2" />
       </CardTitle>
     </CardHeader>
+  )
+}
+
+export const SkeletonProfile = () => {
+  return (
+    <div className="space-y-8">
+      <Card>
+        <CardHeaderSkeleton />
+        <CardContent>
+          <div className="grid items-center gap-4">
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeaderSkeleton />
+        <CardContent>
+          <div className="grid items-center gap-4">
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

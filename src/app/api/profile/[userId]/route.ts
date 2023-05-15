@@ -9,35 +9,6 @@ const routeContextSchema = z.object({
   }),
 })
 
-export async function GET(
-  req: Request,
-  context: z.infer<typeof routeContextSchema>
-) {
-  try {
-    const { params } = routeContextSchema.parse(context)
-
-    // Get the user.
-    const user = await db.user.findFirst({
-      where: {
-        id: params.userId,
-      },
-    })
-
-    return new Response(JSON.stringify(user ?? null), {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 })
-    }
-
-    return new Response(null, { status: 500 })
-  }
-}
-
 export async function PATCH(
   req: Request,
   context: z.infer<typeof routeContextSchema>
