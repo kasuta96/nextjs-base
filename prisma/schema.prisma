@@ -102,8 +102,60 @@ model User {
 
   accounts Account[]
   sessions Session[]
+  roles    UserRoles[]
 
   @@map("users")
+}
+
+model Role {
+  id           String  @id @default(cuid())
+  name         String  @db.VarChar(255)
+  nameTrans    Json?   @map(name: "name_trans")
+  remarks      String? @db.VarChar(255)
+  remarksTrans Json?   @map(name: "remarks_trans")
+
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  users       UserRoles[]
+  permissions RolePermissions[]
+}
+
+model UserRoles {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId String
+
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  @@id([userId, roleId])
+}
+
+model Permission {
+  id      String  @id @db.VarChar(255)
+  name    String  @db.VarChar(255)
+  remarks String? @db.VarChar(255)
+
+  RolePermissions RolePermissions[]
+}
+
+model RolePermissions {
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId       String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  permissionId String
+  read         Boolean
+  write        Boolean
+
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  @@id([roleId, permissionId])
 }
 
 model VerificationToken {

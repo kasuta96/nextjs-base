@@ -33,12 +33,30 @@ CREATE TABLE `sessions` (
 -- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NULL,
-    `email` VARCHAR(191) NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
     `email_verified` DATETIME(3) NULL,
-    `image` VARCHAR(191) NULL,
+    `image` VARCHAR(255) NULL,
+    `bio` VARCHAR(255) NULL,
+    `first_name` VARCHAR(255) NULL,
+    `last_name` VARCHAR(255) NULL,
+    `gender` ENUM('Male', 'Female', 'Other', 'Unknown') NULL,
+    `date_of_birth` DATE NULL,
+    `phone_number` VARCHAR(32) NULL,
+    `zip_code` VARCHAR(32) NULL,
+    `address1` VARCHAR(255) NULL,
+    `address2` VARCHAR(255) NULL,
+    `language_code` VARCHAR(32) NOT NULL DEFAULT 'en',
+    `remarks` VARCHAR(255) NULL,
+    `role` ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+    `status` ENUM('Active', 'Inactive', 'Pending', 'Blocked') NOT NULL DEFAULT 'Inactive',
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_user_id` VARCHAR(191) NULL,
+    `approved_at` DATETIME(3) NULL,
+    `approved_user_id` VARCHAR(191) NULL,
+    `deleted_at` DATETIME(3) NULL,
+    `deleted_user_id` VARCHAR(191) NULL,
 
     UNIQUE INDEX `users_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -59,3 +77,12 @@ ALTER TABLE `accounts` ADD CONSTRAINT `accounts_user_id_fkey` FOREIGN KEY (`user
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `users` ADD CONSTRAINT `users_updated_user_id_fkey` FOREIGN KEY (`updated_user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `users` ADD CONSTRAINT `users_approved_user_id_fkey` FOREIGN KEY (`approved_user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `users` ADD CONSTRAINT `users_deleted_user_id_fkey` FOREIGN KEY (`deleted_user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
