@@ -16,6 +16,11 @@ declare module 'next-auth' {
   }
 }
 
+interface AllPermission {
+  read: string[]
+  write: string[]
+}
+
 interface User {
   id: string
   name: string
@@ -24,4 +29,5 @@ interface User {
   role: UserRole
   status: UserStatus
   lang: string
+  allPermission: AllPermission
 }

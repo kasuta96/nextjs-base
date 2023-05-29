@@ -72,8 +72,8 @@
   "permission": {
     "role_name": "Role, Permission",
     "role_remarks": "Manage roles and permissions for users",
-    "user_public_name": "User (Public)",
-    "user_public_remarks": "Manage public information of users",
+    "user_name": "User (Public)",
+    "user_remarks": "Manage public information of users",
     "user_private_name": "User (Private)",
     "user_private_remarks": "Manage private information of users"
   }

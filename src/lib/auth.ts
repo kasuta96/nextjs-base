@@ -1,3 +1,4 @@
+import { reformPermission } from './services/role'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
@@ -30,6 +31,7 @@ const authOptions: AuthOptions = {
         session.user.role = token.role
         session.user.status = token.status
         session.user.lang = token.lang
+        session.user.allPermission = token.allPermission
       }
 
       return session
@@ -38,6 +40,13 @@ const authOptions: AuthOptions = {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
+        },
+        include: {
+          roles: {
+            include: {
+              permissions: true,
+            },
+          },
         },
       })
 
@@ -54,6 +63,7 @@ const authOptions: AuthOptions = {
         role: dbUser.role,
         status: dbUser.status,
         lang: dbUser.languageCode,
+        allPermission: reformPermission(dbUser.roles),
       }
     },
     redirect({ url }) {

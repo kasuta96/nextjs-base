@@ -72,8 +72,8 @@
   "permission": {
     "role_name": "ロール、権限",
     "role_remarks": "ユーザーのロールと権限を管理する",
-    "user_public_name": "ユーザー（公開）",
-    "user_public_remarks": "ユーザーの公開情報を管理する",
+    "user_name": "ユーザー（公開）",
+    "user_remarks": "ユーザーの公開情報を管理する",
     "user_private_name": "ユーザー（プライベート）",
     "user_private_remarks": "ユーザーのプライベート情報を管理する"
   }

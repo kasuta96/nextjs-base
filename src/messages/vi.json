@@ -72,8 +72,8 @@
   "permission": {
     "role_name": "Role, Phân quyền",
     "role_remarks": "Quản lý roles, phân quyền của người dùng",
-    "user_public_name": "Người dùng (Công khai)",
-    "user_public_remarks": "Quản lý những thông tin công khai của người dùng",
+    "user_name": "Người dùng (Công khai)",
+    "user_remarks": "Quản lý những thông tin công khai của người dùng",
     "user_private_name": "Người dùng (Riêng tư)",
     "user_private_remarks": "Quản lý những thông tin riêng tư của người dùng"
   }
