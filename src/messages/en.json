@@ -11,6 +11,7 @@
     "Management Page": "Management Page",
     "Dashboard": "Dashboard",
     "Users": "Users",
+    "Roles": "Roles",
     "Profile": "Profile",
     "Setting": "Setting",
     "Login": "Login",
@@ -20,6 +21,11 @@
     "Login successfully": "Login successfully",
     "Detailed information": "Detailed information",
 
+    "Empty": "Empty",
+    "Create new": "Create new",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Confirm": "Confirm",
     "Cancel": "Cancel",
     "Save": "Save",
     "Reset": "Reset",
@@ -55,10 +61,20 @@
   },
   "notify": {
     "error": "Something went wrong!. Please try again later.",
-    "updateSuccess": "Update successfully."
+    "updateSuccess": "Update successfully.",
+    "deleteConfirm": "Are you sure you want to delete?",
+    "deleteSuccess": "Deletion successful."
   },
   "error": {
     "Something went wrong!": "Something went wrong!",
     "Try again": "Try again"
+  },
+  "permission": {
+    "role_name": "Role, Permission",
+    "role_remarks": "Manage roles and permissions for users",
+    "user_public_name": "User (Public)",
+    "user_public_remarks": "Manage public information of users",
+    "user_private_name": "User (Private)",
+    "user_private_remarks": "Manage private information of users"
   }
 }

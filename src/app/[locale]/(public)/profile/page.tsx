@@ -1,5 +1,5 @@
 import { ProfileForm } from './_components/profile-form'
-import { getUnblockUser, getUserData } from '@/lib/user'
+import { getUnblockUser, getUserData } from '@/lib/services/user'
 import { notFound } from 'next/navigation'
 
 export const metadata = {

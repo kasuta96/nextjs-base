@@ -1,26 +1,9 @@
-import { Permission, PrismaClient } from '@prisma/client'
+import { permissions } from '@/lib/constants/permission'
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const permission: Permission[] = [
-  {
-    id: 'role',
-    name: 'role_name',
-    remarks: 'role_remarks',
-  },
-  {
-    id: 'user_public',
-    name: 'user_public_name',
-    remarks: 'user_public_remarks',
-  },
-  {
-    id: 'user_private',
-    name: 'user_private_name',
-    remarks: 'user_private_remarks',
-  },
-]
-
 async function main() {
-  permission.map(async (pms) => {
+  permissions.map(async (pms) => {
     await prisma.permission.upsert({
       where: { id: pms.id },
       update: { name: pms.name, remarks: pms.remarks },

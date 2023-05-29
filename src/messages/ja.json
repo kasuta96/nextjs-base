@@ -11,6 +11,7 @@
     "Management Page": "管理ページ",
     "Dashboard": "ダッシュボード",
     "Users": "ユーザー",
+    "Roles": "ロール",
     "Profile": "プロフィール",
     "Setting": "設定",
     "Login": "ログイン",
@@ -20,6 +21,11 @@
     "Login successfully": "ログインに成功しました。",
     "Detailed information": "詳細情報",
 
+    "Empty": "空",
+    "Create new": "新規作成",
+    "Edit": "編集",
+    "Delete": "削除",
+    "Confirm": "確認する",
     "Cancel": "キャンセル",
     "Save": "保存",
     "Reset": "リセット",
@@ -37,7 +43,7 @@
     "zipCode": "郵便番号",
     "address1": "住所1",
     "address2": "住所2",
-    "role": "役割",
+    "role": "ロール",
     "status": "状態",
     "emailVerified": "メールアドレス確認済み",
     "remarks": "備考",
@@ -55,10 +61,20 @@
   },
   "notify": {
     "error": "何か問題が発生しました！。 後でもう一度試してください。",
-    "updateSuccess": "正常に更新されました。"
+    "updateSuccess": "正常に更新されました。",
+    "deleteConfirm": "本当に削除しますか？",
+    "deleteSuccess": "削除が成功しました。"
   },
   "error": {
     "Something went wrong!": "何か問題が発生しました！",
     "Try again": "もう一度"
+  },
+  "permission": {
+    "role_name": "ロール、権限",
+    "role_remarks": "ユーザーのロールと権限を管理する",
+    "user_public_name": "ユーザー（公開）",
+    "user_public_remarks": "ユーザーの公開情報を管理する",
+    "user_private_name": "ユーザー（プライベート）",
+    "user_private_remarks": "ユーザーのプライベート情報を管理する"
   }
 }

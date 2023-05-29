@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   ProfileSchema,
   ProfileType,
@@ -18,9 +17,8 @@ import {
 } from '@/lib/validations/user'
 import { useTranslations } from 'next-intl'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, Controller, FieldError } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-import { Loader2 } from 'lucide-react'
 import { SelectRef } from '@/components/ui/custom-form'
 import {
   SelectContent,
@@ -32,6 +30,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Skeleton } from '@/components/ui/skeleton'
 import { User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { InputGroup } from '@/components/form/input-group'
+import SaveButton from '@/components/Button'
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: User
@@ -45,12 +45,13 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
     register,
     control,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<ProfileType>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
       name: user.name,
       bio: user.bio || '',
+      image: user.image || '',
       firstName: user.firstName || '',
       lastName: user.lastName || '',
       gender: user.gender || undefined,
@@ -82,8 +83,8 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
       })
     }
 
+    reset(data)
     toast.success(t('notify.updateSuccess'), { icon: '👌' })
-    router.refresh()
   }
 
   const resetForm = () => {
@@ -172,37 +173,10 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
           <Button type="button" variant="ghost" onClick={resetForm}>
             {t('common.Reset')}
           </Button>
-          <Button type="submit" disabled={isSaving}>
-            {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            <span>{t('common.Save')}</span>
-          </Button>
+          <SaveButton disabled={isSaving || !isDirty} loading={isSaving} />
         </CardFooter>
       </Card>
     </form>
-  )
-}
-
-const InputGroup = ({
-  label,
-  error,
-  children,
-}: {
-  label: string
-  error: FieldError | undefined
-  children: React.ReactNode
-}) => {
-  return (
-    <div className="flex flex-col space-y-1.5">
-      <div className="flex items-center space-x-3">
-        <Label className="w-[100px] flex-none text-right text-gray max-[400px]:w-[60px]">
-          {label}
-        </Label>
-        {children}
-      </div>
-      {error && (
-        <div className="px-1 text-xs text-destructive">{error.message}</div>
-      )}
-    </div>
   )
 }
 

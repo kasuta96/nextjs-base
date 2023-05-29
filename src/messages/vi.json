@@ -11,6 +11,7 @@
     "Management Page": "Trang quản lý",
     "Dashboard": "Bảng điều khiển",
     "Users": "Người dùng",
+    "Roles": "Roles",
     "Profile": "Hồ sơ",
     "Setting": "Cài đặt",
     "Login": "Đăng nhập",
@@ -20,6 +21,11 @@
     "Login successfully": "Đăng nhập thành công",
     "Detailed information": "Thông tin chi tiết",
 
+    "Empty": "Trống rỗng",
+    "Create new": "Tạo mới",
+    "Edit": "Sửa",
+    "Delete": "Xóa",
+    "Confirm": "Xác nhận",
     "Cancel": "Hủy",
     "Save": "Lưu",
     "Reset": "Đặt lại",
@@ -55,10 +61,20 @@
   },
   "notify": {
     "error": "Có gì đó không ổn!. Thử lại sau nhé.",
-    "updateSuccess": "Cập nhật thành công."
+    "updateSuccess": "Cập nhật thành công.",
+    "deleteConfirm": "Có chắc chắn xoá ko đấy?",
+    "deleteSuccess": "Xóa thành công."
   },
   "error": {
     "Something went wrong!": "Có gì đó không ổn!",
     "Try again": "Thử lại"
+  },
+  "permission": {
+    "role_name": "Role, Phân quyền",
+    "role_remarks": "Quản lý roles, phân quyền của người dùng",
+    "user_public_name": "Người dùng (Công khai)",
+    "user_public_remarks": "Quản lý những thông tin công khai của người dùng",
+    "user_private_name": "Người dùng (Riêng tư)",
+    "user_private_remarks": "Quản lý những thông tin riêng tư của người dùng"
   }
 }

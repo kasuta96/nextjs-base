@@ -1,6 +1,6 @@
 import { AddressBar } from '@/components/layout/address-bar'
 import { Sidebar } from '@/components/layout/sidebar'
-import { getActiveUser } from '@/lib/user'
+import { getActiveUser } from '@/lib/services/user'
 
 export default async function DashboardLayout({
   children,
