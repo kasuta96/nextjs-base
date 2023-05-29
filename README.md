@@ -37,7 +37,7 @@ Edit database config in .env file
 
 Optional: Installation with docker
 
-```
+```bash
 docker-compose up --build -d
 ```
 
@@ -47,18 +47,17 @@ Generate the Prisma Client
 pnpm prisma generate
 ```
 
-Run migrate on development:
-Should be use root user or use [shadow database](https://pris.ly/d/migrate-shadow)
+Run migrate:
 
 ```bash
+# On development
 pnpm prisma migrate dev
-```
 
-Run migrate on production:
-
-```bash
+# Or on production:
 pnpm prisma migrate deploy
 ```
+
+_On development: Should be use root user of database or [shadow database](https://pris.ly/d/migrate-shadow)_
 
 #### Application
 
@@ -85,7 +84,7 @@ Prisma is an open source next-generation ORM
 - [Prisma docs](https://www.prisma.io/docs/concepts/overview/what-is-prisma)
 - [Prisma schema reference](https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference)
 
-When update database schema
+- When update database schema
 
 ```bash
 # Run migrate on development
@@ -93,6 +92,8 @@ pnpm prisma migrate dev --name added_somethings
 # Reads schema and generates code
 pnpm prisma generate
 ```
+
+- Soft delete: Set the target models in [src/lib/db.ts](src/lib/db.ts)
 
 ### Design - UI/UX
 
@@ -105,5 +106,5 @@ pnpm prisma generate
 
 - Zod:
   - Docs: [Zod](https://zod.dev/)
-  - validations in `src/lib/validations`
+  - validations in [src/lib/validations](src/lib/validations)
 - [React Hook Form](https://react-hook-form.com/get-started/)
