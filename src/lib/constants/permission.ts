@@ -1,6 +1,8 @@
 import { Permission } from '@prisma/client'
 import { RolePermissionType } from '../validations/role'
 
+// ⛔️ Do not modify the permission ID (used for prisma/seed.ts & role relation).
+// The permission name and remarks are i18n keys (Update i18n (src/messages) when modifying them).
 export const permissions: Permission[] = [
   {
     id: 'role',
@@ -8,9 +10,9 @@ export const permissions: Permission[] = [
     remarks: 'role_remarks',
   },
   {
-    id: 'user_public',
-    name: 'user_public_name',
-    remarks: 'user_public_remarks',
+    id: 'user',
+    name: 'user_name',
+    remarks: 'user_remarks',
   },
   {
     id: 'user_private',

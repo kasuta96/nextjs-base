@@ -1,4 +1,4 @@
-import { permissions } from '@/lib/constants/permission'
+import { permissions } from '../src/lib/constants/permission'
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
