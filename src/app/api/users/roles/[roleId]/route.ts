@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { db } from '@/lib/db'
-import { getServerSession } from '@/lib/session'
+import { checkPermission } from '@/lib/services/permission'
 import { RoleWithPermissionsSchema } from '@/lib/validations/role'
 
 const routeContextSchema = z.object({
@@ -16,10 +16,9 @@ export async function PATCH(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    // Ensure user is authentication and has access to this route.
-    const session = await getServerSession()
-
-    if (!session?.user || session?.user.role !== 'ADMIN') {
+    // Check write permission
+    const { write } = await checkPermission('role')
+    if (!write) {
       return new Response(null, { status: 403 })
     }
 
@@ -73,10 +72,9 @@ export async function DELETE(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    // Ensure user is authentication and has access to this route.
-    const session = await getServerSession()
-
-    if (!session?.user || session?.user.role !== 'ADMIN') {
+    // Check write permission
+    const { write } = await checkPermission('role')
+    if (!write) {
       return new Response(null, { status: 403 })
     }
 

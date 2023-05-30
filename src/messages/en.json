@@ -63,7 +63,9 @@
     "error": "Something went wrong!. Please try again later.",
     "updateSuccess": "Update successfully.",
     "deleteConfirm": "Are you sure you want to delete?",
-    "deleteSuccess": "Deletion successful."
+    "deleteSuccess": "Deletion successful.",
+    "noReadPermission": "No read permission.",
+    "noWritePermission": "No write permission."
   },
   "error": {
     "Something went wrong!": "Something went wrong!",

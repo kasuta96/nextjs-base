@@ -63,7 +63,9 @@
     "error": "Có gì đó không ổn!. Thử lại sau nhé.",
     "updateSuccess": "Cập nhật thành công.",
     "deleteConfirm": "Có chắc chắn xoá ko đấy?",
-    "deleteSuccess": "Xóa thành công."
+    "deleteSuccess": "Xóa thành công.",
+    "noReadPermission": "Không có quyền đọc.",
+    "noWritePermission": "Không có quyền ghi."
   },
   "error": {
     "Something went wrong!": "Có gì đó không ổn!",

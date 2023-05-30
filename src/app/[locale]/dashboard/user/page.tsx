@@ -1,11 +1,15 @@
-import { useTranslations } from 'next-intl'
+import { checkPermission } from '@/lib/services/permission'
+import { getTranslations } from 'next-intl/server'
 
 export const metadata = {
   title: 'Users',
 }
 
-export default function UserPage() {
-  const t = useTranslations('common')
+export default async function UserPage() {
+  const t = await getTranslations()
 
-  return <p>{t(`Users`)}</p>
+  const { read, write } = await checkPermission('user')
+  if (!read) return <p>{t('notify.noReadPermission')}</p>
+
+  return <p>{t(`common.Users`)}</p>
 }

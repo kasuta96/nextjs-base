@@ -63,7 +63,9 @@
     "error": "何か問題が発生しました！。 後でもう一度試してください。",
     "updateSuccess": "正常に更新されました。",
     "deleteConfirm": "本当に削除しますか？",
-    "deleteSuccess": "削除が成功しました。"
+    "deleteSuccess": "削除が成功しました。",
+    "noReadPermission": "読み取り許可なし。",
+    "noWritePermission": "書き込み許可なし。"
   },
   "error": {
     "Something went wrong!": "何か問題が発生しました！",

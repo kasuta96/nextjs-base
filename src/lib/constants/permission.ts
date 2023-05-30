@@ -3,7 +3,7 @@ import { RolePermissionType } from '../validations/role'
 
 // ⛔️ Do not modify the permission ID (used for prisma/seed.ts & role relation).
 // The permission name and remarks are i18n keys (Update i18n (src/messages) when modifying them).
-export const permissions: Permission[] = [
+export const permissions = [
   {
     id: 'role',
     name: 'role_name',
@@ -19,7 +19,9 @@ export const permissions: Permission[] = [
     name: 'user_private_name',
     remarks: 'user_private_remarks',
   },
-]
+] as const
+
+export type PermissionIdType = (typeof permissions)[number]['id']
 
 export const defaultPermissions: RolePermissionType[] = permissions.map(
   (permission) => {

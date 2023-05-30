@@ -33,9 +33,11 @@ import SaveButton from '@/components/Button'
 export function PermissionsForm({
   role,
   setOpen,
+  write,
 }: {
   role?: RoleData
   setOpen?: Dispatch<SetStateAction<boolean>>
+  write: boolean
 }) {
   const t = useTranslations()
   const router = useRouter()
@@ -122,7 +124,9 @@ export function PermissionsForm({
                 <TableRow key={pms.permissionId}>
                   <TableCell className="flex items-center space-x-2">
                     <span>{t(`permission.${pms.permission?.name}`)}</span>
-                    <PermissionTooltip permission={pms.permission} />
+                    <div>
+                      <PermissionTooltip permission={pms.permission} />
+                    </div>
                   </TableCell>
                   <TableCell>
                     <FormField
@@ -187,18 +191,20 @@ export function PermissionsForm({
               />
             </>
           ) : (
-            <>
-              {role && <RoleDelete role={role} />}
-              <div
-                className={cn(
-                  buttonVariants({ variant: 'outline' }),
-                  'cursor-pointer'
-                )}
-                onClick={() => setEditRole(true)}
-              >
-                {t('common.Edit')}
-              </div>
-            </>
+            write && (
+              <>
+                {role && <RoleDelete role={role} />}
+                <div
+                  className={cn(
+                    buttonVariants({ variant: 'outline' }),
+                    'cursor-pointer'
+                  )}
+                  onClick={() => setEditRole(true)}
+                >
+                  {t('common.Edit')}
+                </div>
+              </>
+            )
           )}
         </div>
       </form>
