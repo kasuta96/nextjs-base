@@ -55,7 +55,7 @@ export function PermissionsForm({
 
   async function onSubmit(data: RoleWithPermissionsType) {
     setIsSaving(true)
-    const fetchUrl = `/api/users/roles/${role?.id || ''}`
+    const fetchUrl = `/api/role/${role?.id || ''}`
     const fetchMethod = role ? 'PATCH' : 'POST'
 
     const response = await fetch(fetchUrl, {

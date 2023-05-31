@@ -25,7 +25,7 @@ export function RoleDelete({ role }: { role: RoleData }) {
   const submitDelete = async () => {
     setIsDeleting(true)
 
-    const response = await fetch(`/api/users/roles/${role.id}`, {
+    const response = await fetch(`/api/role/${role.id}`, {
       method: 'DELETE',
     })
 
