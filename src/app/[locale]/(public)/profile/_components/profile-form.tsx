@@ -18,7 +18,6 @@ import {
 import { useTranslations } from 'next-intl'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, Controller } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
 import { SelectRef } from '@/components/ui/custom-form'
 import {
   SelectContent,
@@ -32,6 +31,7 @@ import { User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { InputGroup } from '@/components/form/input-group'
 import SaveButton from '@/components/Button'
+import { toast } from '@/components/ui/use-toast'
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: User
@@ -78,13 +78,11 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast.error(t('notify.error'), {
-        icon: '🙀',
-      })
+      return toast({ title: t('notify.error'), variant: 'destructive' })
     }
 
     reset(data)
-    toast.success(t('notify.updateSuccess'), { icon: '👌' })
+    toast({ title: t('notify.updateSuccess'), variant: 'success' })
   }
 
   const resetForm = () => {

@@ -23,12 +23,12 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { Close } from '@radix-ui/react-dialog'
-import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { defaultPermissions } from '@/lib/constants/permission'
 import { RoleData } from './role-accordion'
 import { RoleDelete } from './role-delete'
 import SaveButton from '@/components/Button'
+import { toast } from '@/components/ui/use-toast'
 
 export function PermissionsForm({
   role,
@@ -69,15 +69,13 @@ export function PermissionsForm({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast.error(t('notify.error'), {
-        icon: '🙀',
-      })
+      return toast({ title: t('notify.error'), variant: 'destructive' })
     }
 
     setOpen && setOpen(false)
     setEditRole(false)
     form.reset(data)
-    toast.success(t('notify.updateSuccess'), { icon: '👌' })
+    toast({ title: t('notify.updateSuccess'), variant: 'success' })
     router.refresh()
   }
 
