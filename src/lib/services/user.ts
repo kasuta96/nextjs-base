@@ -31,3 +31,21 @@ export async function getUserData(userId: User['id']) {
     },
   })
 }
+
+export async function getUsers() {
+  return await db.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      image: true,
+      firstName: true,
+      lastName: true,
+      gender: true,
+      dateOfBirth: true,
+      status: true,
+      role: true,
+      roles: true,
+    },
+  })
+}

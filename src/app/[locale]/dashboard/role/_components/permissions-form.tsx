@@ -136,7 +136,7 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={() => field.onChange}
                             />
                           </FormControl>
                           <FormLabel>Read</FormLabel>
@@ -154,7 +154,7 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={() => field.onChange}
                             />
                           </FormControl>
                           <FormLabel>Write</FormLabel>

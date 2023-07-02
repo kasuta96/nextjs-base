@@ -1,15 +1,27 @@
 import { checkPermission } from '@/lib/services/permission'
-import { getTranslations } from 'next-intl/server'
+import { DataTable } from '@/components/table/data-table'
+import NoReadPermission from '@/components/errors/no-read-permission'
+import { getUsers } from '@/lib/services/user'
+import { UserColumns, UserSearchColumns } from './_components/user-column'
+import { User } from '@/lib/validations/user'
 
 export const metadata = {
   title: 'Users',
 }
 
 export default async function UserPage() {
-  const t = await getTranslations()
-
   const { read, write } = await checkPermission('user')
-  if (!read) return <p>{t('notify.noReadPermission')}</p>
+  if (!read) return <NoReadPermission />
 
-  return <p>{t(`common.Users`)}</p>
+  const users = (await getUsers()) as unknown as User[]
+
+  return (
+    <DataTable
+      name="user"
+      write={write}
+      columns={UserColumns}
+      data={users}
+      searchColumns={UserSearchColumns}
+    />
+  )
 }

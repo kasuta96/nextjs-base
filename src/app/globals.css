@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
     --green: hsl(160, 84%, 39%); /* emerald-500 */
@@ -87,8 +83,6 @@
     --destructive-foreground: hsl(351, 95%, 71%); /* rose-400 */
 
     --ring: hsl(216, 34%, 17%);
-
-    --radius: 0.5rem;
   }
 }
 
@@ -98,7 +92,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
 

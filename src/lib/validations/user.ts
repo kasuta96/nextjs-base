@@ -1,4 +1,4 @@
-import { Gender, UserRole, UserStatus } from '@prisma/client'
+import { Gender, Role, UserRole, UserStatus } from '@prisma/client'
 import { z } from 'zod'
 
 export const GenderSchema = z.nativeEnum(Gender)
@@ -13,33 +13,37 @@ export type UserStatusType = `${z.infer<typeof UserStatusSchema>}`
 export const ProfileSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(2),
-  image: z.string().optional(),
-  bio: z.string().optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
+  image: z.string().nullable(),
+  bio: z.string().max(255).nullable(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
   gender: GenderSchema.optional(),
-  dateOfBirth: z.string().optional(),
-  phoneNumber: z.string().optional(),
-  zipCode: z.string().optional(),
-  address1: z.string().optional(),
-  address2: z.string().optional(),
-  languageCode: z.string().optional(),
+  dateOfBirth: z.string().nullable(),
+  phoneNumber: z.string().nullable(),
+  zipCode: z.string().nullable(),
+  address1: z.string().nullable(),
+  address2: z.string().nullable(),
+  languageCode: z.string().nullable().optional(),
 })
 export type ProfileType = z.infer<typeof ProfileSchema>
 
 export const UserSchema = ProfileSchema.merge(
   z.object({
-    role: UserRoleSchema.optional(),
-    status: UserStatusSchema.optional(),
-    emailVerified: z.string().optional(),
-    remarks: z.string().optional(),
-    createdAt: z.string().optional(),
-    updatedAt: z.string().optional(),
-    updatedUserId: z.string().optional(),
-    approveredAt: z.string().optional(),
-    approveredUserId: z.string().optional(),
-    deletedAt: z.string().optional(),
-    deletedUserId: z.string().optional(),
+    role: UserRoleSchema,
+    status: UserStatusSchema,
+    emailVerified: z.string().nullable(),
+    remarks: z.string().nullable(),
+    createdAt: z.string().nullable(),
+    updatedAt: z.string().nullable(),
+    updatedUserId: z.string().nullable(),
+    approvedAt: z.string().nullable(),
+    approvedUserId: z.string().nullable(),
+    deletedAt: z.string().nullable(),
+    deletedUserId: z.string().nullable(),
   })
 )
 export type UserType = z.infer<typeof UserSchema>
+
+export type User = UserType & {
+  roles: Role[]
+}

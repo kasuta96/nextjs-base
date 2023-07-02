@@ -4,6 +4,12 @@ import { AllPermission } from '~/types/next-auth'
 
 export async function getRoles() {
   return await db.role.findMany({
+    orderBy: [{ updatedAt: 'desc' }],
+  })
+}
+
+export async function getRoleIncludePermissions() {
+  return await db.role.findMany({
     include: {
       permissions: {
         include: {

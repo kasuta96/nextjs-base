@@ -29,11 +29,17 @@
     "Cancel": "Hủy",
     "Save": "Lưu",
     "Reset": "Đặt lại",
-    "Close": "Đóng"
+    "Close": "Đóng",
+    "Clear filters": "Xóa bộ lọc",
+    "View": "Hiển thị",
+    "Rows": "Hàng",
+    "Page": "Trang",
+    "Selected": "Đã chọn"
   },
   "user": {
     "name": "Tên hiển thị",
     "email": "Email",
+    "image": "Ảnh",
     "bio": "Tiểu sử",
     "firstName": "Họ",
     "lastName": "Tên",
@@ -44,20 +50,25 @@
     "address1": "Địa chỉ 1",
     "address2": "Địa chỉ 2",
     "role": "Vai trò",
+    "roles": "Vai trò",
     "status": "Trạng thái",
     "emailVerified": "Email Đã Xác minh",
     "remarks": "Ghi chú",
     "createdAt": "Đã tạo lúc",
     "updatedAt": "Đã cập nhật lúc",
     "updatedUser": "Người cập nhật",
-    "approveredAt": "Đã phê duyệt lúc",
-    "approveredUser": "Người phê duyệt",
+    "approvedAt": "Đã phê duyệt lúc",
+    "approvedUser": "Người phê duyệt",
     "deletedAt": "Đã xóa lúc",
     "deletedUser": "Người xóa",
     "Male": "Nam",
     "Female": "Nữ",
     "Other": "Khác",
-    "Unknown": "Không rõ"
+    "Unknown": "Không rõ",
+    "Active": "Kích hoạt",
+    "Inactive": "Chưa kích hoạt",
+    "Pending": "Chờ duyệt",
+    "Blocked": "Khóa"
   },
   "notify": {
     "error": "Có gì đó không ổn!. Thử lại sau nhé.",
@@ -65,7 +76,8 @@
     "deleteConfirm": "Có chắc chắn xoá ko đấy?",
     "deleteSuccess": "Xóa thành công.",
     "noReadPermission": "Không có quyền đọc.",
-    "noWritePermission": "Không có quyền ghi."
+    "noWritePermission": "Không có quyền ghi.",
+    "noResults": "Không có kết quả nào."
   },
   "error": {
     "Something went wrong!": "Có gì đó không ổn!",

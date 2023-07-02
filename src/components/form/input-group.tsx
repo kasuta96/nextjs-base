@@ -22,7 +22,9 @@ export const InputGroup = ({
         {children}
       </div>
       {error && (
-        <div className="px-1 text-xs text-destructive">{error.message}</div>
+        <div className="px-1 text-end text-xs text-destructive">
+          {error.message}
+        </div>
       )}
     </div>
   )

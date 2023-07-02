@@ -123,7 +123,7 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
                 name="gender"
                 control={control}
                 render={({ field }) => (
-                  <SelectRef onValueChange={field.onChange} {...field}>
+                  <SelectRef onValueChange={() => field.onChange} {...field}>
                     <SelectTrigger>
                       <SelectValue />
                       <SelectContent position="popper">
