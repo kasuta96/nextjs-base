@@ -99,10 +99,10 @@ model User {
   updatedUser   User?    @relation("UpdatedUsers", fields: [updatedUserId], references: [id])
   updatedUsers  User[]   @relation("UpdatedUsers")
 
-  approveredAt     DateTime? @map(name: "approved_at")
-  approveredUserId String?   @map(name: "approved_user_id")
-  approveredUser   User?     @relation("ApproveredUsers", fields: [approveredUserId], references: [id])
-  approveredUsers  User[]    @relation("ApproveredUsers")
+  approvedAt     DateTime? @map(name: "approved_at")
+  approvedUserId String?   @map(name: "approved_user_id")
+  approvedUser   User?     @relation("ApprovedUsers", fields: [approvedUserId], references: [id])
+  approvedUsers  User[]    @relation("ApprovedUsers")
 
   deletedAt     DateTime? @map(name: "deleted_at")
   deletedUserId String?   @map(name: "deleted_user_id")

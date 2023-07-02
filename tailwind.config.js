@@ -20,6 +20,10 @@ module.exports = {
         ring: 'var(--ring)',
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        green: {
+          DEFAULT: 'var(--green)',
+          foreground: 'var(--green-foreground)',
+        },
         sky: {
           DEFAULT: 'var(--sky)',
           foreground: 'var(--sky-foreground)',

@@ -100,7 +100,6 @@ pnpm prisma generate
 - [Tailwindcss](https://tailwindcss.com/docs/) - A utility-first CSS framework packed with classes
 - [Shadcn UI](https://ui.shadcn.com/docs) - [Radix UI](https://www.radix-ui.com/) - A Tailwindcss components library
 - [Lucide Icon](https://lucide.dev/) - Icon components
-- [react-hot-toast](https://react-hot-toast.com/) - Notification
 
 ### Schema validation, Form
 

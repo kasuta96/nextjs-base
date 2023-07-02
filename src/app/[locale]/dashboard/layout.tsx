@@ -1,13 +1,13 @@
 import { AddressBar } from '@/components/layout/address-bar'
 import { Sidebar } from '@/components/layout/sidebar'
-import { getActiveUser } from '@/lib/services/user'
+import { checkPermission } from '@/lib/services/permission'
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const user = await getActiveUser()
+  const { user } = await checkPermission()
 
   return (
     <div className="flex h-screen flex-col justify-between">

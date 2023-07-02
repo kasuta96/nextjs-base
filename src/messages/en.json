@@ -29,11 +29,17 @@
     "Cancel": "Cancel",
     "Save": "Save",
     "Reset": "Reset",
-    "Close": "Close"
+    "Close": "Close",
+    "Clear filters": "Clear filters",
+    "View": "View",
+    "Rows": "Rows",
+    "Page": "Page",
+    "Selected": "Selected"
   },
   "user": {
     "name": "Display name",
     "email": "Email",
+    "image": "Image",
     "bio": "Bio",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -44,26 +50,34 @@
     "address1": "Address 1",
     "address2": "Address 2",
     "role": "Role",
+    "roles": "Roles",
     "status": "Status",
     "emailVerified": "Email Verified",
     "remarks": "Remarks",
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "updatedUser": "Updated User",
-    "approveredAt": "Approved At",
-    "approveredUser": "Approved User",
+    "approvedAt": "Approved At",
+    "approvedUser": "Approved User",
     "deletedAt": "Deleted At",
     "deletedUser": "Deleted User",
     "Male": "Male",
     "Female": "Female",
     "Other": "Other",
-    "Unknown": "Unknown"
+    "Unknown": "Unknown",
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "Pending": "Pending",
+    "Blocked": "Blocked"
   },
   "notify": {
     "error": "Something went wrong!. Please try again later.",
     "updateSuccess": "Update successfully.",
     "deleteConfirm": "Are you sure you want to delete?",
-    "deleteSuccess": "Deletion successful."
+    "deleteSuccess": "Deletion successful.",
+    "noReadPermission": "No read permission.",
+    "noWritePermission": "No write permission.",
+    "noResults": "No results found."
   },
   "error": {
     "Something went wrong!": "Something went wrong!",

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { ClientProviders } from './client-providers'
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
-import { Toaster } from 'react-hot-toast'
+import { Toaster } from '@/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: {

@@ -1,6 +1,6 @@
 'use client'
 
-import { sidebar, type Item } from './sidebar-data'
+import { SidebarData, type Item } from './sidebar-data'
 import Link, { removeLocaleFromUrl } from '@/components/Link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
@@ -15,6 +15,7 @@ export function Sidebar({ user }: { user: User }) {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
   const t = useTranslations('common')
+  const sidebar = SidebarData(user)
 
   return (
     <>

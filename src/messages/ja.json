@@ -29,11 +29,17 @@
     "Cancel": "キャンセル",
     "Save": "保存",
     "Reset": "リセット",
-    "Close": "閉じる"
+    "Close": "閉じる",
+    "Clear filters": "フィルター解除",
+    "View": "表示",
+    "Rows": "行数",
+    "Page": "ページ",
+    "Selected": "選択済"
   },
   "user": {
     "name": "表示名",
     "email": "メールアドレス",
+    "image": "画像",
     "bio": "バイオ",
     "firstName": "名",
     "lastName": "姓",
@@ -44,26 +50,34 @@
     "address1": "住所1",
     "address2": "住所2",
     "role": "ロール",
+    "roles": "ロール",
     "status": "状態",
     "emailVerified": "メールアドレス確認済み",
     "remarks": "備考",
     "createdAt": "作成日時",
     "updatedAt": "更新日時",
     "updatedUser": "更新者",
-    "approveredAt": "承認日時",
-    "approveredUser": "承認者",
+    "approvedAt": "承認日時",
+    "approvedUser": "承認者",
     "deletedAt": "削除日時",
     "deletedUser": "削除者",
     "Male": "男性",
     "Female": "女性",
     "Other": "その他",
-    "Unknown": "不明"
+    "Unknown": "不明",
+    "Active": "有効",
+    "Inactive": "無効",
+    "Pending": "保留",
+    "Blocked": "ブロック"
   },
   "notify": {
     "error": "何か問題が発生しました！。 後でもう一度試してください。",
     "updateSuccess": "正常に更新されました。",
     "deleteConfirm": "本当に削除しますか？",
-    "deleteSuccess": "削除が成功しました。"
+    "deleteSuccess": "削除が成功しました。",
+    "noReadPermission": "読み取り許可なし。",
+    "noWritePermission": "書き込み許可なし。",
+    "noResults": "結果なし"
   },
   "error": {
     "Something went wrong!": "何か問題が発生しました！",

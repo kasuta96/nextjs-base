@@ -4,7 +4,7 @@ services:
   # DB
   db:
     image: mysql:8.0
-    container_name: ${APP_NAME}-db
+    container_name: ${APP_NAME:-NextjsApp}-db
     volumes:
       - ./.data/mysql:/var/lib/mysql
     restart: unless-stopped
@@ -19,7 +19,7 @@ services:
       - mynetwork
 
   # app:
-  #   container_name: ${APP_NAME}-app
+  #   container_name: ${APP_NAME:-NextjsApp}-app
   #   build: .
   #   ports:
   #     - ${APP_PORT}:3000
@@ -28,5 +28,5 @@ services:
 
 networks:
   mynetwork:
-    name: ${APP_NAME}-network
+    name: ${APP_NAME:-NextjsApp}-network
     driver: bridge

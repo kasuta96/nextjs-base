@@ -3,5 +3,5 @@ interface UserLayoutProps {
 }
 
 export default function UserLayout({ children }: UserLayoutProps) {
-  return <div className="p-4">{children}</div>
+  return <>{children}</>
 }

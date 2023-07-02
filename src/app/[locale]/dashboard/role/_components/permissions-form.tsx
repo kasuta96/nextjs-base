@@ -23,19 +23,21 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { Close } from '@radix-ui/react-dialog'
-import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { defaultPermissions } from '@/lib/constants/permission'
 import { RoleData } from './role-accordion'
 import { RoleDelete } from './role-delete'
 import SaveButton from '@/components/Button'
+import { toast } from '@/components/ui/use-toast'
 
 export function PermissionsForm({
   role,
   setOpen,
+  write,
 }: {
   role?: RoleData
   setOpen?: Dispatch<SetStateAction<boolean>>
+  write: boolean
 }) {
   const t = useTranslations()
   const router = useRouter()
@@ -53,7 +55,7 @@ export function PermissionsForm({
 
   async function onSubmit(data: RoleWithPermissionsType) {
     setIsSaving(true)
-    const fetchUrl = `/api/users/roles/${role?.id || ''}`
+    const fetchUrl = `/api/role/${role?.id || ''}`
     const fetchMethod = role ? 'PATCH' : 'POST'
 
     const response = await fetch(fetchUrl, {
@@ -67,15 +69,13 @@ export function PermissionsForm({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast.error(t('notify.error'), {
-        icon: '🙀',
-      })
+      return toast({ title: t('notify.error'), variant: 'destructive' })
     }
 
     setOpen && setOpen(false)
     setEditRole(false)
     form.reset(data)
-    toast.success(t('notify.updateSuccess'), { icon: '👌' })
+    toast({ title: t('notify.updateSuccess'), variant: 'success' })
     router.refresh()
   }
 
@@ -122,7 +122,9 @@ export function PermissionsForm({
                 <TableRow key={pms.permissionId}>
                   <TableCell className="flex items-center space-x-2">
                     <span>{t(`permission.${pms.permission?.name}`)}</span>
-                    <PermissionTooltip permission={pms.permission} />
+                    <div>
+                      <PermissionTooltip permission={pms.permission} />
+                    </div>
                   </TableCell>
                   <TableCell>
                     <FormField
@@ -134,7 +136,7 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={() => field.onChange}
                             />
                           </FormControl>
                           <FormLabel>Read</FormLabel>
@@ -152,7 +154,7 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={() => field.onChange}
                             />
                           </FormControl>
                           <FormLabel>Write</FormLabel>
@@ -187,18 +189,20 @@ export function PermissionsForm({
               />
             </>
           ) : (
-            <>
-              {role && <RoleDelete role={role} />}
-              <div
-                className={cn(
-                  buttonVariants({ variant: 'outline' }),
-                  'cursor-pointer'
-                )}
-                onClick={() => setEditRole(true)}
-              >
-                {t('common.Edit')}
-              </div>
-            </>
+            write && (
+              <>
+                {role && <RoleDelete role={role} />}
+                <div
+                  className={cn(
+                    buttonVariants({ variant: 'outline' }),
+                    'cursor-pointer'
+                  )}
+                  onClick={() => setEditRole(true)}
+                >
+                  {t('common.Edit')}
+                </div>
+              </>
+            )
           )}
         </div>
       </form>

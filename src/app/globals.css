@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
+    --green: hsl(160, 84%, 39%); /* emerald-500 */
+    --green-foreground: hsl(163, 88%, 20%); /* emerald-800 */
+
     --sky: hsl(201, 96%, 32%); /* sky-700 */
     --sky-foreground: hsl(204, 94%, 94%); /* sky-100 */
 
@@ -38,8 +37,8 @@
     --accent: hsl(210, 40%, 96.1%);
     --accent-foreground: hsl(222.2, 47.4%, 11.2%);
 
-    --destructive: hsl(0, 100%, 50%);
-    --destructive-foreground: hsl(210, 40%, 98%);
+    --destructive: hsl(351, 95%, 71%); /* rose-400 */
+    --destructive-foreground: hsl(342, 75%, 30%); /* rose-900 */
 
     --ring: hsl(215, 20.2%, 65.1%);
 
@@ -47,6 +46,9 @@
   }
 
   .dark {
+    --green: hsl(163, 88%, 20%); /* emerald-800 */
+    --green-foreground: hsl(160, 84%, 39%); /* emerald-500 */
+
     --sky: hsl(199, 95%, 74%); /* sky-300 */
     --sky-foreground: hsl(204, 80%, 16%); /* sky-950 */
 
@@ -77,12 +79,10 @@
     --accent: hsl(216, 34%, 17%);
     --accent-foreground: hsl(210, 40%, 98%);
 
-    --destructive: hsl(0, 63%, 40%);
-    --destructive-foreground: hsl(210, 40%, 98%);
+    --destructive: hsl(342, 75%, 30%); /* rose-900 */
+    --destructive-foreground: hsl(351, 95%, 71%); /* rose-400 */
 
     --ring: hsl(216, 34%, 17%);
-
-    --radius: 0.5rem;
   }
 }
 
@@ -92,7 +92,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
 

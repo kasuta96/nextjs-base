@@ -13,7 +13,7 @@ import PermissionsForm from './permissions-form'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
-export function RoleCreate() {
+export function RoleCreate({ write }: { write: boolean }) {
   const t = useTranslations('common')
   const [open, setOpen] = useState(false)
 
@@ -29,7 +29,7 @@ export function RoleCreate() {
           <DialogHeader>
             <DialogTitle>{t('Create new')}</DialogTitle>
           </DialogHeader>
-          <PermissionsForm setOpen={setOpen} />
+          <PermissionsForm setOpen={setOpen} write={write} />
         </DialogContent>
       </Dialog>
     </>

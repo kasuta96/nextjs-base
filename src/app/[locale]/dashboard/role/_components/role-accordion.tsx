@@ -19,16 +19,22 @@ export type RoleData = Role & {
   })[]
 }
 
-export function RoleAccordion({ roles }: { roles: RoleData[] }) {
+export function RoleAccordion({
+  roles,
+  write,
+}: {
+  roles: RoleData[]
+  write: boolean
+}) {
   const t = useTranslations()
 
   return (
     <div className="space-y-4">
-      <RoleCreate />
+      {write && <RoleCreate write={write} />}
       <Accordion
         type="single" // single | multiple
         collapsible // use with type single
-        className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+        className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3"
       >
         {roles.length ? (
           roles.map((role) => (
@@ -39,7 +45,7 @@ export function RoleAccordion({ roles }: { roles: RoleData[] }) {
             >
               <AccordionTrigger>{role.name}</AccordionTrigger>
               <AccordionContent className="px-2">
-                <PermissionsForm role={role} />
+                <PermissionsForm role={role} write={write} />
               </AccordionContent>
             </AccordionItem>
           ))

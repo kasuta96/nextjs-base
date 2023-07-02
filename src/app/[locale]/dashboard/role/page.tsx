@@ -1,12 +1,19 @@
-import { getRoles } from '@/lib/services/role'
+import { getRoleIncludePermissions } from '@/lib/services/role'
 import { RoleAccordion } from './_components/role-accordion'
+import { checkPermission } from '@/lib/services/permission'
+import { getTranslations } from 'next-intl/server'
 
 export const metadata = {
   title: 'Role',
 }
 
 export default async function UserPage() {
-  const roles = await getRoles()
+  const t = await getTranslations()
+  // Check permission
+  const { read, write } = await checkPermission('role')
+  if (!read) return <p>{t('notify.noReadPermission')}</p>
 
-  return <RoleAccordion roles={roles} />
+  const roles = await getRoleIncludePermissions()
+
+  return <RoleAccordion roles={roles} write={write} />
 }
