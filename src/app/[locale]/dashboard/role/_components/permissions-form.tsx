@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import React, { Dispatch, SetStateAction, useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   RoleWithPermissionsSchema,
   RoleWithPermissionsType,
-} from '@/lib/validations/role'
-import { useTranslations } from 'next-intl'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
+} from "@/lib/validations/role"
+import { useTranslations } from "next-intl"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -17,18 +17,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { PermissionTooltip } from './permission-tooltip'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { Close } from '@radix-ui/react-dialog'
-import { useRouter } from 'next/navigation'
-import { defaultPermissions } from '@/lib/constants/permission'
-import { RoleData } from './role-accordion'
-import { RoleDelete } from './role-delete'
-import SaveButton from '@/components/Button'
-import { toast } from '@/components/ui/use-toast'
+} from "@/components/ui/form"
+import { PermissionTooltip } from "./permission-tooltip"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
+import { Close } from "@radix-ui/react-dialog"
+import { useRouter } from "next/navigation"
+import { defaultPermissions } from "@/lib/constants/permission"
+import { RoleData } from "./role-accordion"
+import { RoleDelete } from "./role-delete"
+import SaveButton from "@/components/Button"
+import { toast } from "@/components/ui/use-toast"
 
 export function PermissionsForm({
   role,
@@ -47,21 +47,21 @@ export function PermissionsForm({
   const form = useForm<RoleWithPermissionsType>({
     resolver: zodResolver(RoleWithPermissionsSchema),
     defaultValues: {
-      name: role?.name || '',
-      remarks: role?.remarks || '',
+      name: role?.name || "",
+      remarks: role?.remarks || "",
       permissions: role?.permissions || defaultPermissions,
     },
   })
 
   async function onSubmit(data: RoleWithPermissionsType) {
     setIsSaving(true)
-    const fetchUrl = `/api/role/${role?.id || ''}`
-    const fetchMethod = role ? 'PATCH' : 'POST'
+    const fetchUrl = `/api/role/${role?.id || ""}`
+    const fetchMethod = role ? "PATCH" : "POST"
 
     const response = await fetch(fetchUrl, {
       method: fetchMethod,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
@@ -69,13 +69,13 @@ export function PermissionsForm({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t('notify.error'), variant: 'destructive' })
+      return toast({ title: t("notify.error"), variant: "destructive" })
     }
 
     setOpen && setOpen(false)
     setEditRole(false)
     form.reset(data)
-    toast({ title: t('notify.updateSuccess'), variant: 'success' })
+    toast({ title: t("notify.updateSuccess"), variant: "success" })
     router.refresh()
   }
 
@@ -89,7 +89,7 @@ export function PermissionsForm({
               name={`name`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('user.name')}</FormLabel>
+                  <FormLabel>{t("user.name")}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -102,7 +102,7 @@ export function PermissionsForm({
               name={`remarks`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('user.remarks')}</FormLabel>
+                  <FormLabel>{t("user.remarks")}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -136,7 +136,9 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={() => field.onChange}
+                              onCheckedChange={(e: boolean) =>
+                                field.onChange(e)
+                              }
                             />
                           </FormControl>
                           <FormLabel>Read</FormLabel>
@@ -154,7 +156,9 @@ export function PermissionsForm({
                             <Checkbox
                               checked={field.value}
                               disabled={!editRole}
-                              onCheckedChange={() => field.onChange}
+                              onCheckedChange={(e: boolean) =>
+                                field.onChange(e)
+                              }
                             />
                           </FormControl>
                           <FormLabel>Write</FormLabel>
@@ -176,11 +180,11 @@ export function PermissionsForm({
                   variant="outline"
                   onClick={() => setEditRole(false)}
                 >
-                  {t('common.Cancel')}
+                  {t("common.Cancel")}
                 </Button>
               ) : (
                 <Close asChild>
-                  <Button variant="outline">{t('common.Close')}</Button>
+                  <Button variant="outline">{t("common.Close")}</Button>
                 </Close>
               )}
               <SaveButton
@@ -194,12 +198,12 @@ export function PermissionsForm({
                 {role && <RoleDelete role={role} />}
                 <div
                   className={cn(
-                    buttonVariants({ variant: 'outline' }),
-                    'cursor-pointer'
+                    buttonVariants({ variant: "outline" }),
+                    "cursor-pointer"
                   )}
                   onClick={() => setEditRole(true)}
                 >
-                  {t('common.Edit')}
+                  {t("common.Edit")}
                 </div>
               </>
             )

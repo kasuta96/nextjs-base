@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import { useLocale } from 'next-intl'
-import NextLink from 'next/link'
-import { ComponentProps, forwardRef } from 'react'
-import { locales } from '@/lib/i18n'
+import { useLocale } from "next-intl"
+import NextLink from "next/link"
+import { ComponentProps, forwardRef } from "react"
+import { locales } from "@/lib/i18n"
 
 type Props = ComponentProps<typeof NextLink>
 
 export function removeLocaleFromUrl(url: string): string {
-  const regex = new RegExp(`^/(${locales.join('|')})([\/])?([\?])?`)
-  return url.replace(regex, '/$3')
+  const regex = new RegExp(`^/(${locales.join("|")})([\/])?([\?])?`)
+  return url.replace(regex, "/$3")
 }
 
-function Link({ href, locale, ...rest }: Props, ref: Props['ref']) {
+function Link({ href, locale, ...rest }: Props, ref: Props["ref"]) {
   const currentLocale = useLocale()
 
   // Turn this off, to avoid updating the locale cookie for prefetch requests
@@ -23,12 +23,12 @@ function Link({ href, locale, ...rest }: Props, ref: Props['ref']) {
 
     return url.replace(
       /^\//,
-      '/' + (typeof locale === 'string' ? locale : currentLocale) + '/'
+      "/" + (typeof locale === "string" ? locale : currentLocale) + "/"
     )
   }
 
   const localizedHref =
-    typeof href === 'string'
+    typeof href === "string"
       ? getLocalizedHref(href)
       : href.pathname != null
       ? { ...href, pathname: getLocalizedHref(href.pathname) }

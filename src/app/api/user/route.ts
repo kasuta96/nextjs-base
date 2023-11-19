@@ -1,14 +1,14 @@
-import { z } from 'zod'
-import { db } from '@/lib/db'
-import { checkPermission } from '@/lib/services/permission'
-import { UserSchema } from '@/lib/validations/user'
-import { createSelect } from '@/lib/helper'
+import { z } from "zod"
+import { db } from "@/lib/db"
+import { checkPermission } from "@/lib/services/permission"
+import { UserSchema } from "@/lib/validations/user"
+import { createSelect } from "@/lib/helper"
 
 export async function GET() {
   try {
     // Check permission
-    const userPublicPms = await checkPermission('user')
-    const userPrivatePms = await checkPermission('user')
+    const userPublicPms = await checkPermission("user")
+    const userPrivatePms = await checkPermission("user")
     if (!userPublicPms.read && !userPrivatePms.read) {
       return new Response(null, { status: 403 })
     }
@@ -16,7 +16,7 @@ export async function GET() {
     const users = db.user.findMany({
       select: createSelect(UserSchema),
       orderBy: {
-        updatedAt: 'desc',
+        updatedAt: "desc",
       },
     })
 

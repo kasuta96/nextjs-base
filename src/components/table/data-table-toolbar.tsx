@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { Table } from '@tanstack/react-table'
-import { DataTableViewOptions } from '@/components/table/data-table-view-options'
-import { DataTableSearch, SearchColumnProps } from './data-table-search'
+import { Table } from "@tanstack/react-table"
+import { DataTableViewOptions } from "@/components/table/data-table-view-options"
+import { DataTableSearch, SearchColumnProps } from "./data-table-search"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>

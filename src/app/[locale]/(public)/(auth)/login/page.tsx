@@ -1,10 +1,10 @@
-import { Metadata } from 'next'
-import LoginForm from './loginForm'
-import { getCurrentUser } from '@/lib/session'
+import { Metadata } from "next"
+import LoginForm from "./loginForm"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
-  title: 'Login',
-  description: 'Login to your account',
+  title: "Login",
+  description: "Login to your account",
 }
 
 export default async function LoginPage() {

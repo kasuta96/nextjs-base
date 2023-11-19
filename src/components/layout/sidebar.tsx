@@ -1,28 +1,28 @@
-'use client'
+"use client"
 
-import { SidebarData, type Item } from './sidebar-data'
-import Link, { removeLocaleFromUrl } from '@/components/Link'
-import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
-import { useState } from 'react'
-import Nav from '@/components/layout/nav'
-import { User } from '~/types/next-auth'
-import { env } from '~/env.mjs'
-import { useTranslations } from 'next-intl'
-import { ROUTE_HOME } from '@/lib/constants/route'
+import { SidebarData, type Item } from "./sidebar-data"
+import Link, { removeLocaleFromUrl } from "@/components/Link"
+import { usePathname } from "next/navigation"
+import clsx from "clsx"
+import { useState } from "react"
+import Nav from "@/components/layout/nav"
+import { User } from "~/types/next-auth"
+import { env } from "~/env.mjs"
+import { useTranslations } from "next-intl"
+import { ROUTE_HOME } from "@/lib/constants/route"
 
 export function Sidebar({ user }: { user: User }) {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
-  const t = useTranslations('common')
+  const t = useTranslations("common")
   const sidebar = SidebarData(user)
 
   return (
     <>
       <div className="fixed top-0 z-10 flex w-full flex-col border border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300 lg:bottom-0 lg:z-auto lg:w-60">
         <div
-          className={clsx('overflow-y-auto lg:static lg:block', {
-            'fixed inset-x-0 bottom-0 top-0 mt-px bg-gray-50 dark:bg-gray-900':
+          className={clsx("overflow-y-auto lg:static lg:block", {
+            "fixed inset-x-0 bottom-0 top-0 mt-px bg-gray-50 dark:bg-gray-900":
               isOpen,
             hidden: !isOpen,
           })}
@@ -43,7 +43,7 @@ export function Sidebar({ user }: { user: User }) {
             {sidebar.map((section) => {
               return (
                 <div key={section.name}>
-                  <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-500/80">
+                  <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     <div>{t(section.name)}</div>
                   </div>
 
@@ -91,9 +91,9 @@ function SidebarItem({
       onClick={close}
       href={`${item.path}`}
       className={clsx(
-        'flex space-x-2 rounded-md px-3 py-2 text-sm hover:bg-sky-foreground',
+        "flex space-x-2 rounded-md px-3 py-2 text-sm hover:bg-sky-foreground",
         {
-          'font-semibold text-sky': isActive,
+          "font-semibold text-sky": isActive,
         }
       )}
     >

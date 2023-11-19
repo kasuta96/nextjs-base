@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import { useTranslations } from 'next-intl'
-import { ROUTE_DASHBOARD, ROUTE_LOGO } from '@/lib/constants/route'
+import Image from "next/image"
+import { Inter } from "next/font/google"
+import { useTranslations } from "next-intl"
+import { ROUTE_DASHBOARD, ROUTE_LOGO } from "@/lib/constants/route"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export default function HomePage() {
-  const t = useTranslations('common')
+  const t = useTranslations("common")
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function HomePage() {
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
         >
           <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            {t(`Dashboard`)}{' '}
+            {t(`Dashboard`)}{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -37,7 +37,7 @@ export default function HomePage() {
           <p
             className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
           >
-            {t('Management Page')}
+            {t("Management Page")}
           </p>
         </a>
       </div>

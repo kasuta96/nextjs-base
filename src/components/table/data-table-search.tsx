@@ -1,16 +1,16 @@
-'use client'
+"use client"
 
-import { Table } from '@tanstack/react-table'
-import { Input } from '@/components/ui/input'
-import { DataTableFacetedFilter } from './data-table-faceted-filter'
-import { Option } from '@/lib/helper'
-import { useTranslations } from 'next-intl'
-import { Button } from '../ui/button'
-import { X } from 'lucide-react'
+import { Table } from "@tanstack/react-table"
+import { Input } from "@/components/ui/input"
+import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { Option } from "@/lib/helper"
+import { useTranslations } from "next-intl"
+import { Button } from "../ui/button"
+import { X } from "lucide-react"
 
 export interface SearchColumnProps {
   id: string
-  type: 'text' | 'option'
+  type: "text" | "option"
   options?: Option[]
   isFilter?: boolean
 }
@@ -35,12 +35,12 @@ export function DataTableSearch<TData>({
         (column, index) =>
           column.isFilter !== false && (
             <div key={index}>
-              {column.type == 'text' ? (
+              {column.type == "text" ? (
                 <Input
                   placeholder={t(`${name}.${column.id}`)}
                   value={
                     (table.getColumn(column.id)?.getFilterValue() as string) ??
-                    ''
+                    ""
                   }
                   onChange={(event) => {
                     table
@@ -49,7 +49,7 @@ export function DataTableSearch<TData>({
                   }}
                   className="h-8 w-[100px] lg:w-[120px] xl:w-[150px]"
                 />
-              ) : column.type == 'option' && column.options ? (
+              ) : column.type == "option" && column.options ? (
                 <DataTableFacetedFilter
                   name={name}
                   column={table.getColumn(column.id)}
@@ -69,7 +69,7 @@ export function DataTableSearch<TData>({
           className="h-8 whitespace-nowrap px-2 lg:px-3"
         >
           <X className="mr-2 h-4 w-4" />
-          {t('common.Reset')}
+          {t("common.Reset")}
         </Button>
       )}
     </div>

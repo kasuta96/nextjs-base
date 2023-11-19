@@ -1,5 +1,5 @@
-import { getServerSession as getSS } from 'next-auth/next'
-import authOptions from '@/lib/auth'
+import { getServerSession as getSS } from "next-auth/next"
+import authOptions from "@/lib/auth"
 
 export async function getServerSession() {
   return await getSS(authOptions)

@@ -1,5 +1,5 @@
-import { Gender, Role, UserRole, UserStatus } from '@prisma/client'
-import { z } from 'zod'
+import { Gender, Role, UserRole, UserStatus } from "@prisma/client"
+import { z } from "zod"
 
 export const GenderSchema = z.nativeEnum(Gender)
 export type GenderType = `${z.infer<typeof GenderSchema>}`

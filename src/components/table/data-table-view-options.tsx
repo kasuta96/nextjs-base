@@ -1,17 +1,17 @@
-'use client'
+"use client"
 
-import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { Table } from '@tanstack/react-table'
-import { SlidersHorizontal } from 'lucide-react'
+import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
+import { Table } from "@tanstack/react-table"
+import { SlidersHorizontal } from "lucide-react"
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-} from '@/components/ui/dropdown-menu'
-import { ShowTranslate } from '../common/show-text'
-import { useTranslations } from 'next-intl'
+} from "@/components/ui/dropdown-menu"
+import { ShowTranslate } from "../common/show-text"
+import { useTranslations } from "next-intl"
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
@@ -22,14 +22,14 @@ export function DataTableViewOptions<TData>({
   table,
   name,
 }: DataTableViewOptionsProps<TData>) {
-  const t = useTranslations('common')
+  const t = useTranslations("common")
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="ml-auto h-8">
           <SlidersHorizontal className="h-4 w-4" />
           <span className="ml-2 hidden whitespace-nowrap lg:block">
-            {t('View')}
+            {t("View")}
           </span>
         </Button>
       </DropdownMenuTrigger>
@@ -38,7 +38,7 @@ export function DataTableViewOptions<TData>({
           .getAllColumns()
           .filter(
             (column) =>
-              typeof column.accessorFn !== 'undefined' && column.getCanHide()
+              typeof column.accessorFn !== "undefined" && column.getCanHide()
           )
           .map((column) => {
             return (

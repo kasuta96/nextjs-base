@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { User } from '~/types/next-auth'
-import ThemeSwitch from '@/components/menu/theme-switch'
-import { Dispatch, SetStateAction } from 'react'
-import UserDropdown from '@/components/menu/user-dropdown'
-import { Menu, X } from 'lucide-react'
+import { User } from "~/types/next-auth"
+import { ThemeToggle } from "@/components/menu/theme-toggle"
+import { Dispatch, SetStateAction } from "react"
+import UserDropdown from "@/components/menu/user-dropdown"
+import { Menu, X } from "lucide-react"
 
 export default function Nav({
   className,
@@ -38,7 +38,7 @@ export default function Nav({
           )}
         </div>
         <div className="flex items-center space-x-4">
-          <ThemeSwitch />
+          <ThemeToggle />
           <UserDropdown user={user} />
         </div>
       </div>

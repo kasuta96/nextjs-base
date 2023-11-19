@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { db } from '@/lib/db'
-import { ProfileSchema } from '@/lib/validations/user'
-import { getServerSession } from '@/lib/session'
+import { z } from "zod"
+import { db } from "@/lib/db"
+import { ProfileSchema } from "@/lib/validations/user"
+import { getServerSession } from "@/lib/session"
 
 const routeContextSchema = z.object({
   params: z.object({

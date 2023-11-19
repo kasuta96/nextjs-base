@@ -1,4 +1,4 @@
-import { LucideIcon } from 'lucide-react'
+import { LucideIcon } from "lucide-react"
 
 // Create prisma select object from zod schema
 export function createSelect(schema: any): object {

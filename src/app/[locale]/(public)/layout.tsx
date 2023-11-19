@@ -1,9 +1,9 @@
-import ThemeSwitch from '@/components/menu/theme-switch'
-import UserDropdown from '@/components/menu/user-dropdown'
-import { env } from '~/env.mjs'
-import Link from '@/components/Link'
-import { ROUTE_HOME } from '@/lib/constants/route'
-import { getCurrentUser } from '@/lib/session'
+import { ThemeToggle } from "@/components/menu/theme-toggle"
+import UserDropdown from "@/components/menu/user-dropdown"
+import { env } from "~/env.mjs"
+import Link from "@/components/Link"
+import { ROUTE_HOME } from "@/lib/constants/route"
+import { getCurrentUser } from "@/lib/session"
 
 interface HomeLayoutProps {
   children: React.ReactNode
@@ -22,7 +22,7 @@ export default async function HomeLayout({ children }: HomeLayoutProps) {
           {env.NEXT_PUBLIC_APP_NAME}
         </Link>
         <div className="fixed bottom-0 left-0 flex h-24 w-full items-end justify-center space-x-4 bg-gradient-to-t from-white via-white p-2 dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <ThemeSwitch />
+          <ThemeToggle />
           <UserDropdown user={user} />
         </div>
       </div>

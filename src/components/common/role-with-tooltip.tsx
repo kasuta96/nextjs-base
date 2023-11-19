@@ -1,12 +1,12 @@
-import { Role } from '@prisma/client'
-import React from 'react'
+import { Role } from "@prisma/client"
+import React from "react"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { Badge } from '../ui/badge'
+} from "@/components/ui/tooltip"
+import { Badge } from "../ui/badge"
 
 export default function RoleWithTooltip({ roles }: { roles: Role[] }) {
   return (
@@ -31,14 +31,14 @@ export default function RoleWithTooltip({ roles }: { roles: Role[] }) {
               {roles.map((role) => (
                 <div key={role.id}>
                   <div className="font-semibold">{role.name}</div>
-                  <div className=" text-gray-500">{role.remarks}</div>
+                  <div className="text-muted-foreground">{role.remarks}</div>
                 </div>
               ))}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ) : (
-        '-'
+        "-"
       )}
     </>
   )

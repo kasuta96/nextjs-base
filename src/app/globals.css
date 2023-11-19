@@ -98,3 +98,13 @@
 .card {
   @apply rounded-lg bg-card p-px shadow-md dark:shadow-gray-700;
 }
+
+.shadow,
+.shadow-sm,
+.shadow-md,
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl
+{
+  @apply dark:shadow-gray-700;
+}
