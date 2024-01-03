@@ -24,10 +24,6 @@ This project using the following stack:
 _I will be using pnpm as the default option. However, you still have the choice to use either npm or yarn._
 
 ```bash
-npm install
-# or
-yarn
-# or
 pnpm install
 ```
 
@@ -39,6 +35,13 @@ Optional: Installation with docker
 
 ```bash
 docker-compose up --build -d
+```
+
+```sql
+-- On development
+-- Access DB & GRANT all permissions to user
+GRANT ALL PRIVILEGES ON *.* TO 'redine'@'%';
+-- Or just change user to root
 ```
 
 Generate the Prisma Client
@@ -68,6 +71,8 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+---
 
 ## Learn More
 

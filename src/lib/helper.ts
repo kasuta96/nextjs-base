@@ -1,3 +1,4 @@
+import { Account } from "@prisma/client"
 import { LucideIcon } from "lucide-react"
 
 // Create prisma select object from zod schema
@@ -34,4 +35,18 @@ export function enumToOptions<T extends Record<string, string>>(
   }
 
   return options
+}
+
+export function getAccountType(accounts?: Account[]): string {
+  const result = accounts?.length
+    ? accounts
+        .map((a) => {
+          let type = a.type == "oauth" ? "SSO" : a.type
+          let provider = a.provider
+          return `${type} (${provider})`
+        })
+        .join(", ")
+    : ""
+
+  return result
 }

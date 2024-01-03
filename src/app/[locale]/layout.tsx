@@ -4,13 +4,14 @@ import { ThemeProvider } from "@/components/menu/theme-provider"
 import { NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
 import { Toaster } from "@/components/ui/toaster"
+import { env } from "~/env.mjs"
 
 export const metadata: Metadata = {
   title: {
-    default: "Next.js App",
-    template: "%s | Next.js App",
+    default: `${env.NEXT_PUBLIC_APP_NAME}`,
+    template: `%s | ${env.NEXT_PUBLIC_APP_NAME}`,
   },
-  description: "description",
+  description: "",
 }
 
 export default async function RootLayout({

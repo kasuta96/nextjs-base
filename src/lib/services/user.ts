@@ -24,10 +24,64 @@ export async function getUnblockUser() {
   return user
 }
 
-export async function getUserData(userId: User["id"]) {
+export async function getUserData(
+  userId: User["id"],
+  types?: {
+    general?: boolean
+    private?: boolean
+    role?: boolean
+    other?: boolean
+  }
+) {
+  const isGeneral = types?.general ?? true
+  const isPrivate = types?.private ?? false
+  const isRole = types?.role ?? false
+  const isOther = types?.other ?? false
+
   return await db.user.findFirst({
     where: {
       id: userId,
+    },
+    select: {
+      // Public information
+      id: isGeneral,
+      email: isGeneral,
+      name: isGeneral,
+      image: isGeneral,
+      bio: isGeneral,
+      firstName: isGeneral,
+      lastName: isGeneral,
+      gender: isGeneral,
+      dateOfBirth: isGeneral,
+      languageCode: isGeneral,
+      status: isGeneral,
+      // Private information
+      phoneNumber: isPrivate,
+      zipCode: isPrivate,
+      address1: isPrivate,
+      address2: isPrivate,
+      remarks: isPrivate,
+      // Other
+      emailVerified: isOther,
+      createdAt: isOther,
+      updatedAt: isOther,
+      updatedUserId: isOther,
+      approvedAt: isOther,
+      approvedUserId: isOther,
+      deletedAt: isOther,
+      deletedUserId: isOther,
+      accounts: isOther
+        ? {
+            select: {
+              id: true,
+              type: true,
+              provider: true,
+            },
+          }
+        : false,
+      // Role
+      role: isRole,
+      roles: isRole,
     },
   })
 }

@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Skeleton } from "../ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton"
 import { DataTableToolbar } from "./data-table-toolbar"
 import { DataTablePagination } from "./data-table-pagination"
 import { useState } from "react"
@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="mt-4 space-y-2">
+    <div className="space-y-2">
       <DataTableToolbar
         name={name}
         table={table}

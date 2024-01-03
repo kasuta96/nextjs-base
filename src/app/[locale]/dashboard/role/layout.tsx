@@ -3,5 +3,5 @@ interface RoleLayoutProps {
 }
 
 export default function RoleLayout({ children }: RoleLayoutProps) {
-  return <div className="p-4">{children}</div>
+  return <div className="my-4">{children}</div>
 }

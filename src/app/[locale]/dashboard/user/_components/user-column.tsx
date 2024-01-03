@@ -9,13 +9,14 @@ import { DataTableColumnHeader } from "@/components/table/data-table-column-head
 import { SearchColumnProps } from "@/components/table/data-table-search"
 // import { Checkbox } from "@/components/ui/checkbox"
 import { genders, userStatus } from "@/lib/constants/option"
-import { ROUTE_DEFAULT_AVATAR } from "@/lib/constants/route"
+import { ROUTE_DEFAULT_AVATAR, ROUTE_USER } from "@/lib/constants/route"
 import { User } from "@/lib/validations/user"
 import { Role } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import { UserRowActions } from "./user-row-actions"
 import { Crown } from "lucide-react"
+import Link from "@/components/Link"
 
 export const UserColumns: ColumnDef<User>[] = [
   // {
@@ -64,9 +65,11 @@ export const UserColumns: ColumnDef<User>[] = [
             </div>
           )}
         </div>
-        <span className="max-w-[150px] truncate" title={row.getValue("name")}>
-          {row.getValue("name")}
-        </span>
+        <div className="max-w-[150px] truncate" title={row.getValue("name")}>
+          <Link href={`${ROUTE_USER}/${row.original.id}`}>
+            {row.getValue("name")}
+          </Link>
+        </div>
       </div>
     ),
     meta: {
@@ -168,7 +171,7 @@ export const UserColumns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => {
       const roles = row.getValue("roles") as Role[]
-      return <RoleWithTooltip roles={roles} />
+      return <RoleWithTooltip roles={roles} userRole={row.original.role} />
     },
     // filterFn: (row, name, value) => {
     //   return value.includes(row.getValue(name))

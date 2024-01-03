@@ -14,6 +14,8 @@ import {
   ProfileSchema,
   ProfileType,
   GenderSchema,
+  User,
+  GenderType,
 } from "@/lib/validations/user"
 import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -27,7 +29,6 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Gender, User } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import { InputGroup } from "@/components/form/input-group"
 import SaveButton from "@/components/Button"
@@ -124,7 +125,7 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
                 control={control}
                 render={({ field }) => (
                   <SelectRef
-                    onValueChange={(e: Gender) => field.onChange(e)}
+                    onValueChange={(e: GenderType) => field.onChange(e)}
                     {...field}
                   >
                     <SelectTrigger>

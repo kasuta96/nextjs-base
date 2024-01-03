@@ -4,7 +4,6 @@ import { checkPermission } from "@/lib/services/permission"
 
 export default async function DashboardLayout(props: {
   children: React.ReactNode
-  userEditModal: React.ReactNode
 }) {
   const { user } = await checkPermission()
 

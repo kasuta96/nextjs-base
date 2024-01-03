@@ -29,6 +29,7 @@ import { RoleData } from "./role-accordion"
 import { RoleDelete } from "./role-delete"
 import SaveButton from "@/components/Button"
 import { toast } from "@/components/ui/use-toast"
+import { Textarea } from "@/components/ui/textarea"
 
 export function PermissionsForm({
   role,
@@ -104,7 +105,7 @@ export function PermissionsForm({
                 <FormItem>
                   <FormLabel>{t("user.remarks")}</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -112,7 +113,9 @@ export function PermissionsForm({
             />
           </>
         ) : (
-          <p>{role?.remarks}</p>
+          <p className="max-h-16 overflow-auto whitespace-pre-line">
+            {role?.remarks}
+          </p>
         )}
 
         <div className="space-y-2">
