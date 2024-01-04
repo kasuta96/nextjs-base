@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import {
   ColumnDef,
@@ -10,7 +10,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from '@tanstack/react-table'
+} from "@tanstack/react-table"
 
 import {
   Table,
@@ -19,13 +19,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Skeleton } from '../ui/skeleton'
-import { DataTableToolbar } from './data-table-toolbar'
-import { DataTablePagination } from './data-table-pagination'
-import { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { SearchColumnProps } from './data-table-search'
+} from "@/components/ui/table"
+import { Skeleton } from "@/components/ui/skeleton"
+import { DataTableToolbar } from "./data-table-toolbar"
+import { DataTablePagination } from "./data-table-pagination"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { SearchColumnProps } from "./data-table-search"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <DataTableToolbar
         name={name}
         table={table}
@@ -96,7 +96,7 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
+                  data-state={row.getIsSelected() && "selected"}
                   className="bg-background"
                 >
                   {row.getVisibleCells().map((cell) => {
@@ -120,14 +120,14 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {t('notify.noResults')}
+                  {t("notify.noResults")}
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
+        <DataTablePagination table={table} />
       </div>
-      <DataTablePagination table={table} />
     </div>
   )
 }

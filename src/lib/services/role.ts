@@ -1,10 +1,10 @@
-import { db } from '@/lib/db'
-import { Role, RolePermissions } from '@prisma/client'
-import { AllPermission } from '~/types/next-auth'
+import { db } from "@/lib/db"
+import { Role, RolePermissions } from "@prisma/client"
+import { AllPermission } from "~/types/next-auth"
 
 export async function getRoles() {
   return await db.role.findMany({
-    orderBy: [{ updatedAt: 'desc' }],
+    orderBy: [{ updatedAt: "desc" }],
   })
 }
 
@@ -17,7 +17,7 @@ export async function getRoleIncludePermissions() {
         },
       },
     },
-    orderBy: [{ updatedAt: 'desc' }],
+    orderBy: [{ updatedAt: "desc" }],
   })
 }
 

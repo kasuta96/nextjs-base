@@ -1,11 +1,11 @@
-import { useTranslations } from 'next-intl'
+import { useTranslations } from "next-intl"
 
 export const metadata = {
-  title: 'Dashboard',
+  title: "Dashboard",
 }
 
 export default function DashboardPage() {
-  const t = useTranslations('common')
+  const t = useTranslations("common")
 
-  return <div className="p-4">{t('Dashboard')}</div>
+  return <div className="p-4">{t("Dashboard")}</div>
 }

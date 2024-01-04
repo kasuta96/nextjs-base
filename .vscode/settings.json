@@ -4,9 +4,11 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.format": true
+    "source.fixAll.format": "explicit"
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "i18n-ally.localesPaths": ["src/messages"], // E.g. "messages"
+  "i18n-ally.keystyle": "nested"
 }

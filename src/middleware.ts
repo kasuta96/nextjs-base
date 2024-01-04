@@ -1,12 +1,12 @@
-import { withAuth } from 'next-auth/middleware'
-import { NextRequest } from 'next/server'
-import createIntlMiddleware from 'next-intl/middleware'
-import { locales } from '@/lib/i18n'
-import { protectedRoutes } from '@/lib/constants/route'
+import { withAuth } from "next-auth/middleware"
+import { NextRequest } from "next/server"
+import createMiddleware from "next-intl/middleware"
+import { locales } from "@/lib/next-intl/config"
+import { protectedRoutes } from "@/lib/constants/route"
 
-const intlMiddleware = createIntlMiddleware({
+const intlMiddleware = createMiddleware({
   locales,
-  defaultLocale: 'en',
+  defaultLocale: "en",
 })
 
 const authMiddleware = withAuth(
@@ -26,8 +26,8 @@ const authMiddleware = withAuth(
 export default function middleware(req: NextRequest) {
   // Check protected page (Need authentication)
   const protectedPathnameRegex = RegExp(
-    `^(\/(${locales.join('|')}))?(${protectedRoutes.join('|')})(\/.*)?$`,
-    'i'
+    `^(\/(${locales.join("|")}))?(${protectedRoutes.join("|")})(\/.*)?$`,
+    "i"
   )
   const isProtectedPage = protectedPathnameRegex.test(req.nextUrl.pathname)
 
@@ -41,6 +41,6 @@ export default function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     // Match all request paths except:
-    '/((?!api|_next|.*\\..*).*)',
+    "/((?!api|_next|.*\\..*).*)",
   ],
 }

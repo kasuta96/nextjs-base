@@ -1,16 +1,16 @@
-'use client'
+"use client"
 
-import React, { Suspense } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
-import { Home } from 'lucide-react'
-import { locales } from '@/lib/i18n'
-import { ROUTE_HOME } from '@/lib/constants/route'
-import { Card, CardContent } from '@/components/ui/card'
+import React, { Suspense } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
+import Link from "next/link"
+import { Home } from "lucide-react"
+import { locales } from "@/lib/next-intl/config"
+import { ROUTE_HOME } from "@/lib/constants/route"
+import { Card, CardContent } from "@/components/ui/card"
 
 export function AddressBar() {
   const pathname = usePathname()
-  let uri = ''
+  let uri = ""
 
   return (
     <Card>
@@ -23,14 +23,14 @@ export function AddressBar() {
             {pathname ? (
               <>
                 {pathname
-                  .split('/')
+                  .split("/")
                   .slice(1)
                   .map((segment) => {
                     uri += `/${segment}`
                     if (locales.includes(segment)) return null
                     return (
                       <React.Fragment key={segment}>
-                        <span className="text-gray-500">/</span>
+                        <span className="text-muted-foreground">/</span>
                         <Link
                           href={uri}
                           key={segment}
@@ -58,7 +58,7 @@ export function AddressBar() {
 //   const searchParams = useSearchParams()!
 
 //   return searchParams.toString().length !== 0 ? (
-//     <div className="px-2 text-gray-500">
+//     <div className="px-2 text-muted-foreground">
 //       <span>?</span>
 //       {Array.from(searchParams.entries()).map(([key, value], index) => {
 //         return (

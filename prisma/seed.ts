@@ -1,5 +1,5 @@
-import { permissions } from '../src/lib/constants/permission'
-import { PrismaClient } from '@prisma/client'
+import { permissions } from "../src/lib/constants/permission"
+import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 async function main() {
@@ -10,7 +10,7 @@ async function main() {
       create: { id: pms.id, name: pms.name, remarks: pms.remarks },
     })
   })
-  console.log('🔐 Permission seed 🚀')
+  console.log("🔐 Permission seed 🚀")
 }
 main()
   .then(async () => {

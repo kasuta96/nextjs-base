@@ -7,7 +7,6 @@
     "Light": "ライト",
     "Dark": "ダーク",
     "System": "システム",
-
     "Management Page": "管理ページ",
     "Dashboard": "ダッシュボード",
     "Users": "ユーザー",
@@ -16,11 +15,11 @@
     "Setting": "設定",
     "Login": "ログイン",
     "Logout": "ログアウト",
+    "LoginType": "ログインタイプ",
     "Login with Google": "Googleでログインする",
     "Login with GitHub": "GitHubでログインする",
     "Login successfully": "ログインに成功しました。",
     "Detailed information": "詳細情報",
-
     "Empty": "空",
     "Create new": "新規作成",
     "Edit": "編集",
@@ -34,7 +33,11 @@
     "View": "表示",
     "Rows": "行数",
     "Page": "ページ",
-    "Selected": "選択済"
+    "Selected": "選択済",
+    "Admin permissions": "システム管理者（すべて権限）",
+    "General": "一般",
+    "Private": "プライベート",
+    "Other": "その他"
   },
   "user": {
     "name": "表示名",
@@ -47,8 +50,8 @@
     "dateOfBirth": "生年月日",
     "phoneNumber": "電話番号",
     "zipCode": "郵便番号",
-    "address1": "住所1",
-    "address2": "住所2",
+    "address1": "住所１",
+    "address2": "住所２",
     "role": "ロール",
     "roles": "ロール",
     "status": "状態",
@@ -85,7 +88,7 @@
   },
   "permission": {
     "role_name": "ロール、権限",
-    "role_remarks": "ユーザーのロールと権限を管理する",
+    "role_remarks": "ロールと権限の設定を管理する",
     "user_name": "ユーザー（公開）",
     "user_remarks": "ユーザーの公開情報を管理する",
     "user_private_name": "ユーザー（プライベート）",

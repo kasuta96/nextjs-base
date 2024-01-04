@@ -1,12 +1,12 @@
-import { z } from 'zod'
-import { db } from '@/lib/db'
-import { checkPermission } from '@/lib/services/permission'
-import { RoleWithPermissionsSchema } from '@/lib/validations/role'
+import { z } from "zod"
+import { db } from "@/lib/db"
+import { checkPermission } from "@/lib/services/permission"
+import { RoleWithPermissionsSchema } from "@/lib/validations/role"
 
 export async function POST(req: Request) {
   try {
     // Ensure user is authentication and has access to this route.
-    const { write } = await checkPermission('role')
+    const { write } = await checkPermission("role")
     if (!write) {
       return new Response(null, { status: 403 })
     }
@@ -40,6 +40,7 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
+    console.log(error)
     return new Response(null, { status: 500 })
   }
 }

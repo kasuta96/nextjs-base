@@ -1,8 +1,8 @@
-import { PermissionIdType } from '@/lib/constants/permission'
-import { activeUserStatus } from '@/lib/constants/auth'
-import { redirect } from 'next/navigation'
-import { ROUTE_403, ROUTE_LOGOUT } from '@/lib/constants/route'
-import { getCurrentUser } from '@/lib/session'
+import { PermissionIdType } from "@/lib/constants/permission"
+import { activeUserStatus } from "@/lib/constants/auth"
+import { redirect } from "next/navigation"
+import { ROUTE_403, ROUTE_LOGOUT } from "@/lib/constants/route"
+import { getCurrentUser } from "@/lib/session"
 
 export async function checkPermission(permissionId?: PermissionIdType) {
   const user = await getCurrentUser()
@@ -17,7 +17,7 @@ export async function checkPermission(permissionId?: PermissionIdType) {
   if (!permissionId) return { user: user }
 
   // Role admin: full access
-  if (user.role === 'ADMIN') {
+  if (user.role === "ADMIN") {
     return { read: true, write: true, user: user }
   }
 

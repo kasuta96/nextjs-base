@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/ui/button'
-import { ROUTE_HOME } from '@/lib/constants/route'
+import { Button } from "@/components/ui/button"
+import { ROUTE_HOME } from "@/lib/constants/route"
 
 export default function ErrorPage({
   code,

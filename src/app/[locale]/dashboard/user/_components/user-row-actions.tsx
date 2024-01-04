@@ -1,22 +1,23 @@
-'use client'
+"use client"
 
-import { Row } from '@tanstack/react-table'
-import { Copy, MoreHorizontal, Pen, Star, Trash } from 'lucide-react'
+// import { Row } from "@tanstack/react-table"
+import { Copy, MoreHorizontal, Pen, Star, Trash } from "lucide-react"
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu"
+import { User } from "@/lib/validations/user"
 
-interface UserRowActionsProps<TData> {
-  row: Row<TData>
+interface UserRowActionsProps {
+  user: User
 }
 
-export function UserRowActions<TData>({ row }: UserRowActionsProps<TData>) {
+export function UserRowActions({ user }: UserRowActionsProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +30,7 @@ export function UserRowActions<TData>({ row }: UserRowActionsProps<TData>) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => console.log(user.id)}>
           <Pen className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
           Edit
         </DropdownMenuItem>

@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { User } from '~/types/next-auth'
-import ThemeSwitch from '@/components/menu/theme-switch'
-import { Dispatch, SetStateAction } from 'react'
-import UserDropdown from '@/components/menu/user-dropdown'
-import { Menu, X } from 'lucide-react'
+import { User } from "~/types/next-auth"
+import { ThemeToggle } from "@/components/menu/theme-toggle"
+import { Dispatch, SetStateAction } from "react"
+import UserDropdown from "@/components/menu/user-dropdown"
+import { Menu, X } from "lucide-react"
 
 export default function Nav({
   className,
@@ -19,7 +19,7 @@ export default function Nav({
 }) {
   return (
     <div
-      className={`inset-x-0 bottom-0 rounded-t-3xl bg-white/60 px-5 py-3 text-gray-700 shadow-lg backdrop-blur-md dark:bg-gray-900/60 dark:text-gray-300 lg:rounded-none lg:border-t lg:border-gray-300 lg:bg-inherit lg:dark:border-gray-700 lg:dark:bg-inherit ${className}`}
+      className={`inset-x-0 bottom-0 rounded-t-3xl bg-white/60 px-5 py-3 text-gray-700 shadow-lg backdrop-blur-md lg:rounded-none lg:border-t lg:border-gray-300 lg:bg-inherit dark:bg-gray-900/60 dark:text-gray-300 lg:dark:border-gray-700 lg:dark:bg-inherit ${className}`}
     >
       <div className="flex justify-between space-x-4">
         <div className="flex items-center space-x-4">
@@ -38,7 +38,7 @@ export default function Nav({
           )}
         </div>
         <div className="flex items-center space-x-4">
-          <ThemeSwitch />
+          <ThemeToggle />
           <UserDropdown user={user} />
         </div>
       </div>

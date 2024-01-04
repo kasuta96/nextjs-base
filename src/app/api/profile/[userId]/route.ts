@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { db } from '@/lib/db'
-import { ProfileSchema } from '@/lib/validations/user'
-import { getServerSession } from '@/lib/session'
+import { z } from "zod"
+import { db } from "@/lib/db"
+import { ProfileSchema } from "@/lib/validations/user"
+import { getServerSession } from "@/lib/session"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -52,6 +52,7 @@ export async function PATCH(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
+    console.log(error)
     return new Response(null, { status: 500 })
   }
 }
