@@ -7,7 +7,6 @@
     "Light": "Light",
     "Dark": "Dark",
     "System": "System",
-
     "Management Page": "Management Page",
     "Dashboard": "Dashboard",
     "Users": "Users",
@@ -16,11 +15,11 @@
     "Setting": "Setting",
     "Login": "Login",
     "Logout": "Logout",
+    "LoginType": "Login type",
     "Login with Google": "Login with Google",
     "Login with GitHub": "Login with GitHub",
     "Login successfully": "Login successfully",
     "Detailed information": "Detailed information",
-
     "Empty": "Empty",
     "Create new": "Create new",
     "Edit": "Edit",
@@ -34,7 +33,11 @@
     "View": "View",
     "Rows": "Rows",
     "Page": "Page",
-    "Selected": "Selected"
+    "Selected": "Selected",
+    "Admin permissions": "System Admin (Full permissions)",
+    "General": "General",
+    "Private": "Private",
+    "Other": "Other"
   },
   "user": {
     "name": "Display name",
@@ -85,7 +88,7 @@
   },
   "permission": {
     "role_name": "Role, Permission",
-    "role_remarks": "Manage roles and permissions for users",
+    "role_remarks": "Manage roles and permissions settings",
     "user_name": "User (Public)",
     "user_remarks": "Manage public information of users",
     "user_private_name": "User (Private)",

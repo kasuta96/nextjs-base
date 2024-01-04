@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { Column } from '@tanstack/react-table'
-import { Check, LucideIcon, PlusCircle } from 'lucide-react'
+import * as React from "react"
+import { Column } from "@tanstack/react-table"
+import { Check, LucideIcon, PlusCircle } from "lucide-react"
 
-import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -13,15 +13,15 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command'
+} from "@/components/ui/command"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { Separator } from '@/components/ui/separator'
-import { Option } from '@/lib/helper'
-import { useTranslations } from 'next-intl'
+} from "@/components/ui/popover"
+import { Separator } from "@/components/ui/separator"
+import { Option } from "@/lib/helper"
+import { useTranslations } from "next-intl"
 
 interface DataTableFacetedFilter<TData, TValue> {
   name: string
@@ -46,7 +46,7 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          className="h-8 whitespace-nowrap border-dashed"
+          className="h-8 whitespace-nowrap border-dashed text-muted-foreground"
         >
           <PlusCircle className="mr-2 h-4 w-4" />
           {t(`${name}.${title}`)}
@@ -65,7 +65,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     variant="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
-                    {selectedValues.size} {t('common.Selected')}
+                    {selectedValues.size} {t("common.Selected")}
                   </Badge>
                 ) : (
                   options
@@ -89,7 +89,7 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={t(`${name}.${title}`)} />
           <CommandList>
-            <CommandEmpty>{t('notify.noResults')}</CommandEmpty>
+            <CommandEmpty>{t("notify.noResults")}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value)
@@ -110,13 +110,13 @@ export function DataTableFacetedFilter<TData, TValue>({
                   >
                     <div
                       className={cn(
-                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                         isSelected
-                          ? 'bg-primary text-primary-foreground'
-                          : 'opacity-50 [&_svg]:invisible'
+                          ? "bg-primary text-primary-foreground"
+                          : "opacity-50 [&_svg]:invisible"
                       )}
                     >
-                      <Check className={cn('h-4 w-4')} />
+                      <Check className={cn("h-4 w-4")} />
                     </div>
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
@@ -139,7 +139,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    {t('common.Clear filters')}
+                    {t("common.Clear filters")}
                   </CommandItem>
                 </CommandGroup>
               </>

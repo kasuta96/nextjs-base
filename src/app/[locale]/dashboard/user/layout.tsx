@@ -2,6 +2,6 @@ interface UserLayoutProps {
   children?: React.ReactNode
 }
 
-export default function UserLayout({ children }: UserLayoutProps) {
-  return <>{children}</>
+export default function UserLayout(props: UserLayoutProps) {
+  return <div className="my-4">{props.children}</div>
 }

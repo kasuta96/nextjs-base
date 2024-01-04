@@ -1,7 +1,7 @@
-import ErrorPage from '../error-page'
+import ErrorPage from "../error-page"
 
 export const metadata = {
-  title: 'Error 401',
+  title: "Error 401",
 }
 
 export default function Error401() {

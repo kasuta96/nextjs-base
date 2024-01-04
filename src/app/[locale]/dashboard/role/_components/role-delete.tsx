@@ -1,20 +1,20 @@
-'use client'
+"use client"
 
-import { Loader2, Trash } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Loader2, Trash } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { Close } from '@radix-ui/react-dialog'
-import { RoleData } from './role-accordion'
-import { useRouter } from 'next/navigation'
-import { toast } from '@/components/ui/use-toast'
+} from "@/components/ui/dialog"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { Close } from "@radix-ui/react-dialog"
+import { RoleData } from "./role-accordion"
+import { useRouter } from "next/navigation"
+import { toast } from "@/components/ui/use-toast"
 
 export function RoleDelete({ role }: { role: RoleData }) {
   const t = useTranslations()
@@ -26,17 +26,17 @@ export function RoleDelete({ role }: { role: RoleData }) {
     setIsDeleting(true)
 
     const response = await fetch(`/api/role/${role.id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
 
     setIsDeleting(false)
 
     if (!response?.ok) {
-      return toast({ title: t('notify.error'), variant: 'destructive' })
+      return toast({ title: t("notify.error"), variant: "destructive" })
     }
 
     setOpen(false)
-    toast({ title: t('notify.deleteSuccess'), variant: 'success' })
+    toast({ title: t("notify.deleteSuccess"), variant: "success" })
     router.refresh()
   }
 
@@ -45,7 +45,7 @@ export function RoleDelete({ role }: { role: RoleData }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">
-            <Trash className="mr-2 h-4 w-4" /> {t('common.Delete')}
+            <Trash className="mr-2 h-4 w-4" /> {t("common.Delete")}
           </Button>
         </DialogTrigger>
         <DialogContent>
@@ -53,18 +53,18 @@ export function RoleDelete({ role }: { role: RoleData }) {
             <DialogTitle>{role?.name}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <div className="text-center">{t('notify.deleteConfirm')}</div>
+            <div className="text-center">{t("notify.deleteConfirm")}</div>
             <div className="flex items-center justify-end space-x-2">
               <Close asChild>
-                <Button variant="outline">{t('common.Close')}</Button>
+                <Button variant="outline">{t("common.Close")}</Button>
               </Close>
               <Button variant="destructive" onClick={submitDelete}>
                 {isDeleting ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
                   <Trash className="mr-2 h-4 w-4" />
-                )}{' '}
-                {t('common.Delete')}
+                )}{" "}
+                {t("common.Delete")}
               </Button>
             </div>
           </div>

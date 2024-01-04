@@ -1,14 +1,13 @@
-import { useMounted } from '@/lib/hook/use-mounted'
-import { GenderType } from '@/lib/validations/user'
-import { useTranslations } from 'next-intl'
+import { GenderType } from "@/lib/validations/user"
+import { useTranslations } from "next-intl"
 
 export function ShowGender(gender: GenderType) {
-  const t = useTranslations('user')
-  return t(gender || 'Unknown') || gender
+  const t = useTranslations("user")
+  return t(gender || "Unknown") || gender
 }
 
 export function ShowLang(lang: string) {
-  const t = useTranslations('common')
+  const t = useTranslations("common")
   return t(`lang-${lang}`) || lang
 }
 

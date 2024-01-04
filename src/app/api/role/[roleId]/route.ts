@@ -1,7 +1,7 @@
-import { z } from 'zod'
-import { db } from '@/lib/db'
-import { checkPermission } from '@/lib/services/permission'
-import { RoleWithPermissionsSchema } from '@/lib/validations/role'
+import { z } from "zod"
+import { db } from "@/lib/db"
+import { checkPermission } from "@/lib/services/permission"
+import { RoleWithPermissionsSchema } from "@/lib/validations/role"
 
 const routeContextSchema = z.object({
   params: z.object({
@@ -17,7 +17,7 @@ export async function PATCH(
     const { params } = routeContextSchema.parse(context)
 
     // Check write permission
-    const { write } = await checkPermission('role')
+    const { write } = await checkPermission("role")
     if (!write) {
       return new Response(null, { status: 403 })
     }
@@ -61,6 +61,7 @@ export async function PATCH(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
+    console.log(error)
     return new Response(null, { status: 500 })
   }
 }
@@ -73,7 +74,7 @@ export async function DELETE(
     const { params } = routeContextSchema.parse(context)
 
     // Check write permission
-    const { write } = await checkPermission('role')
+    const { write } = await checkPermission("role")
     if (!write) {
       return new Response(null, { status: 403 })
     }
@@ -91,6 +92,7 @@ export async function DELETE(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
+    console.log(error)
     return new Response(null, { status: 500 })
   }
 }

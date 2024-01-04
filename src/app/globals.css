@@ -55,7 +55,7 @@
     --gray: hsl(213, 27%, 84%); /* gray-300 */
     --gray-foreground: hsl(215, 14%, 34%); /* gray-500 */
 
-    --background: hsl(224, 71%, 4%);
+    --background: hsl(225, 6%, 13%);
     --foreground: hsl(213, 31%, 91%);
 
     --muted: hsl(223, 16%, 25%);
@@ -64,11 +64,11 @@
     --popover: hsl(224, 71%, 4%);
     --popover-foreground: hsl(215, 20.2%, 80%);
 
-    --card: hsl(215, 20%, 20%);
+    --card: hsl(225, 4%, 20%);
     --card-foreground: hsl(213, 31%, 91%);
 
-    --border: hsl(216, 34%, 17%);
-    --input: hsl(216, 34%, 17%);
+    --border: hsl(206, 6%, 25%);
+    --input: hsl(206, 6%, 25%);
 
     --primary: hsl(210, 40%, 98%);
     --primary-foreground: hsl(222.2, 47.4%, 1.2%);
@@ -76,13 +76,13 @@
     --secondary: hsl(222.2, 47.4%, 11.2%);
     --secondary-foreground: hsl(210, 40%, 98%);
 
-    --accent: hsl(216, 34%, 17%);
+    --accent: hsl(206, 6%, 25%);
     --accent-foreground: hsl(210, 40%, 98%);
 
-    --destructive: hsl(342, 75%, 30%); /* rose-900 */
-    --destructive-foreground: hsl(351, 95%, 71%); /* rose-400 */
+    --destructive: hsl(342, 80%, 40%);
+    --destructive-foreground: hsl(351, 100%, 80%); /* rose-400 */
 
-    --ring: hsl(216, 34%, 17%);
+    --ring: hsl(206, 6%, 25%);
   }
 }
 
@@ -95,6 +95,11 @@
   }
 }
 
-.card {
-  @apply rounded-lg bg-card p-px shadow-md dark:shadow-gray-700;
+.shadow,
+.shadow-sm,
+.shadow-md,
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  @apply dark:shadow-gray-700;
 }

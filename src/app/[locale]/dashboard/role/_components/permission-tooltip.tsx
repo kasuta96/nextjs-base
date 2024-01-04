@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { HelpCircle } from 'lucide-react'
+import { HelpCircle } from "lucide-react"
 
-import { PermissionType } from '@/lib/validations/role'
-import { useTranslations } from 'next-intl'
+import { PermissionType } from "@/lib/validations/role"
+import { useTranslations } from "next-intl"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
+} from "@/components/ui/tooltip"
 
 export function PermissionTooltip({
   permission,

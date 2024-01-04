@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod"
 
 export const PermissionSchema = z.object({
   id: z.string(),
@@ -18,7 +18,7 @@ export type RolePermissionType = z.infer<typeof RolePermissionSchema>
 
 export const RoleSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(2),
+  name: z.string().min(2).max(255),
   nameTrans: z.string().optional(),
   remarks: z.string().optional(),
   remarksTrans: z.string().optional(),

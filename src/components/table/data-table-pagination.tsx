@@ -1,20 +1,20 @@
-import { Table } from '@tanstack/react-table'
+import { Table } from "@tanstack/react-table"
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from 'lucide-react'
+} from "lucide-react"
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { useTranslations } from 'next-intl'
+} from "@/components/ui/select"
+import { useTranslations } from "next-intl"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -23,12 +23,13 @@ interface DataTablePaginationProps<TData> {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
-  const t = useTranslations('common')
+  const t = useTranslations("common")
   return (
-    <div className="flex items-center justify-between px-2 text-muted-foreground">
+    <div className="flex items-center justify-between p-4 text-muted-foreground">
       <div className="flex-1 text-sm">
-        {table.getFilteredSelectedRowModel().rows.length} /{' '}
-        {table.getFilteredRowModel().rows.length} {t('Selected')}
+        {/* {table.getFilteredSelectedRowModel().rows.length} /{" "}
+        {table.getFilteredRowModel().rows.length}{" "}
+        <span className="hidden sm:inline">{t("Selected")}</span> */}
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
@@ -48,8 +49,8 @@ export function DataTablePagination<TData>({
                 </SelectItem>
               ))}
             </SelectContent>
-            <p className="text-sm font-medium">
-              {t('Rows')} / {t('Page')}
+            <p className="hidden text-sm font-medium sm:block">
+              {t("Rows")} / {t("Page")}
             </p>
           </Select>
         </div>

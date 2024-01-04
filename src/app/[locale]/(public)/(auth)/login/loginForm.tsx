@@ -1,27 +1,27 @@
-'use client'
+"use client"
 
-import { signIn } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { redirect, useSearchParams } from 'next/navigation'
-import { authErrors } from '@/lib/constants/auth'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { AlertCircle, Loader2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { User } from '~/types/next-auth'
-import { useTranslations } from 'next-intl'
-import { toast } from '@/components/ui/use-toast'
-import { ROUTE_HOME } from '@/lib/constants/route'
+import { signIn } from "next-auth/react"
+import { useEffect, useState } from "react"
+import { redirect, useSearchParams } from "next/navigation"
+import { authErrors } from "@/lib/constants/auth"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AlertCircle, Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { User } from "~/types/next-auth"
+import { useTranslations } from "next-intl"
+import { toast } from "@/components/ui/use-toast"
+import { ROUTE_HOME } from "@/lib/constants/route"
 
 export default function LoginForm({ user }: { user?: User }) {
   const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
-  const callbackError = useSearchParams()!.get('error')
-  const callbackUrl = useSearchParams()?.get('callbackUrl')
-  const t = useTranslations('common')
+  const [error, setError] = useState<string>("")
+  const callbackError = useSearchParams()!.get("error")
+  const callbackUrl = useSearchParams()?.get("callbackUrl")
+  const t = useTranslations("common")
 
   useEffect(() => {
     if (user) {
-      toast({ title: t('Login successfully'), variant: 'success' })
+      toast({ title: t("Login successfully"), variant: "success" })
       return redirect(callbackUrl || ROUTE_HOME)
     }
   }, [user, callbackUrl, t])
@@ -29,19 +29,19 @@ export default function LoginForm({ user }: { user?: User }) {
   useEffect(() => {
     callbackError && setError(getAuthErrorMessage(callbackError))
     return () => {
-      setError('')
+      setError("")
     }
   }, [callbackError])
 
   async function loginWithGoogle() {
     setIsGoogleLoading(true)
-    login('google')
+    login("google")
   }
   async function login(provider: string) {
     try {
       await signIn(provider)
     } catch (error) {
-      setError('Something went wrong!')
+      setError("Something went wrong!")
     }
   }
 
@@ -73,7 +73,7 @@ export default function LoginForm({ user }: { user?: User }) {
             <path d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z"></path>
           </svg>
         )}
-        {t('Login with Google')}
+        {t("Login with Google")}
       </Button>
     </div>
   )

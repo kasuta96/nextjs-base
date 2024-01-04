@@ -1,17 +1,35 @@
-import { Role } from '@prisma/client'
-import React from 'react'
+import { Role, UserRole } from "@prisma/client"
+import React from "react"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { Badge } from '../ui/badge'
+} from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
+import { ShowTranslate } from "./show-text"
 
-export default function RoleWithTooltip({ roles }: { roles: Role[] }) {
+export default function RoleWithTooltip({
+  roles,
+  userRole,
+}: {
+  roles: Role[]
+  userRole?: UserRole
+}) {
   return (
     <>
-      {roles.length ? (
+      {userRole === "ADMIN" ? (
+        <TooltipProvider delayDuration={300}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span>{userRole}</span>
+            </TooltipTrigger>
+            <TooltipContent className="space-y-4 p-4">
+              <span>{ShowTranslate("common", "Admin permissions")}</span>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ) : roles.length ? (
         <TooltipProvider delayDuration={300}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -31,14 +49,14 @@ export default function RoleWithTooltip({ roles }: { roles: Role[] }) {
               {roles.map((role) => (
                 <div key={role.id}>
                   <div className="font-semibold">{role.name}</div>
-                  <div className=" text-gray-500">{role.remarks}</div>
+                  <div className="text-muted-foreground">{role.remarks}</div>
                 </div>
               ))}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       ) : (
-        '-'
+        "-"
       )}
     </>
   )

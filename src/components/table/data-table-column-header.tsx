@@ -1,15 +1,15 @@
-import { Column } from '@tanstack/react-table'
-import { ChevronsUpDown, EyeOff, SortAsc, SortDesc } from 'lucide-react'
+import { Column } from "@tanstack/react-table"
+import { ChevronsUpDown, EyeOff, SortAsc, SortDesc } from "lucide-react"
 
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu"
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -22,13 +22,13 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
-  const titleClass = `whitespace-nowrap ${column.getIsFiltered() && 'text-sky'}`
+  const titleClass = `whitespace-nowrap ${column.getIsFiltered() && "text-sky"}`
   if (!column.getCanSort()) {
     return <div className={cn(titleClass, className)}>{title}</div>
   }
 
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div className={cn("flex items-center space-x-2", className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -37,9 +37,9 @@ export function DataTableColumnHeader<TData, TValue>({
             className="-ml-3 h-8 data-[state=open]:bg-accent"
           >
             <span className={titleClass}>{title}</span>
-            {column.getIsSorted() === 'desc' ? (
+            {column.getIsSorted() === "desc" ? (
               <SortDesc className="ml-2 h-4 w-4" />
-            ) : column.getIsSorted() === 'asc' ? (
+            ) : column.getIsSorted() === "asc" ? (
               <SortAsc className="ml-2 h-4 w-4" />
             ) : (
               <ChevronsUpDown className="ml-2 h-4 w-4" />

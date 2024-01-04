@@ -7,7 +7,6 @@
     "Light": "Sáng",
     "Dark": "Tối",
     "System": "Hệ thống",
-
     "Management Page": "Trang quản lý",
     "Dashboard": "Bảng điều khiển",
     "Users": "Người dùng",
@@ -16,11 +15,11 @@
     "Setting": "Cài đặt",
     "Login": "Đăng nhập",
     "Logout": "Đăng xuất",
+    "LoginType": "Kiểu Đăng nhập",
     "Login with Google": "Đăng nhập bằng Google",
     "Login with GitHub": "Đăng nhập bằng GitHub",
     "Login successfully": "Đăng nhập thành công",
     "Detailed information": "Thông tin chi tiết",
-
     "Empty": "Trống rỗng",
     "Create new": "Tạo mới",
     "Edit": "Sửa",
@@ -34,7 +33,11 @@
     "View": "Hiển thị",
     "Rows": "Hàng",
     "Page": "Trang",
-    "Selected": "Đã chọn"
+    "Selected": "Đã chọn",
+    "Admin permissions": "Admin Hệ Thống (Full quyền)",
+    "General": "Tổng quan",
+    "Private": "Riêng tư",
+    "Other": "Khác"
   },
   "user": {
     "name": "Tên hiển thị",
@@ -85,7 +88,7 @@
   },
   "permission": {
     "role_name": "Role, Phân quyền",
-    "role_remarks": "Quản lý roles, phân quyền của người dùng",
+    "role_remarks": "Quản lý cài đặt roles, phân quyền",
     "user_name": "Người dùng (Công khai)",
     "user_remarks": "Quản lý những thông tin công khai của người dùng",
     "user_private_name": "Người dùng (Riêng tư)",

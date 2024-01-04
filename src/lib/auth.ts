@@ -1,19 +1,19 @@
-import { reformPermission } from './services/role'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { AuthOptions } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import { db } from '@/lib/db'
-import { env } from '~/env.mjs'
+import { reformPermission } from "./services/role"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { AuthOptions } from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
+import { db } from "@/lib/db"
+import { env } from "~/env.mjs"
 
 const authOptions: AuthOptions = {
   // debug: env.NODE_ENV !== 'production',
   adapter: PrismaAdapter(db as any),
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   pages: {
-    signIn: '/login',
-    signOut: '/logout',
+    signIn: "/login",
+    signOut: "/logout",
   },
   providers: [
     GoogleProvider({
@@ -71,9 +71,9 @@ const authOptions: AuthOptions = {
        * This fix duplicate callbackUrl when has error
        */
       const urlParams = new URLSearchParams(url)
-      const error = urlParams.get('error')
+      const error = urlParams.get("error")
 
-      return error ? '' : url
+      return error ? "" : url
     },
   },
 }

@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/ui/button'
-import { useTranslations } from 'next-intl'
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 export default function Error({ reset }: { reset: () => void }) {
-  const t = useTranslations('error')
+  const t = useTranslations("error")
 
   return (
     <>
       <div className="space-y-2 p-4 text-center">
-        <h2 className="text-destructive">{t('Something went wrong!')}</h2>
+        <h2 className="text-destructive">{t("Something went wrong!")}</h2>
         <Button
           size="sm"
           variant="ghost"
@@ -18,7 +18,7 @@ export default function Error({ reset }: { reset: () => void }) {
             () => reset()
           }
         >
-          {t('Try again')}
+          {t("Try again")}
         </Button>
       </div>
       <div></div>
