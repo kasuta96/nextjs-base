@@ -76,7 +76,7 @@ model User {
   email         String    @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
   image         String?   @db.VarChar(255)
-  bio           String?   @db.VarChar(255)
+  bio           String?   @db.Text()
 
   firstName    String?   @map(name: "first_name") @db.VarChar(255)
   lastName     String?   @map(name: "last_name") @db.VarChar(255)
@@ -87,7 +87,7 @@ model User {
   address1     String?   @db.VarChar(255)
   address2     String?   @db.VarChar(255)
   languageCode String    @default("en") @map(name: "language_code") @db.VarChar(32)
-  remarks      String?   @db.VarChar(255)
+  remarks      String?   @db.Text()
 
   role   UserRole   @default(USER) @map(name: "role")
   status UserStatus @default(Inactive)
@@ -120,7 +120,7 @@ model Role {
   id           String  @id @default(cuid())
   name         String  @db.VarChar(255)
   nameTrans    Json?   @map(name: "name_trans")
-  remarks      String? @db.VarChar(255)
+  remarks      String? @db.Text()
   remarksTrans Json?   @map(name: "remarks_trans")
 
   createdAt DateTime  @default(now()) @map(name: "created_at")
@@ -134,9 +134,9 @@ model Role {
 }
 
 model Permission {
-  id      String  @id @db.VarChar(255)
+  id      String  @id
   name    String  @db.VarChar(255)
-  remarks String? @db.VarChar(255)
+  remarks String? @db.Text()
 
   roles RolePermissions[]
 

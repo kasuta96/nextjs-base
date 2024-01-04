@@ -1,10 +1,10 @@
 import { withAuth } from "next-auth/middleware"
 import { NextRequest } from "next/server"
-import createIntlMiddleware from "next-intl/middleware"
-import { locales } from "@/lib/i18n"
+import createMiddleware from "next-intl/middleware"
+import { locales } from "@/lib/next-intl/config"
 import { protectedRoutes } from "@/lib/constants/route"
 
-const intlMiddleware = createIntlMiddleware({
+const intlMiddleware = createMiddleware({
   locales,
   defaultLocale: "en",
 })

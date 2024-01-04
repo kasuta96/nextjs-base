@@ -17,7 +17,7 @@ import {
 import Image from "next/image"
 import { Languages, LogIn } from "lucide-react"
 import Link from "@/components/Link"
-import { locales } from "@/lib/i18n"
+import { locales } from "@/lib/next-intl/config"
 import { useMounted } from "@/lib/hook/use-mounted"
 import { useTranslations } from "next-intl"
 import { usePathname, useSearchParams } from "next/navigation"

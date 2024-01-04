@@ -13,29 +13,29 @@ export type UserStatusType = `${z.infer<typeof UserStatusSchema>}`
 
 export const ProfileSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(2),
-  image: z.string().nullable(),
-  bio: z.string().max(255).nullable(),
-  firstName: z.string().nullable(),
-  lastName: z.string().nullable(),
+  name: z.string().min(2).max(255),
+  image: z.string().max(255).nullable(),
+  bio: z.string().nullable(),
+  firstName: z.string().max(255).nullable(),
+  lastName: z.string().max(255).nullable(),
   gender: GenderSchema.optional(),
   dateOfBirth: z.string().nullable(),
   phoneNumber: z.string().regex(phoneRegex, "Invalid Number!").nullable(),
   zipCode: z.string().regex(zipCode, "Invalid Number!").nullable(),
-  address1: z.string().nullable(),
-  address2: z.string().nullable(),
+  address1: z.string().max(255).nullable(),
+  address2: z.string().max(255).nullable(),
   languageCode: z.string().optional(),
 })
 export type ProfileType = z.infer<typeof ProfileSchema>
 
 export const UserPublicSchema = z.object({
   id: z.string().optional(),
-  email: z.string(),
-  name: z.string().min(2).optional(),
-  image: z.string().optional(),
-  bio: z.string().max(255).optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
+  email: z.string().max(255),
+  name: z.string().min(2).max(255).optional(),
+  image: z.string().max(255).optional(),
+  bio: z.string().optional(),
+  firstName: z.string().max(255).optional(),
+  lastName: z.string().max(255).optional(),
   gender: GenderSchema.optional(),
   dateOfBirth: z.coerce.date().optional(),
   languageCode: z.string().optional(),
@@ -48,8 +48,8 @@ export const UserPrivateSchema = z.object({
   id: z.string().optional(),
   phoneNumber: z.string().regex(phoneRegex, "Invalid Number!").optional(),
   zipCode: z.string().regex(zipCode, "Invalid Number!").optional(),
-  address1: z.string().optional(),
-  address2: z.string().optional(),
+  address1: z.string().max(255).optional(),
+  address2: z.string().max(255).optional(),
   remarks: z.string().optional(),
 })
 export type UserPrivateType = z.infer<typeof UserPrivateSchema>

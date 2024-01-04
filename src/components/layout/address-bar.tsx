@@ -4,7 +4,7 @@ import React, { Suspense } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Home } from "lucide-react"
-import { locales } from "@/lib/i18n"
+import { locales } from "@/lib/next-intl/config"
 import { ROUTE_HOME } from "@/lib/constants/route"
 import { Card, CardContent } from "@/components/ui/card"
 

@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl"
 import NextLink from "next/link"
 import { ComponentProps, forwardRef } from "react"
-import { locales } from "@/lib/i18n"
+import { locales } from "@/lib/next-intl/config"
 
 type Props = ComponentProps<typeof NextLink>
 
@@ -31,8 +31,8 @@ function Link({ href, locale, ...rest }: Props, ref: Props["ref"]) {
     typeof href === "string"
       ? getLocalizedHref(href)
       : href.pathname != null
-      ? { ...href, pathname: getLocalizedHref(href.pathname) }
-      : href
+        ? { ...href, pathname: getLocalizedHref(href.pathname) }
+        : href
 
   return <NextLink ref={ref} href={localizedHref} {...rest} />
 }

@@ -19,7 +19,7 @@ export function Sidebar({ user }: { user: User }) {
 
   return (
     <>
-      <div className="fixed top-0 z-10 flex w-full flex-col border border-gray-300 text-gray-700 dark:border-gray-700 dark:text-gray-300 lg:bottom-0 lg:z-auto lg:w-60">
+      <div className="fixed top-0 z-10 flex w-full flex-col border border-gray-300 text-gray-700 lg:bottom-0 lg:z-auto lg:w-60 dark:border-gray-700 dark:text-gray-300">
         <div
           className={clsx("overflow-y-auto lg:static lg:block", {
             "fixed inset-x-0 bottom-0 top-0 mt-px bg-gray-50 dark:bg-gray-900":

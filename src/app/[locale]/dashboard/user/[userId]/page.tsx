@@ -15,9 +15,8 @@ export default async function UserDetail({
 }) {
   // Check permission
   const { read: read, write: write } = await checkPermission("user")
-  const { read: readPrivate, write: writePrivate } = await checkPermission(
-    "user_private"
-  )
+  const { read: readPrivate, write: writePrivate } =
+    await checkPermission("user_private")
   if (!read) return <NoReadPermission />
 
   const userData = (await getUserData(userId, {
