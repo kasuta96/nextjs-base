@@ -30,7 +30,7 @@ export type ProfileType = z.infer<typeof ProfileSchema>
 
 export const UserPublicSchema = z.object({
   id: z.string().optional(),
-  email: z.string().max(255),
+  email: z.string().max(255).optional(),
   name: z.string().min(2).max(255).optional(),
   image: z.string().max(255).optional(),
   bio: z.string().optional(),
@@ -68,7 +68,21 @@ export const UserSchema = UserPublicSchema.merge(UserPrivateSchema).merge(
 )
 export type UserType = z.infer<typeof UserSchema>
 
+// RelatedUser
+export const RelatedUserSchema = z.object({
+  id: z.string().optional(),
+  email: z.string().max(255).optional(),
+  name: z.string().min(2).max(255).optional(),
+  image: z.string().max(255).optional(),
+  role: UserRoleSchema.optional(),
+  status: UserStatusSchema.optional(),
+})
+export type RelatedUserType = z.infer<typeof RelatedUserSchema>
+
 export type User = UserType & {
   roles: Role[]
   accounts: Account[]
+  updatedUser: RelatedUserType
+  approvedUser: RelatedUserType
+  deletedUser: RelatedUserType
 }

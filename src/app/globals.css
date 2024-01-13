@@ -61,8 +61,8 @@
     --muted: hsl(223, 16%, 25%);
     --muted-foreground: hsl(215.4, 16.3%, 56.9%);
 
-    --popover: hsl(224, 71%, 4%);
-    --popover-foreground: hsl(215, 20.2%, 80%);
+    --popover: hsl(225, 6%, 13%);
+    --popover-foreground: hsl(213, 31%, 91%);
 
     --card: hsl(225, 4%, 20%);
     --card-foreground: hsl(213, 31%, 91%);

@@ -4,6 +4,7 @@ import { activeUserStatus } from "@/lib/constants/auth"
 import { ROUTE_403, ROUTE_LOGIN, ROUTE_LOGOUT } from "@/lib/constants/route"
 import { db } from "@/lib/db"
 import { User } from "@prisma/client"
+import { selectUser } from "@/lib/constants/user"
 
 export async function getActiveUser() {
   const user = await getCurrentUser()
@@ -66,10 +67,13 @@ export async function getUserData(
       createdAt: isOther,
       updatedAt: isOther,
       updatedUserId: isOther,
+      updatedUser: isOther && selectUser,
       approvedAt: isOther,
       approvedUserId: isOther,
+      approvedUser: isOther && selectUser,
       deletedAt: isOther,
       deletedUserId: isOther,
+      deletedUser: isOther && selectUser,
       accounts: isOther
         ? {
             select: {

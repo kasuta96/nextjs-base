@@ -38,7 +38,6 @@ export async function GET() {
 const routeContextSchema = z.object({
   params: z.object({
     userId: z.string(),
-    type: z.string(),
   }),
 })
 
@@ -49,48 +48,32 @@ export async function PATCH(
   try {
     const { params } = routeContextSchema.parse(context)
     const body = await req.json()
-    const { write } = await checkPermission("user")
+    const { write, user: currentUser } = await checkPermission("user")
     const { write: writePrivate } = await checkPermission("user_private")
 
-    switch (params.type) {
-      case "general":
-        // Check permission
-        if (!write) {
-          return new Response(null, { status: 403 })
-        }
-        // Get the request body and validate it.
-        const generalPayload = UserPublicSchema.parse(body)
-        // Create the user.
-        await db.user.update({
-          where: {
-            id: params.userId,
-          },
-          data: generalPayload,
-        })
-
-        return new Response(null, { status: 200 })
-
-      case "private":
-        // Check permission
-        if (!writePrivate) {
-          return new Response(null, { status: 403 })
-        }
-
-        // Get the request body and validate it.
-        const privatePayload = UserPrivateSchema.parse(body)
-        // Create the user.
-        await db.user.update({
-          where: {
-            id: params.userId,
-          },
-          data: privatePayload,
-        })
-
-        return new Response(null, { status: 200 })
-
-      default:
-        return new Response(null, { status: 404 })
+    // Check permission
+    if (!write && !writePrivate) {
+      return new Response(null, { status: 403 })
     }
+    // Get the request body and validate it.
+    let payload = {
+      ...UserPublicSchema.parse(body),
+      ...(writePrivate && UserPrivateSchema.parse(body)),
+    }
+
+    // Create the user.
+    await db.user.update({
+      where: {
+        id: params.userId,
+      },
+      data: {
+        ...payload,
+        updatedAt: new Date(),
+        updatedUserId: currentUser.id,
+      },
+    })
+
+    return new Response(null, { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })

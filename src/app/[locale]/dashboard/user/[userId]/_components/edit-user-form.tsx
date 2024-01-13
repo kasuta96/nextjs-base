@@ -12,14 +12,12 @@ import {
   UserPrivateType,
   UserPublicSchema,
   UserPublicType,
-  UserSchema,
   UserStatusSchema,
-  UserType,
 } from "@/lib/validations/user"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { SelectItem } from "@/components/ui/select"
-import { useToast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 import {
   Accordion,
   AccordionContent,
@@ -124,7 +122,6 @@ const EditUserGeneralForm = ({
   locale?: string
   write?: boolean
 }) => {
-  const { toast } = useToast()
   const t = useTranslations()
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
@@ -148,7 +145,7 @@ const EditUserGeneralForm = ({
 
   async function onSubmit(data: UserPublicType) {
     setIsSaving(true)
-    const fetchUrl = user ? `/api/user/${user.id}/general` : `/api/user`
+    const fetchUrl = user ? `/api/user/${user.id}` : `/api/user`
     const fetchMethod = user ? "PATCH" : "POST"
 
     const response = await fetch(fetchUrl, {
@@ -162,12 +159,12 @@ const EditUserGeneralForm = ({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setIsEdit(false)
     form.reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
     router.refresh()
   }
 
@@ -298,7 +295,6 @@ const EditUserPrivateForm = ({
   user?: UserPrivateType
   write?: boolean
 }) => {
-  const { toast } = useToast()
   const t = useTranslations()
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
@@ -317,7 +313,7 @@ const EditUserPrivateForm = ({
 
   async function onSubmit(data: UserPrivateType) {
     setIsSaving(true)
-    const fetchUrl = `/api/user/${user?.id}/private`
+    const fetchUrl = `/api/user/${user?.id}`
 
     const response = await fetch(fetchUrl, {
       method: "PATCH",
@@ -330,12 +326,12 @@ const EditUserPrivateForm = ({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setIsEdit(false)
     form.reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
     router.refresh()
   }
 
@@ -448,8 +444,8 @@ const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
       />
       <InputFormField
         type="text"
-        name="updatedUserId"
-        value={user?.updatedUserId}
+        name="updatedUser"
+        value={user?.updatedUser?.name}
         label={t("user.updatedUser")}
         isEdit={false}
       />
@@ -462,8 +458,8 @@ const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
       />
       <InputFormField
         type="text"
-        name="approvedUserId"
-        value={user?.approvedUserId}
+        name="approvedUser"
+        value={user?.approvedUser?.name}
         label={t("user.approvedUser")}
         isEdit={false}
       />
