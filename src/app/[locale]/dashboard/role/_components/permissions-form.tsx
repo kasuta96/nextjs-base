@@ -27,7 +27,7 @@ import { useRouter } from "next/navigation"
 import { defaultPermissions } from "@/lib/constants/permission"
 import { RoleData } from "./role-accordion"
 import { RoleDelete } from "./role-delete"
-import SaveButton from "@/components/Button"
+import SaveButton from "@/components/common/button"
 import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 

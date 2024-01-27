@@ -58,7 +58,7 @@ CREATE TABLE `users` (
     `address2` VARCHAR(255) NULL,
     `language_code` VARCHAR(32) NOT NULL DEFAULT 'en',
     `remarks` TEXT NULL,
-    `role` ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+    `system_role` ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
     `status` ENUM('Active', 'Inactive', 'Pending', 'Blocked') NOT NULL DEFAULT 'Inactive',
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -87,6 +87,14 @@ CREATE TABLE `roles` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `user_role` (
+    `user_id` VARCHAR(191) NOT NULL,
+    `role_id` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`user_id`, `role_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `permissions` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(255) NOT NULL,
@@ -108,15 +116,6 @@ CREATE TABLE `role_permissions` (
     PRIMARY KEY (`role_id`, `permission_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- CreateTable
-CREATE TABLE `_RoleToUser` (
-    `A` VARCHAR(191) NOT NULL,
-    `B` VARCHAR(191) NOT NULL,
-
-    UNIQUE INDEX `_RoleToUser_AB_unique`(`A`, `B`),
-    INDEX `_RoleToUser_B_index`(`B`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
 -- AddForeignKey
 ALTER TABLE `accounts` ADD CONSTRAINT `accounts_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -133,13 +132,13 @@ ALTER TABLE `users` ADD CONSTRAINT `users_approved_user_id_fkey` FOREIGN KEY (`a
 ALTER TABLE `users` ADD CONSTRAINT `users_deleted_user_id_fkey` FOREIGN KEY (`deleted_user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `user_role` ADD CONSTRAINT `user_role_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `user_role` ADD CONSTRAINT `user_role_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `role_permissions` ADD CONSTRAINT `role_permissions_role_id_fkey` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `role_permissions` ADD CONSTRAINT `role_permissions_permission_id_fkey` FOREIGN KEY (`permission_id`) REFERENCES `permissions`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `_RoleToUser` ADD CONSTRAINT `_RoleToUser_A_fkey` FOREIGN KEY (`A`) REFERENCES `roles`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `_RoleToUser` ADD CONSTRAINT `_RoleToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

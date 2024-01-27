@@ -31,7 +31,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useRouter } from "next/navigation"
 import { InputGroup } from "@/components/form/input-group"
-import SaveButton from "@/components/Button"
+import SaveButton from "@/components/common/button"
 import { toast } from "sonner"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {

@@ -17,7 +17,7 @@ export async function checkPermission(permissionId?: PermissionIdType) {
   if (!permissionId) return { user: user }
 
   // Role admin: full access
-  if (user.role === "ADMIN") {
+  if (user.systemRole === "ADMIN") {
     return { read: true, write: true, user: user }
   }
 

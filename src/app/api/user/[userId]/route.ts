@@ -6,7 +6,7 @@ import {
   UserPublicSchema,
   UserSchema,
 } from "@/lib/validations/user"
-import { createSelect } from "@/lib/helper"
+import { createSelect, isEmptyObject } from "@/lib/helper"
 
 export async function GET() {
   try {
@@ -30,7 +30,7 @@ export async function GET() {
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    console.log(error)
+    console.error(error)
     return new Response(null, { status: 500 })
   }
 }
@@ -61,6 +61,10 @@ export async function PATCH(
       ...(writePrivate && UserPrivateSchema.parse(body)),
     }
 
+    if (isEmptyObject(payload)) {
+      return new Response(null, { status: 400 })
+    }
+
     // Create the user.
     await db.user.update({
       where: {
@@ -79,7 +83,7 @@ export async function PATCH(
       return new Response(JSON.stringify(error.issues), { status: 422 })
     }
 
-    console.log(error)
+    console.error(error)
     return new Response(null, { status: 500 })
   }
 }

@@ -4,7 +4,7 @@ export const selectUser = {
     email: true,
     name: true,
     image: true,
-    role: true,
+    systemRole: true,
     status: true,
   },
 }

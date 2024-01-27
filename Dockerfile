@@ -11,7 +11,7 @@ RUN npm install -g pnpm
 # アプリケーションのフォルダを作成とソースコードをコピー
 RUN mkdir -p /app
 WORKDIR /app
-COPY . /app
+COPY . .
 
 # アプリケーションを起動
 CMD ["/bin/sh", "-c", "pnpm install --production --ignore-scripts && pnpm build:prod && npm start"]

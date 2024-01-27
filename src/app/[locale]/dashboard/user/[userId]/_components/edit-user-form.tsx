@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { getAccountType } from "@/lib/helper"
 import {
   GenderSchema,
   User,
@@ -17,103 +19,15 @@ import {
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { SelectItem } from "@/components/ui/select"
-import { toast } from "sonner"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Badge } from "@/components/ui/badge"
-import SaveButton from "@/components/Button"
+import SaveButton from "@/components/common/button"
 import {
   InputFormField,
   DateFormField,
   SelectFormField,
   DateTimeFormField,
 } from "@/components/form/input-group"
-import { getAccountType } from "@/lib/helper"
 
-export function EditUserAccordion({
-  user,
-  locale,
-  permissions,
-}: {
-  user?: User
-  locale?: string
-  permissions: {
-    read?: boolean
-    write?: boolean
-    readPrivate?: boolean
-    writePrivate?: boolean
-  }
-}) {
-  const t = useTranslations()
-
-  return (
-    <div className="space-y-4">
-      <Accordion
-        type="single" // single | multiple
-        collapsible // use with type single
-        defaultValue="general"
-        className="grid gap-4"
-      >
-        <AccordionItem
-          value={"general"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.General")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <EditUserGeneralForm
-              user={user}
-              write={permissions.write}
-              locale={locale}
-            />
-          </AccordionContent>
-        </AccordionItem>
-
-        {permissions.readPrivate && (
-          <AccordionItem
-            value={"private"}
-            className="h-fit rounded-lg border px-4 hover:shadow-lg"
-          >
-            <AccordionTrigger>{t("common.Private")}</AccordionTrigger>
-            <AccordionContent className="p-2 pb-4">
-              <EditUserPrivateForm
-                user={user}
-                write={permissions.writePrivate}
-              />
-            </AccordionContent>
-          </AccordionItem>
-        )}
-
-        <AccordionItem
-          value={"roles"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.Roles")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <EditUserRolesForm user={user} write={permissions.write} />
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem
-          value={"other"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.Other")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <UserOther user={user} write={permissions.write} />
-          </AccordionContent>
-        </AccordionItem>
-
-        {/*  */}
-      </Accordion>
-    </div>
-  )
-}
-
-const EditUserGeneralForm = ({
+export const EditUserGeneralForm = ({
   user,
   locale,
   write,
@@ -288,7 +202,7 @@ const EditUserGeneralForm = ({
   )
 }
 
-const EditUserPrivateForm = ({
+export const EditUserPrivateForm = ({
   user,
   write,
 }: {
@@ -416,7 +330,13 @@ const EditUserPrivateForm = ({
   )
 }
 
-const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
+export const UserOther = ({
+  user,
+  write,
+}: {
+  user?: User
+  write?: boolean
+}) => {
   const t = useTranslations()
 
   return (
@@ -466,30 +386,6 @@ const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
       {/* emailVerified */}
       {/* deletedAt */}
       {/* deletedUserId */}
-    </div>
-  )
-}
-
-const EditUserRolesForm = ({
-  user,
-  write,
-}: {
-  user?: User
-  write?: boolean
-}) => {
-  const t = useTranslations()
-
-  return (
-    <div className="space-y-4">
-      {user?.roles.length ? (
-        user.roles.map((role) => (
-          <Badge key={role.id} className="bg-gray">
-            {role.name}
-          </Badge>
-        ))
-      ) : (
-        <div className="text-gray">{t("common.Empty")}</div>
-      )}
     </div>
   )
 }

@@ -39,7 +39,7 @@ export async function getUserData(
   const isRole = types?.role ?? false
   const isOther = types?.other ?? false
 
-  return await db.user.findFirst({
+  const user = await db.user.findFirst({
     where: {
       id: userId,
     },
@@ -84,10 +84,12 @@ export async function getUserData(
           }
         : false,
       // Role
-      role: isRole,
-      roles: isRole,
+      systemRole: isRole,
+      userRoles: isRole ? { include: { role: true } } : false,
     },
   })
+
+  return user
 }
 
 export async function getUsers() {
@@ -102,8 +104,12 @@ export async function getUsers() {
       gender: true,
       dateOfBirth: true,
       status: true,
-      role: true,
-      roles: true,
+      systemRole: true,
+      userRoles: {
+        include: {
+          role: true,
+        },
+      },
     },
   })
 }

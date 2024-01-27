@@ -11,7 +11,6 @@ import { SearchColumnProps } from "@/components/table/data-table-search"
 import { genders, userStatus } from "@/lib/constants/option"
 import { ROUTE_DEFAULT_AVATAR, ROUTE_USER } from "@/lib/constants/route"
 import { User } from "@/lib/validations/user"
-import { Role } from "@prisma/client"
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import { UserRowActions } from "./user-row-actions"
@@ -59,8 +58,8 @@ export const UserColumns: ColumnDef<User>[] = [
             alt=""
             className="rounded-full"
           />
-          {row.original.role == "ADMIN" && (
-            <div title={row.original.role}>
+          {row.original.systemRole == "ADMIN" && (
+            <div title={row.original.systemRole}>
               <Crown className="absolute -right-2.5 -top-2.5 h-5 w-5 rounded-full bg-background p-0.5 text-sky" />
             </div>
           )}
@@ -170,8 +169,12 @@ export const UserColumns: ColumnDef<User>[] = [
       />
     ),
     cell: ({ row }) => {
-      const roles = row.getValue("roles") as Role[]
-      return <RoleWithTooltip roles={roles} userRole={row.original.role} />
+      return (
+        <RoleWithTooltip
+          userRoles={row.original.userRoles}
+          systemRole={row.original.systemRole}
+        />
+      )
     },
     // filterFn: (row, name, value) => {
     //   return value.includes(row.getValue(name))
