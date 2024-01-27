@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import { ThemeProvider } from "@/components/menu/theme-provider"
 import { NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/sonner"
 import { env } from "~/env.mjs"
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default async function RootLayout({
   try {
     messages = (await import(`../../messages/${locale}.json`)).default
   } catch (error) {
-    console.log(error)
+    console.error(error)
     notFound()
   }
 
@@ -37,7 +37,12 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Toaster />
+        <Toaster
+          richColors
+          closeButton
+          expand={false}
+          position="bottom-right"
+        />
       </body>
     </html>
   )

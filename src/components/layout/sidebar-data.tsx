@@ -16,7 +16,7 @@ export function SidebarData(user: User) {
   // Public
   let management: Item[] = [ITEM_DASHBOARD]
   // Private
-  if (user.allPermission.read.includes("user") || user.role === "ADMIN") {
+  if (user.allPermission.read.includes("user") || user.systemRole === "ADMIN") {
     management = [...management, ITEM_USER]
   }
 
@@ -24,7 +24,7 @@ export function SidebarData(user: User) {
   // Public
   let setting: Item[] = []
   // Private
-  if (user.allPermission.read.includes("role") || user.role === "ADMIN") {
+  if (user.allPermission.read.includes("role") || user.systemRole === "ADMIN") {
     setting = [...setting, ITEM_ROLE]
   }
 

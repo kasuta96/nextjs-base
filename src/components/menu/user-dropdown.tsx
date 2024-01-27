@@ -59,7 +59,9 @@ function UserDropdown({ user }: { user?: User }) {
                 />
                 <div>
                   <div className="font-medium">{user.name}</div>
-                  <span className="text-xs opacity-70">🚀 {user.role}</span>
+                  <span className="text-xs opacity-70">
+                    🚀 {user.systemRole}
+                  </span>
                 </div>
               </div>
             </DropdownMenuLabel>

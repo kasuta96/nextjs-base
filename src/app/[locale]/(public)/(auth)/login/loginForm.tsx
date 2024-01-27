@@ -9,7 +9,7 @@ import { AlertCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { User } from "~/types/next-auth"
 import { useTranslations } from "next-intl"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 import { ROUTE_HOME } from "@/lib/constants/route"
 
 export default function LoginForm({ user }: { user?: User }) {
@@ -21,7 +21,7 @@ export default function LoginForm({ user }: { user?: User }) {
 
   useEffect(() => {
     if (user) {
-      toast({ title: t("Login successfully"), variant: "success" })
+      toast.success(t("Login successfully"))
       return redirect(callbackUrl || ROUTE_HOME)
     }
   }, [user, callbackUrl, t])

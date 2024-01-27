@@ -31,8 +31,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useRouter } from "next/navigation"
 import { InputGroup } from "@/components/form/input-group"
-import SaveButton from "@/components/Button"
-import { toast } from "@/components/ui/use-toast"
+import SaveButton from "@/components/common/button"
+import { toast } from "sonner"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: User
@@ -79,11 +79,11 @@ export function ProfileForm({ user, ...props }: UserNameFormProps) {
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
   }
 
   const resetForm = () => {

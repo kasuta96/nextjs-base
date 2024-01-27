@@ -10,6 +10,7 @@ import { RoleCreate } from "./role-create"
 import { Permission, Role, RolePermissions } from "@prisma/client"
 import { PermissionsForm } from "./permissions-form"
 import { useTranslations } from "next-intl"
+import { Empty } from "@/components/common/empty"
 
 export type RoleData = Role & {
   permissions: (RolePermissions & {
@@ -48,7 +49,7 @@ export function RoleAccordion({
             </AccordionItem>
           ))
         ) : (
-          <div className="text-gray">{t("common.Empty")}</div>
+          <Empty />
         )}
       </Accordion>
     </div>

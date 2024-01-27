@@ -212,7 +212,9 @@ export const DateFormField = ({
                     mode="single"
                     selected={field.value}
                     defaultMonth={field.value}
-                    onSelect={field.onChange}
+                    onSelect={(d) =>
+                      field.onChange(d && new Date(format(d, "yyyy-MM-dd")))
+                    }
                     locale={locale == "ja" ? ja : locale == "vi" ? vi : enUS}
                     disabled={(date) =>
                       date > new Date() || date < new Date("1900-01-01")
