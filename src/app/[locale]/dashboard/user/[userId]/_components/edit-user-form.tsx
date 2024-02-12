@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { getAccountType } from "@/lib/helper"
 import {
   GenderSchema,
   User,
@@ -12,110 +14,20 @@ import {
   UserPrivateType,
   UserPublicSchema,
   UserPublicType,
-  UserSchema,
   UserStatusSchema,
-  UserType,
 } from "@/lib/validations/user"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { SelectItem } from "@/components/ui/select"
-import { useToast } from "@/components/ui/use-toast"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Badge } from "@/components/ui/badge"
-import SaveButton from "@/components/Button"
+import { SaveButton } from "@/components/common/button"
 import {
   InputFormField,
   DateFormField,
   SelectFormField,
   DateTimeFormField,
 } from "@/components/form/input-group"
-import { getAccountType } from "@/lib/helper"
 
-export function EditUserAccordion({
-  user,
-  locale,
-  permissions,
-}: {
-  user?: User
-  locale?: string
-  permissions: {
-    read?: boolean
-    write?: boolean
-    readPrivate?: boolean
-    writePrivate?: boolean
-  }
-}) {
-  const t = useTranslations()
-
-  return (
-    <div className="space-y-4">
-      <Accordion
-        type="single" // single | multiple
-        collapsible // use with type single
-        defaultValue="general"
-        className="grid gap-4"
-      >
-        <AccordionItem
-          value={"general"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.General")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <EditUserGeneralForm
-              user={user}
-              write={permissions.write}
-              locale={locale}
-            />
-          </AccordionContent>
-        </AccordionItem>
-
-        {permissions.readPrivate && (
-          <AccordionItem
-            value={"private"}
-            className="h-fit rounded-lg border px-4 hover:shadow-lg"
-          >
-            <AccordionTrigger>{t("common.Private")}</AccordionTrigger>
-            <AccordionContent className="p-2 pb-4">
-              <EditUserPrivateForm
-                user={user}
-                write={permissions.writePrivate}
-              />
-            </AccordionContent>
-          </AccordionItem>
-        )}
-
-        <AccordionItem
-          value={"roles"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.Roles")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <EditUserRolesForm user={user} write={permissions.write} />
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem
-          value={"other"}
-          className="h-fit rounded-lg border px-4 hover:shadow-lg"
-        >
-          <AccordionTrigger>{t("common.Other")}</AccordionTrigger>
-          <AccordionContent className="p-2 pb-4">
-            <UserOther user={user} write={permissions.write} />
-          </AccordionContent>
-        </AccordionItem>
-
-        {/*  */}
-      </Accordion>
-    </div>
-  )
-}
-
-const EditUserGeneralForm = ({
+export const EditUserGeneralForm = ({
   user,
   locale,
   write,
@@ -124,7 +36,6 @@ const EditUserGeneralForm = ({
   locale?: string
   write?: boolean
 }) => {
-  const { toast } = useToast()
   const t = useTranslations()
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
@@ -148,7 +59,7 @@ const EditUserGeneralForm = ({
 
   async function onSubmit(data: UserPublicType) {
     setIsSaving(true)
-    const fetchUrl = user ? `/api/user/${user.id}/general` : `/api/user`
+    const fetchUrl = user ? `/api/user/${user.id}` : `/api/user`
     const fetchMethod = user ? "PATCH" : "POST"
 
     const response = await fetch(fetchUrl, {
@@ -162,12 +73,12 @@ const EditUserGeneralForm = ({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setIsEdit(false)
     form.reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
     router.refresh()
   }
 
@@ -291,14 +202,13 @@ const EditUserGeneralForm = ({
   )
 }
 
-const EditUserPrivateForm = ({
+export const EditUserPrivateForm = ({
   user,
   write,
 }: {
   user?: UserPrivateType
   write?: boolean
 }) => {
-  const { toast } = useToast()
   const t = useTranslations()
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
@@ -317,7 +227,7 @@ const EditUserPrivateForm = ({
 
   async function onSubmit(data: UserPrivateType) {
     setIsSaving(true)
-    const fetchUrl = `/api/user/${user?.id}/private`
+    const fetchUrl = `/api/user/${user?.id}`
 
     const response = await fetch(fetchUrl, {
       method: "PATCH",
@@ -330,12 +240,12 @@ const EditUserPrivateForm = ({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setIsEdit(false)
     form.reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
     router.refresh()
   }
 
@@ -420,7 +330,13 @@ const EditUserPrivateForm = ({
   )
 }
 
-const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
+export const UserOther = ({
+  user,
+  write,
+}: {
+  user?: User
+  write?: boolean
+}) => {
   const t = useTranslations()
 
   return (
@@ -448,8 +364,8 @@ const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
       />
       <InputFormField
         type="text"
-        name="updatedUserId"
-        value={user?.updatedUserId}
+        name="updatedUser"
+        value={user?.updatedUser?.name}
         label={t("user.updatedUser")}
         isEdit={false}
       />
@@ -462,38 +378,14 @@ const UserOther = ({ user, write }: { user?: User; write?: boolean }) => {
       />
       <InputFormField
         type="text"
-        name="approvedUserId"
-        value={user?.approvedUserId}
+        name="approvedUser"
+        value={user?.approvedUser?.name}
         label={t("user.approvedUser")}
         isEdit={false}
       />
       {/* emailVerified */}
       {/* deletedAt */}
       {/* deletedUserId */}
-    </div>
-  )
-}
-
-const EditUserRolesForm = ({
-  user,
-  write,
-}: {
-  user?: User
-  write?: boolean
-}) => {
-  const t = useTranslations()
-
-  return (
-    <div className="space-y-4">
-      {user?.roles.length ? (
-        user.roles.map((role) => (
-          <Badge key={role.id} className="bg-gray">
-            {role.name}
-          </Badge>
-        ))
-      ) : (
-        <div className="text-gray">{t("common.Empty")}</div>
-      )}
     </div>
   )
 }

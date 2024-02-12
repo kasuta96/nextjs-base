@@ -32,7 +32,11 @@ prisma.$use(async (params, next) => {
       // ID filter maintained
       params.args.where["deletedAt"] = null
     }
-    if (params.action === "findMany") {
+    if (
+      params.action === "findFirstOrThrow" ||
+      params.action === "findUniqueOrThrow" ||
+      params.action === "findMany"
+    ) {
       if (params.args.where) {
         if (params.args.where.deletedAt == undefined) {
           // Exclude deletedAt records if they have not been explicitly requested

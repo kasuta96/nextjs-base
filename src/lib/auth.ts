@@ -28,7 +28,7 @@ const authOptions: AuthOptions = {
         session.user.name = token.name
         session.user.email = token.email
         session.user.image = token.picture
-        session.user.role = token.role
+        session.user.systemRole = token.systemRole
         session.user.status = token.status
         session.user.lang = token.lang
         session.user.allPermission = token.allPermission
@@ -42,10 +42,8 @@ const authOptions: AuthOptions = {
           email: token.email,
         },
         include: {
-          roles: {
-            include: {
-              permissions: true,
-            },
+          userRoles: {
+            include: { role: { include: { permissions: true } } },
           },
         },
       })
@@ -60,10 +58,10 @@ const authOptions: AuthOptions = {
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
-        role: dbUser.role,
         status: dbUser.status,
         lang: dbUser.languageCode,
-        allPermission: reformPermission(dbUser.roles),
+        systemRole: dbUser.systemRole,
+        allPermission: reformPermission(dbUser.userRoles),
       }
     },
     redirect({ url }) {

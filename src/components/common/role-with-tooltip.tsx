@@ -1,4 +1,4 @@
-import { Role, UserRole } from "@prisma/client"
+import { SystemRole } from "@prisma/client"
 import React from "react"
 import {
   Tooltip,
@@ -8,48 +8,53 @@ import {
 } from "@/components/ui/tooltip"
 import { Badge } from "@/components/ui/badge"
 import { ShowTranslate } from "./show-text"
+import { User } from "@/lib/validations/user"
 
 export default function RoleWithTooltip({
-  roles,
-  userRole,
+  userRoles,
+  systemRole,
 }: {
-  roles: Role[]
-  userRole?: UserRole
+  userRoles: User["userRoles"]
+  systemRole?: SystemRole
 }) {
   return (
     <>
-      {userRole === "ADMIN" ? (
+      {systemRole === "ADMIN" ? (
         <TooltipProvider delayDuration={300}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span>{userRole}</span>
+              <span>{systemRole}</span>
             </TooltipTrigger>
             <TooltipContent className="space-y-4 p-4">
               <span>{ShowTranslate("common", "Admin permissions")}</span>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      ) : roles.length ? (
+      ) : userRoles.length ? (
         <TooltipProvider delayDuration={300}>
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center space-x-1">
-                <div className="max-w-[100px] truncate">{roles[0].name}</div>
-                {roles.length > 1 && (
+                <div className="max-w-[100px] truncate">
+                  {userRoles[0].role.name}
+                </div>
+                {userRoles.length > 1 && (
                   <Badge
                     variant="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
-                    +{roles.length - 1}
+                    +{userRoles.length - 1}
                   </Badge>
                 )}
               </div>
             </TooltipTrigger>
             <TooltipContent className="space-y-4 p-4">
-              {roles.map((role) => (
-                <div key={role.id}>
-                  <div className="font-semibold">{role.name}</div>
-                  <div className="text-muted-foreground">{role.remarks}</div>
+              {userRoles.map((role) => (
+                <div key={role.role.name}>
+                  <div className="font-semibold">{role.role.name}</div>
+                  <div className="max-w-64 truncate text-muted-foreground">
+                    {role.role.remarks}
+                  </div>
                 </div>
               ))}
             </TooltipContent>

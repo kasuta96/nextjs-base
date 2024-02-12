@@ -27,8 +27,8 @@ import { useRouter } from "next/navigation"
 import { defaultPermissions } from "@/lib/constants/permission"
 import { RoleData } from "./role-accordion"
 import { RoleDelete } from "./role-delete"
-import SaveButton from "@/components/Button"
-import { toast } from "@/components/ui/use-toast"
+import { SaveButton } from "@/components/common/button"
+import { toast } from "sonner"
 import { Textarea } from "@/components/ui/textarea"
 
 export function PermissionsForm({
@@ -70,13 +70,13 @@ export function PermissionsForm({
     setIsSaving(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setOpen && setOpen(false)
     setEditRole(false)
     form.reset(data)
-    toast({ title: t("notify.updateSuccess"), variant: "success" })
+    toast.success(t("notify.updateSuccess"))
     router.refresh()
   }
 

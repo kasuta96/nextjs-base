@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl"
 import { Close } from "@radix-ui/react-dialog"
 import { RoleData } from "./role-accordion"
 import { useRouter } from "next/navigation"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "sonner"
 
 export function RoleDelete({ role }: { role: RoleData }) {
   const t = useTranslations()
@@ -32,11 +32,11 @@ export function RoleDelete({ role }: { role: RoleData }) {
     setIsDeleting(false)
 
     if (!response?.ok) {
-      return toast({ title: t("notify.error"), variant: "destructive" })
+      return toast.error(t("notify.error"))
     }
 
     setOpen(false)
-    toast({ title: t("notify.deleteSuccess"), variant: "success" })
+    toast.success(t("notify.deleteSuccess"))
     router.refresh()
   }
 

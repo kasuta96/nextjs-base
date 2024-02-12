@@ -1,5 +1,6 @@
-import { Account } from "@prisma/client"
+import { Account, Role } from "@prisma/client"
 import { LucideIcon } from "lucide-react"
+import { User } from "./validations/user"
 
 // Create prisma select object from zod schema
 export function createSelect(schema: any): object {
@@ -49,4 +50,54 @@ export function getAccountType(accounts?: Account[]): string {
     : ""
 
   return result
+}
+
+export function isEmptyObject(obj: object) {
+  return !Object.keys(obj).length
+}
+
+export type BooleanRecord = Record<string, boolean>
+
+export function convertToIdsObj(obj: BooleanRecord): { id: string }[] {
+  return Object.keys(obj)
+    .filter((key) => obj[key])
+    .map((key) => ({ id: key }))
+}
+
+export function convertToBooleanRecord({
+  userRoles,
+  roles,
+}: {
+  userRoles: User["userRoles"]
+  roles?: Role[]
+}): BooleanRecord {
+  return userRoles.reduce((acc, userRole) => {
+    acc[userRole.role.id] = true
+    return acc
+  }, {} as BooleanRecord)
+}
+
+export const getDirtyValues = <
+  DirtyFields extends Record<string, unknown>,
+  Values extends Record<keyof DirtyFields, unknown>,
+>(
+  dirtyFields: DirtyFields,
+  values: Values
+): Partial<typeof values> => {
+  const dirtyValues = Object.keys(dirtyFields).reduce((prev, key) => {
+    if (!dirtyFields[key]) return prev
+
+    return {
+      ...prev,
+      [key]:
+        typeof dirtyFields[key] === "object"
+          ? getDirtyValues(
+              dirtyFields[key] as DirtyFields,
+              values[key] as Values
+            )
+          : values[key],
+    }
+  }, {})
+
+  return dirtyValues
 }

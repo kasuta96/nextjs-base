@@ -1,12 +1,19 @@
-import { Account, Gender, Role, UserRole, UserStatus } from "@prisma/client"
+import {
+  Account,
+  Gender,
+  Role,
+  SystemRole,
+  UserRole,
+  UserStatus,
+} from "@prisma/client"
 import { z } from "zod"
 import { phoneRegex, zipCode } from "./common"
 
 export const GenderSchema = z.nativeEnum(Gender)
 export type GenderType = `${z.infer<typeof GenderSchema>}`
 
-export const UserRoleSchema = z.nativeEnum(UserRole)
-export type UserRoleType = `${z.infer<typeof UserRoleSchema>}`
+export const SystemRoleSchema = z.nativeEnum(SystemRole)
+export type SystemRoleType = `${z.infer<typeof SystemRoleSchema>}`
 
 export const UserStatusSchema = z.nativeEnum(UserStatus)
 export type UserStatusType = `${z.infer<typeof UserStatusSchema>}`
@@ -30,7 +37,7 @@ export type ProfileType = z.infer<typeof ProfileSchema>
 
 export const UserPublicSchema = z.object({
   id: z.string().optional(),
-  email: z.string().max(255),
+  email: z.string().max(255).optional(),
   name: z.string().min(2).max(255).optional(),
   image: z.string().max(255).optional(),
   bio: z.string().optional(),
@@ -39,7 +46,7 @@ export const UserPublicSchema = z.object({
   gender: GenderSchema.optional(),
   dateOfBirth: z.coerce.date().optional(),
   languageCode: z.string().optional(),
-  role: UserRoleSchema.optional(),
+  systemRole: SystemRoleSchema.optional(),
   status: UserStatusSchema.optional(),
 })
 export type UserPublicType = z.infer<typeof UserPublicSchema>
@@ -68,7 +75,21 @@ export const UserSchema = UserPublicSchema.merge(UserPrivateSchema).merge(
 )
 export type UserType = z.infer<typeof UserSchema>
 
+// RelatedUser
+export const RelatedUserSchema = z.object({
+  id: z.string().optional(),
+  email: z.string().max(255).optional(),
+  name: z.string().min(2).max(255).optional(),
+  image: z.string().max(255).optional(),
+  systemRole: SystemRoleSchema.optional(),
+  status: UserStatusSchema.optional(),
+})
+export type RelatedUserType = z.infer<typeof RelatedUserSchema>
+
 export type User = UserType & {
-  roles: Role[]
+  userRoles: (UserRole & { role: Role })[]
   accounts: Account[]
+  updatedUser: RelatedUserType
+  approvedUser: RelatedUserType
+  deletedUser: RelatedUserType
 }

@@ -4,6 +4,7 @@ import { activeUserStatus } from "@/lib/constants/auth"
 import { ROUTE_403, ROUTE_LOGIN, ROUTE_LOGOUT } from "@/lib/constants/route"
 import { db } from "@/lib/db"
 import { User } from "@prisma/client"
+import { selectUser } from "@/lib/constants/user"
 
 export async function getActiveUser() {
   const user = await getCurrentUser()
@@ -38,7 +39,7 @@ export async function getUserData(
   const isRole = types?.role ?? false
   const isOther = types?.other ?? false
 
-  return await db.user.findFirst({
+  const user = await db.user.findFirst({
     where: {
       id: userId,
     },
@@ -66,10 +67,13 @@ export async function getUserData(
       createdAt: isOther,
       updatedAt: isOther,
       updatedUserId: isOther,
+      updatedUser: isOther && selectUser,
       approvedAt: isOther,
       approvedUserId: isOther,
+      approvedUser: isOther && selectUser,
       deletedAt: isOther,
       deletedUserId: isOther,
+      deletedUser: isOther && selectUser,
       accounts: isOther
         ? {
             select: {
@@ -80,10 +84,12 @@ export async function getUserData(
           }
         : false,
       // Role
-      role: isRole,
-      roles: isRole,
+      systemRole: isRole,
+      userRoles: isRole ? { include: { role: true } } : false,
     },
   })
+
+  return user
 }
 
 export async function getUsers() {
@@ -98,8 +104,12 @@ export async function getUsers() {
       gender: true,
       dateOfBirth: true,
       status: true,
-      role: true,
-      roles: true,
+      systemRole: true,
+      userRoles: {
+        include: {
+          role: true,
+        },
+      },
     },
   })
 }

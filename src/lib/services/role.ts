@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"
-import { Role, RolePermissions } from "@prisma/client"
+import { Role, RolePermissions, UserRole } from "@prisma/client"
 import { AllPermission } from "~/types/next-auth"
 
 export async function getRoles() {
@@ -22,17 +22,19 @@ export async function getRoleIncludePermissions() {
 }
 
 export function reformPermission(
-  roles: (Role & {
-    permissions: RolePermissions[]
+  roles: (UserRole & {
+    role: Role & {
+      permissions: RolePermissions[]
+    }
   })[]
 ) {
   const { read, write } = roles.reduce(
-    (result: AllPermission, role) => {
-      const roleReadPms = role.permissions.filter((pms) => pms.read)
+    (result: AllPermission, userRole) => {
+      const roleReadPms = userRole.role.permissions.filter((pms) => pms.read)
       const roleReadPmsIds = roleReadPms.map((pms) => pms.permissionId)
       result.read.push(...roleReadPmsIds)
 
-      const roleWritePms = role.permissions.filter((pms) => pms.write)
+      const roleWritePms = userRole.role.permissions.filter((pms) => pms.write)
       const roleWritePmsIds = roleWritePms.map((pms) => pms.permissionId)
       result.write.push(...roleWritePmsIds)
 
