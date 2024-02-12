@@ -1,4 +1,4 @@
-import { Account } from "@prisma/client"
+import { Account, Role } from "@prisma/client"
 import { LucideIcon } from "lucide-react"
 import { User } from "./validations/user"
 
@@ -64,8 +64,14 @@ export function convertToIdsObj(obj: BooleanRecord): { id: string }[] {
     .map((key) => ({ id: key }))
 }
 
-export function convertToBooleanRecord(arr: User["userRoles"]): BooleanRecord {
-  return arr.reduce((acc, userRole) => {
+export function convertToBooleanRecord({
+  userRoles,
+  roles,
+}: {
+  userRoles: User["userRoles"]
+  roles?: Role[]
+}): BooleanRecord {
+  return userRoles.reduce((acc, userRole) => {
     acc[userRole.role.id] = true
     return acc
   }, {} as BooleanRecord)

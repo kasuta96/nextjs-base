@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
-import SaveButton from "@/components/common/button"
+import { LoadingButton, SaveButton } from "@/components/common/button"
 import { SkeletonSwitch } from "@/components/skeleton/switch"
 import { Empty } from "@/components/common/empty"
 
@@ -37,23 +37,23 @@ export const EditUserRolesForm = ({
   const router = useRouter()
   const [isEdit, setIsEdit] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const [roles, setRoles] = useState([] as Role[])
-
-  const defaultValues = user?.userRoles
-    ? convertToBooleanRecord(user?.userRoles)
-    : {}
+  const [defaultValues, setDefaultValues] = useState(
+    user?.userRoles && convertToBooleanRecord({ userRoles: user?.userRoles })
+  )
 
   const form = useForm<BooleanRecord>({
     defaultValues: defaultValues,
   })
 
   async function onSubmit(data: BooleanRecord) {
-    setIsLoading(true)
+    setIsSaving(true)
     const dirtyValues = getDirtyValues(form.formState.dirtyFields, data)
 
     const fetchUrl = `/api/user/${user?.id}/role`
 
-    const response = await fetch(fetchUrl, {
+    const res = await fetch(fetchUrl, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -61,8 +61,8 @@ export const EditUserRolesForm = ({
       body: JSON.stringify(dirtyValues),
     })
 
-    setIsLoading(false)
-    if (!response?.ok) {
+    setIsSaving(false)
+    if (!res?.ok) {
       return toast.error(t("notify.error"))
     }
     setIsEdit(false)
@@ -85,14 +85,15 @@ export const EditUserRolesForm = ({
         setIsEdit(false)
       } else {
         setRoles(await res.json())
+        form.reset()
       }
     }
-  }, [isEdit, t])
+  }, [isEdit, t, form])
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {isEdit && !isLoading ? (
+        {isEdit ? (
           <div className="space-y-4">
             {roles.map((r) => (
               <FormField
@@ -107,7 +108,7 @@ export const EditUserRolesForm = ({
                     </div>
                     <FormControl>
                       <Switch
-                        checked={field.value}
+                        checked={field.value ?? false}
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
@@ -142,33 +143,35 @@ export const EditUserRolesForm = ({
         ) : (
           <Empty />
         )}
-        <div className="flex items-center justify-end space-x-2">
-          {isEdit ? (
-            <>
-              <Button
+
+        {write && (
+          <div className="flex items-center justify-end space-x-2">
+            {isEdit && !isLoading ? (
+              <>
+                <SaveButton
+                  disabled={isSaving || !form.formState.isDirty}
+                  loading={isSaving}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => cancelForm()}
+                >
+                  {t("common.Cancel")}
+                </Button>
+              </>
+            ) : (
+              <LoadingButton
                 type="button"
                 variant="outline"
-                onClick={() => cancelForm()}
-              >
-                {t("common.Cancel")}
-              </Button>
-              <SaveButton
-                disabled={isLoading || !form.formState.isDirty}
                 loading={isLoading}
-              />
-            </>
-          ) : write ? (
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setIsEdit(true)}
-            >
-              {t("common.Edit")}
-            </Button>
-          ) : (
-            <></>
-          )}
-        </div>
+                onClick={() => setIsEdit(true)}
+              >
+                {t("common.Edit")}
+              </LoadingButton>
+            )}
+          </div>
+        )}
       </form>
     </Form>
   )

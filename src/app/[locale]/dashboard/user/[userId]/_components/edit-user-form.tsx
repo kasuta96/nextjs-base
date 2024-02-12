@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { SelectItem } from "@/components/ui/select"
-import SaveButton from "@/components/common/button"
+import { SaveButton } from "@/components/common/button"
 import {
   InputFormField,
   DateFormField,
