@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { notFound } from "next/navigation"
 import { Toaster } from "@/components/ui/sonner"
 import { env } from "~/env.mjs"
+import NextTopLoader from "nextjs-toploader"
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +33,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body>
+        <NextTopLoader />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}

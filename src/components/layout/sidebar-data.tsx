@@ -2,7 +2,7 @@
 
 import { ROUTE_DASHBOARD, ROUTE_ROLE, ROUTE_USER } from "@/lib/constants/route"
 import { LayoutDashboard, UserCog, Users } from "lucide-react"
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 
 export type Item = {
   name: string
@@ -11,7 +11,7 @@ export type Item = {
   icon?: any
 }
 
-export function SidebarData(user: User) {
+export function SidebarData(user: SessionUser) {
   // Management area
   // Public
   let management: Item[] = [ITEM_DASHBOARD]

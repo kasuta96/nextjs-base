@@ -31,6 +31,7 @@ const authOptions: AuthOptions = {
         session.user.systemRole = token.systemRole
         session.user.status = token.status
         session.user.lang = token.lang
+        session.user.userRoles = token.userRoles
         session.user.allPermission = token.allPermission
       }
 
@@ -61,6 +62,7 @@ const authOptions: AuthOptions = {
         status: dbUser.status,
         lang: dbUser.languageCode,
         systemRole: dbUser.systemRole,
+        userRoles: dbUser.userRoles,
         allPermission: reformPermission(dbUser.userRoles),
       }
     },

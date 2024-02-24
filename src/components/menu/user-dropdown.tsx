@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +24,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { userDropdownData as menu } from "./user-dropdown-data"
 import { ROUTE_DEFAULT_AVATAR, ROUTE_LOGIN } from "@/lib/constants/route"
 
-function UserDropdown({ user }: { user?: User }) {
+function UserDropdown({ user }: { user?: SessionUser }) {
   const mounted = useMounted()
   const t = useTranslations("common")
   const pathname = usePathname()
@@ -59,8 +59,10 @@ function UserDropdown({ user }: { user?: User }) {
                 />
                 <div>
                   <div className="font-medium">{user.name}</div>
-                  <span className="text-xs opacity-70">
-                    🚀 {user.systemRole}
+                  <span className="text-xs font-light opacity-70">
+                    {user.systemRole == "ADMIN"
+                      ? "SYSTEM ADMIN"
+                      : user.userRoles?.map((r) => r.role.name).join(", ")}
                   </span>
                 </div>
               </div>

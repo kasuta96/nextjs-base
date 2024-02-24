@@ -1,18 +1,18 @@
 import { User as AuthUser } from "next-auth"
 import { JWT } from "next-auth/jwt"
-import { SystemRole, UserStatus } from "@prisma/client"
+import { Role, SystemRole, UserStatus } from "@prisma/client"
 
 declare module "next-auth/jwt" {
-  interface JWT extends User {
+  interface JWT extends SessionUser {
     id: string
     name: string
-    email: string
+    email: string | null
   }
 }
 
 declare module "next-auth" {
   interface Session {
-    user: User
+    user: SessionUser
   }
 }
 
@@ -21,13 +21,14 @@ interface AllPermission {
   write: string[]
 }
 
-interface User {
+interface SessionUser {
   id: string
   name: string
-  email: string
+  email: string | null
   image?: string | null
   status: UserStatus
   lang: string
   systemRole: SystemRole
+  userRoles: (UserRole & { role: Role })[]
   allPermission: AllPermission
 }

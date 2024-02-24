@@ -183,7 +183,12 @@ export const UserColumns: ColumnDef<User>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <UserRowActions user={row.original} />,
+    cell: ({ row, table }) => (
+      <UserRowActions
+        write={table.options.meta?.permission?.write}
+        user={row.original}
+      />
+    ),
     meta: {
       headerClass: "sticky right-0 bg-background",
       cellClass: "sticky right-0 bg-inherit",
