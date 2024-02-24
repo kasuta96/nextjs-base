@@ -5,4 +5,11 @@ declare module "@tanstack/react-table" {
     headerClass?: string
     cellClass?: string
   }
+
+  interface TableMeta<TData extends RowData> {
+    permission?: {
+      read?: boolean
+      write?: boolean
+    }
+  }
 }

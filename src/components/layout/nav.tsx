@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 import { ThemeToggle } from "@/components/menu/theme-toggle"
 import { Dispatch, SetStateAction } from "react"
 import UserDropdown from "@/components/menu/user-dropdown"
@@ -13,7 +13,7 @@ export default function Nav({
   setIsOpen,
 }: {
   className: string
-  user: User
+  user: SessionUser
   isOpen?: boolean
   setIsOpen?: Dispatch<SetStateAction<boolean>>
 }) {

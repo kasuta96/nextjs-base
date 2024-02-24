@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation"
 import clsx from "clsx"
 import { useState } from "react"
 import Nav from "@/components/layout/nav"
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 import { env } from "~/env.mjs"
 import { useTranslations } from "next-intl"
 import { ROUTE_HOME } from "@/lib/constants/route"
 
-export function Sidebar({ user }: { user: User }) {
+export function Sidebar({ user }: { user: SessionUser }) {
   const [isOpen, setIsOpen] = useState(false)
   const close = () => setIsOpen(false)
   const t = useTranslations("common")

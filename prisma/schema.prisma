@@ -74,7 +74,7 @@ enum Gender {
 model User {
   id            String    @id @default(cuid())
   name          String    @db.VarChar(255)
-  email         String    @unique @db.VarChar(255)
+  email         String?   @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
   image         String?   @db.VarChar(255)
   bio           String?   @db.Text()
