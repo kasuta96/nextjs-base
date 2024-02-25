@@ -6,6 +6,8 @@ import { notFound } from "next/navigation"
 import { Toaster } from "@/components/ui/sonner"
 import { env } from "~/env.mjs"
 import NextTopLoader from "nextjs-toploader"
+import { SiteHeader } from "@/components/layout/site-header"
+import { getCurrentUser } from "@/lib/session"
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +31,7 @@ export default async function RootLayout({
     console.error(error)
     notFound()
   }
+  const user = await getCurrentUser()
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -36,7 +39,10 @@ export default async function RootLayout({
         <NextTopLoader />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader user={user} />
+              <main className="flex-1">{children}</main>
+            </div>
           </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster

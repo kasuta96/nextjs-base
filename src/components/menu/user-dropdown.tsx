@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import { Languages, LogIn } from "lucide-react"
-import Link from "@/components/Link"
+import Link from "@/components/common/link"
 import { locales } from "@/lib/next-intl/config"
 import { useMounted } from "@/lib/hook/use-mounted"
 import { useTranslations } from "next-intl"
@@ -38,7 +38,7 @@ function UserDropdown({ user }: { user?: SessionUser }) {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Image
-          className="m-0.5 inline-block h-10 w-10 rounded-full p-0.5 ring-1 ring-gray-300 dark:ring-gray-500"
+          className="m-0.5 inline-block h-8 w-8 rounded-full p-0.5 ring-1 ring-gray-300 dark:ring-gray-500"
           src={user?.image || ROUTE_DEFAULT_AVATAR}
           width="40"
           height="40"

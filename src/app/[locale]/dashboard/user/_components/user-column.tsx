@@ -15,7 +15,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import { UserRowActions } from "./user-row-actions"
 import { Crown } from "lucide-react"
-import Link from "@/components/Link"
+import Link from "@/components/common/link"
 
 export const UserColumns: ColumnDef<User>[] = [
   // {

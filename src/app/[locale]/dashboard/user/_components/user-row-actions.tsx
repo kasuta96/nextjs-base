@@ -27,7 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { User } from "@/lib/validations/user"
-import Link from "@/components/Link"
+import Link from "@/components/common/link"
 import { ROUTE_USER } from "@/lib/constants/route"
 import { userStatus } from "@/lib/constants/option"
 import { ShowTranslate } from "@/components/common/show-text"
