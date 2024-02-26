@@ -32,7 +32,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
   name: string
   searchColumns?: SearchColumnProps[]
-  write: boolean
+  write?: boolean
 }
 
 export function DataTable<TData, TValue>({
@@ -58,6 +58,11 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
+    },
+    meta: {
+      permission: {
+        write: write,
+      },
     },
   })
 

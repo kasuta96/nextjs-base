@@ -1,6 +1,6 @@
 "use client"
 
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import { Languages, LogIn } from "lucide-react"
-import Link from "@/components/Link"
+import Link from "@/components/common/link"
 import { locales } from "@/lib/next-intl/config"
 import { useMounted } from "@/lib/hook/use-mounted"
 import { useTranslations } from "next-intl"
@@ -24,7 +24,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { userDropdownData as menu } from "./user-dropdown-data"
 import { ROUTE_DEFAULT_AVATAR, ROUTE_LOGIN } from "@/lib/constants/route"
 
-function UserDropdown({ user }: { user?: User }) {
+function UserDropdown({ user }: { user?: SessionUser }) {
   const mounted = useMounted()
   const t = useTranslations("common")
   const pathname = usePathname()
@@ -38,7 +38,7 @@ function UserDropdown({ user }: { user?: User }) {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Image
-          className="m-0.5 inline-block h-10 w-10 rounded-full p-0.5 ring-1 ring-gray-300 dark:ring-gray-500"
+          className="m-0.5 inline-block h-8 w-8 rounded-full p-0.5 ring-1 ring-gray-300 dark:ring-gray-500"
           src={user?.image || ROUTE_DEFAULT_AVATAR}
           width="40"
           height="40"
@@ -59,8 +59,10 @@ function UserDropdown({ user }: { user?: User }) {
                 />
                 <div>
                   <div className="font-medium">{user.name}</div>
-                  <span className="text-xs opacity-70">
-                    🚀 {user.systemRole}
+                  <span className="text-xs font-light opacity-70">
+                    {user.systemRole == "ADMIN"
+                      ? "SYSTEM ADMIN"
+                      : user.userRoles?.map((r) => r.role.name).join(", ")}
                   </span>
                 </div>
               </div>

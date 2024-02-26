@@ -7,12 +7,12 @@ import { authErrors } from "@/lib/constants/auth"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { User } from "~/types/next-auth"
+import { SessionUser } from "~/types/next-auth"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import { ROUTE_HOME } from "@/lib/constants/route"
 
-export default function LoginForm({ user }: { user?: User }) {
+export default function LoginForm({ user }: { user?: SessionUser }) {
   const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
   const callbackError = useSearchParams()!.get("error")

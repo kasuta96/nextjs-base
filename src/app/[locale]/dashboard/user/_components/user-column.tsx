@@ -15,7 +15,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image"
 import { UserRowActions } from "./user-row-actions"
 import { Crown } from "lucide-react"
-import Link from "@/components/Link"
+import Link from "@/components/common/link"
 
 export const UserColumns: ColumnDef<User>[] = [
   // {
@@ -183,7 +183,12 @@ export const UserColumns: ColumnDef<User>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <UserRowActions user={row.original} />,
+    cell: ({ row, table }) => (
+      <UserRowActions
+        write={table.options.meta?.permission?.write}
+        user={row.original}
+      />
+    ),
     meta: {
       headerClass: "sticky right-0 bg-background",
       cellClass: "sticky right-0 bg-inherit",
