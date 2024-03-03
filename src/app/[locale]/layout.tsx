@@ -8,6 +8,7 @@ import { env } from "~/env.mjs"
 import NextTopLoader from "nextjs-toploader"
 import { SiteHeader } from "@/components/layout/site-header"
 import { getCurrentUser } from "@/lib/session"
+import { SiteFooter } from "@/components/layout/site-footer"
 
 export const metadata: Metadata = {
   title: {
@@ -42,6 +43,7 @@ export default async function RootLayout({
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader user={user} />
               <main className="flex-1">{children}</main>
+              <SiteFooter />
             </div>
           </ThemeProvider>
         </NextIntlClientProvider>
