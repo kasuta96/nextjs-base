@@ -135,9 +135,7 @@ export const UserColumns: ColumnDef<User>[] = [
       />
     ),
     cell: ({ row }) => (
-      <div className="whitespace-nowrap">
-        {ShowDateFromString(row.getValue("dateOfBirth"))}
-      </div>
+      <div className="whitespace-nowrap">{row.getValue("dateOfBirth")}</div>
     ),
   },
   {

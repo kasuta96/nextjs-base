@@ -30,7 +30,7 @@ export default function RoleWithTooltip({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      ) : userRoles.length ? (
+      ) : userRoles?.length ? (
         <TooltipProvider delayDuration={300}>
           <Tooltip>
             <TooltipTrigger asChild>

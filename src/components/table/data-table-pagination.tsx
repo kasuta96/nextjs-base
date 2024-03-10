@@ -18,10 +18,12 @@ import { useTranslations } from "next-intl"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
+  loading: boolean
 }
 
 export function DataTablePagination<TData>({
   table,
+  loading,
 }: DataTablePaginationProps<TData>) {
   const t = useTranslations("common")
   return (

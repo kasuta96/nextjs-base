@@ -9,6 +9,7 @@ import NextTopLoader from "nextjs-toploader"
 import { SiteHeader } from "@/components/layout/site-header"
 import { getCurrentUser } from "@/lib/session"
 import { SiteFooter } from "@/components/layout/site-footer"
+import { ClientProvider } from "./client-provider"
 
 export const metadata: Metadata = {
   title: {
@@ -40,11 +41,13 @@ export default async function RootLayout({
         <NextTopLoader />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader user={user} />
-              <main className="flex-1">{children}</main>
-              <SiteFooter />
-            </div>
+            <ClientProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader user={user} />
+                <main className="flex-1">{children}</main>
+                <SiteFooter />
+              </div>
+            </ClientProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster

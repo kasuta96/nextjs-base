@@ -113,3 +113,24 @@ export async function getUsers() {
     },
   })
 }
+
+export async function fetchUsers(options: {
+  pageIndex: number
+  pageSize: number
+}) {
+  console.log("start fetUsers")
+
+  const { pageIndex, pageSize } = options
+  const query = `page=${pageIndex}&size=${pageSize}`
+  try {
+    const res = await fetch(`/api/user?${query}`)
+    if (!res?.ok) {
+      throw new Error(`Failed to fetch users: ${res.statusText}`)
+    }
+    const data = await res.json()
+    return data
+  } catch (error) {
+    console.error("Failed to fetch users:", error)
+    throw new Error("Failed to fetch users")
+  }
+}
