@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
-import { Languages, LogIn } from "lucide-react"
+import { Languages, LogIn, ShieldCheck } from "lucide-react"
 import Link from "@/components/common/link"
 import { locales } from "@/lib/next-intl/config"
 import { useMounted } from "@/lib/hook/use-mounted"
@@ -59,13 +59,26 @@ function UserDropdown({ user }: { user?: SessionUser }) {
                 />
                 <div>
                   <div className="font-medium">{user.name}</div>
-                  <span className="text-xs font-light opacity-70">
-                    {user.systemRole == "ADMIN"
-                      ? "SYSTEM ADMIN"
-                      : user.userRoles?.map((r) => r.role.name).join(", ")}
-                  </span>
+                  <div className="text-xs font-light">{user.email}</div>
                 </div>
               </div>
+              <span className="text-xs font-light">
+                {user.systemRole == "ADMIN" ? (
+                  <div className="flex items-center space-x-2 pt-3">
+                    <ShieldCheck className="h-5 w-5" />
+                    <span>SYSTEM ADMIN</span>
+                  </div>
+                ) : user.userRoles.length ? (
+                  <div className="flex items-center space-x-2 pt-3">
+                    <ShieldCheck className="h-5 w-5 flex-none" />
+                    <span>
+                      {user.userRoles?.map((r) => r.role.name).join(", ")}
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
           </>

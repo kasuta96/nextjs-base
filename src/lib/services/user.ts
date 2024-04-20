@@ -110,6 +110,7 @@ export async function getUsers() {
           role: true,
         },
       },
+      createdAt: true,
     },
   })
 }

@@ -16,6 +16,7 @@ import Image from "next/image"
 import { UserRowActions } from "./user-row-actions"
 import { Crown } from "lucide-react"
 import Link from "@/components/common/link"
+import Moment from "react-moment"
 
 export const UserColumns: ColumnDef<User>[] = [
   // {
@@ -45,11 +46,11 @@ export const UserColumns: ColumnDef<User>[] = [
       <DataTableColumnHeader
         column={column}
         title={ShowTranslate("user", column.id)}
-        className=""
+        className="px-4 py-2"
       />
     ),
     cell: ({ row }) => (
-      <div className="flex items-center space-x-2 p-0">
+      <div className="flex items-center space-x-2 p-4">
         <div className="relative h-8 w-8">
           <Image
             src={row.original.image || ROUTE_DEFAULT_AVATAR}
@@ -72,8 +73,8 @@ export const UserColumns: ColumnDef<User>[] = [
       </div>
     ),
     meta: {
-      cellClass: "md:sticky md:left-0 bg-inherit",
-      headerClass: "md:sticky md:left-0 bg-background",
+      cellClass: "md:sticky md:left-0 md:bg-background-sm p-0",
+      headerClass: "md:sticky md:left-0 md:bg-background-sm p-0",
     },
   },
   {
@@ -182,6 +183,20 @@ export const UserColumns: ColumnDef<User>[] = [
     enableSorting: false,
   },
   {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title={ShowTranslate("user", column.id)}
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="whitespace-nowrap">
+        <Moment format="YYYY-MM-DD HH:mm">{row.getValue("createdAt")}</Moment>
+      </div>
+    ),
+  },
+  {
     id: "actions",
     cell: ({ row, table }) => (
       <UserRowActions
@@ -190,8 +205,8 @@ export const UserColumns: ColumnDef<User>[] = [
       />
     ),
     meta: {
-      headerClass: "sticky right-0 bg-background",
-      cellClass: "sticky right-0 bg-inherit",
+      headerClass: "sticky right-0 bg-background-sm",
+      cellClass: "sticky right-0 bg-background-sm",
     },
   },
 ]

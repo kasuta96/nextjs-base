@@ -39,7 +39,8 @@
     "Admin permissions": "Admin Hệ Thống (Full quyền)",
     "General": "Tổng quan",
     "Private": "Riêng tư",
-    "Other": "Khác"
+    "Other": "Khác",
+    "None": "Không"
   },
   "user": {
     "name": "Tên hiển thị",

@@ -39,7 +39,8 @@
     "Admin permissions": "システム管理者（すべて権限）",
     "General": "一般",
     "Private": "プライベート",
-    "Other": "その他"
+    "Other": "その他",
+    "None": "なし"
   },
   "user": {
     "name": "表示名",

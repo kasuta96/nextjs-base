@@ -39,7 +39,8 @@
     "Admin permissions": "System Admin (Full permissions)",
     "General": "General",
     "Private": "Private",
-    "Other": "Other"
+    "Other": "Other",
+    "None": "None"
   },
   "user": {
     "name": "Display name",

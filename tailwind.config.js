@@ -18,7 +18,12 @@ module.exports = {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
-        background: "var(--background)",
+        background: {
+          DEFAULT: "var(--background)",
+          sm: "var(--background-sm)",
+          md: "var(--background-md)",
+          xl: "var(--background-xl)",
+        },
         foreground: "var(--foreground)",
         green: {
           DEFAULT: "var(--green)",

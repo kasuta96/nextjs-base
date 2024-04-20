@@ -16,6 +16,11 @@ export function ShowDateFromString(date: Date) {
   return dateStr
 }
 
+export function ShowDatetimeFromString(date: Date) {
+  const dateStr = date?.toISOString().slice(0, 20)
+  return dateStr
+}
+
 export function ShowTranslate(ns: string, text: string) {
   const t = useTranslations(ns)
 
