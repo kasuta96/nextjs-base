@@ -39,12 +39,10 @@ export const EditUserRolesForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [roles, setRoles] = useState([] as Role[])
-  const [defaultValues, setDefaultValues] = useState(
-    user?.userRoles && convertToBooleanRecord({ userRoles: user?.userRoles })
-  )
 
   const form = useForm<BooleanRecord>({
-    defaultValues: defaultValues,
+    defaultValues:
+      user?.userRoles && convertToBooleanRecord({ userRoles: user?.userRoles }),
   })
 
   async function onSubmit(data: BooleanRecord) {
@@ -67,6 +65,7 @@ export const EditUserRolesForm = ({
     }
     setIsEdit(false)
     toast.success(t("notify.updateSuccess"))
+    form.reset(data)
     router.refresh()
   }
 
