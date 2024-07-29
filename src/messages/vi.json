@@ -10,6 +10,7 @@
     "Management Page": "Trang quản lý",
     "Dashboard": "Bảng điều khiển",
     "Users": "Người dùng",
+    "Teams": "Teams",
     "Roles": "Roles",
     "Profile": "Hồ sơ",
     "Setting": "Cài đặt",
@@ -97,6 +98,8 @@
     "user_name": "Người dùng (Công khai)",
     "user_remarks": "Quản lý những thông tin công khai của người dùng",
     "user_private_name": "Người dùng (Riêng tư)",
-    "user_private_remarks": "Quản lý những thông tin riêng tư của người dùng"
+    "user_private_remarks": "Quản lý những thông tin riêng tư của người dùng",
+    "team_name": "Teams",
+    "team_remarks": "Quản lý teams và thành viên"
   }
 }

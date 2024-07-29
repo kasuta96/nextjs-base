@@ -19,7 +19,7 @@ if (env.NODE_ENV === "production") {
 /* SOFT DELETE MIDDLEWARE */
 /***********************************/
 
-const softDeleteModels = ["User", "Role"]
+const softDeleteModels = ["User", "Role", "Team"]
 
 prisma.$use(async (params, next) => {
   if (params.model && softDeleteModels.includes(params.model)) {

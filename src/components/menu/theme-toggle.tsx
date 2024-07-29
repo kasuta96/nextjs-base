@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
-import { useMounted } from "@/lib/hook/use-mounted"
+import { useMounted } from "@/lib/hooks/use-mounted"
 
 export function ThemeToggle() {
   const mounted = useMounted()

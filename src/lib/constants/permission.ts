@@ -19,6 +19,11 @@ export const permissions = [
     name: "user_private_name",
     remarks: "user_private_remarks",
   },
+  {
+    id: "team",
+    name: "team_name",
+    remarks: "team_remarks",
+  },
 ] as const
 
 export type PermissionIdType = (typeof permissions)[number]["id"]
