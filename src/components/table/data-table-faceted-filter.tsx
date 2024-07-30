@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
-import { Option } from "@/lib/helper"
+import { Option } from "~/types"
 import { useTranslations } from "next-intl"
 
 interface DataTableFacetedFilter<TData, TValue> {

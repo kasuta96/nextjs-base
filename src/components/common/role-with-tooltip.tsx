@@ -3,7 +3,6 @@ import React from "react"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Badge } from "@/components/ui/badge"
@@ -20,46 +19,42 @@ export default function RoleWithTooltip({
   return (
     <>
       {systemRole === "ADMIN" ? (
-        <TooltipProvider delayDuration={300}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span>{systemRole}</span>
-            </TooltipTrigger>
-            <TooltipContent className="space-y-4 p-4">
-              <span>{ShowTranslate("common", "Admin permissions")}</span>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span>{systemRole}</span>
+          </TooltipTrigger>
+          <TooltipContent className="space-y-4 p-4">
+            <span>{ShowTranslate("common", "Admin permissions")}</span>
+          </TooltipContent>
+        </Tooltip>
       ) : userRoles.length ? (
-        <TooltipProvider delayDuration={300}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="flex items-center space-x-1">
-                <div className="max-w-[100px] truncate">
-                  {userRoles[0].role.name}
-                </div>
-                {userRoles.length > 1 && (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
-                    +{userRoles.length - 1}
-                  </Badge>
-                )}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flex items-center space-x-1">
+              <div className="max-w-[100px] truncate">
+                {userRoles[0]?.role.name}
               </div>
-            </TooltipTrigger>
-            <TooltipContent className="space-y-4 p-4">
-              {userRoles.map((role) => (
-                <div key={role.role.name}>
-                  <div className="font-semibold">{role.role.name}</div>
-                  <div className="max-w-64 truncate text-muted-foreground">
-                    {role.role.remarks}
-                  </div>
+              {userRoles.length > 1 && (
+                <Badge
+                  variant="secondary"
+                  className="rounded-sm px-1 font-normal"
+                >
+                  +{userRoles.length - 1}
+                </Badge>
+              )}
+            </div>
+          </TooltipTrigger>
+          <TooltipContent className="space-y-4 p-4">
+            {userRoles.map((role) => (
+              <div key={role.role.name}>
+                <div className="font-semibold">{role.role.name}</div>
+                <div className="max-w-64 truncate text-muted-foreground">
+                  {role.role.remarks}
                 </div>
-              ))}
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+              </div>
+            ))}
+          </TooltipContent>
+        </Tooltip>
       ) : (
         "-"
       )}

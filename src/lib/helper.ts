@@ -1,5 +1,5 @@
 import { Account, Role } from "@prisma/client"
-import { LucideIcon } from "lucide-react"
+import { Option } from "~/types"
 import { User } from "./validations/user"
 
 // Create prisma select object from zod schema
@@ -14,12 +14,6 @@ export function createSelect(schema: any): object {
 }
 
 // Create an options from prisma enums
-export interface Option {
-  label: string
-  value: string
-  icon?: LucideIcon
-}
-
 export function enumToOptions<T extends Record<string, string>>(
   enumType: T
 ): Option[] {
@@ -30,7 +24,7 @@ export function enumToOptions<T extends Record<string, string>>(
       const value = enumType[key]
       options.push({
         label: key,
-        value: value,
+        value: value || "",
       })
     }
   }

@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
@@ -19,15 +18,11 @@ export function PermissionTooltip({
   const t = useTranslations()
 
   return (
-    <TooltipProvider delayDuration={300}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <HelpCircle className="h-5 w-5" />
-        </TooltipTrigger>
-        <TooltipContent>
-          {t(`permission.${permission?.remarks}`)}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <HelpCircle className="h-5 w-5" />
+      </TooltipTrigger>
+      <TooltipContent>{t(`permission.${permission?.remarks}`)}</TooltipContent>
+    </Tooltip>
   )
 }

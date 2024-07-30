@@ -7,6 +7,7 @@ export const ROUTE_PROFILE_SETTING = "/profile/setting"
 // Dashboard
 export const ROUTE_DASHBOARD = "/dashboard"
 export const ROUTE_USER = "/dashboard/user"
+export const ROUTE_TEAM = "/dashboard/team"
 export const ROUTE_ROLE = "/dashboard/role"
 // Static file
 export const ROUTE_DEFAULT_AVATAR = "/media/avatar.png"

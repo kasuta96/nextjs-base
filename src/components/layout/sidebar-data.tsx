@@ -1,7 +1,12 @@
 "use client"
 
-import { ROUTE_DASHBOARD, ROUTE_ROLE, ROUTE_USER } from "@/lib/constants/route"
-import { LayoutDashboard, UserCog, Users } from "lucide-react"
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_ROLE,
+  ROUTE_TEAM,
+  ROUTE_USER,
+} from "@/lib/constants/route"
+import { Handshake, LayoutDashboard, UserCog, Users } from "lucide-react"
 import { SessionUser } from "~/types/next-auth"
 
 export type Item = {
@@ -17,7 +22,7 @@ export function SidebarData(user: SessionUser) {
   let management: Item[] = [ITEM_DASHBOARD]
   // Private
   if (user.allPermission.read.includes("user") || user.systemRole === "ADMIN") {
-    management = [...management, ITEM_USER]
+    management = [...management, ITEM_USER, ITEM_TEAM]
   }
 
   // Setting area
@@ -49,4 +54,5 @@ const ITEM_DASHBOARD = {
   icon: <LayoutDashboard />,
 }
 const ITEM_USER = { name: "Users", path: ROUTE_USER, icon: <Users /> }
+const ITEM_TEAM = { name: "Teams", path: ROUTE_TEAM, icon: <Handshake /> }
 const ITEM_ROLE = { name: "Roles", path: ROUTE_ROLE, icon: <UserCog /> }

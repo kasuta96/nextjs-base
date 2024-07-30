@@ -10,6 +10,7 @@
     "Management Page": "Management Page",
     "Dashboard": "Dashboard",
     "Users": "Users",
+    "Teams": "Teams",
     "Roles": "Roles",
     "Profile": "Profile",
     "Setting": "Setting",
@@ -97,6 +98,8 @@
     "user_name": "User (Public)",
     "user_remarks": "Manage public information of users",
     "user_private_name": "User (Private)",
-    "user_private_remarks": "Manage private information of users"
+    "user_private_remarks": "Manage private information of users",
+    "team_name": "Teams",
+    "team_remarks": "Manage teams and team members"
   }
 }

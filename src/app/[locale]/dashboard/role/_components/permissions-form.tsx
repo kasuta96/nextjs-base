@@ -65,6 +65,7 @@ export function PermissionsForm({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      cache: "no-cache",
     })
 
     setIsSaving(false)
