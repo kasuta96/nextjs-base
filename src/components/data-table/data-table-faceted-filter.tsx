@@ -111,7 +111,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     </div>
                     {option.icon && (
                       <option.icon
-                        className="mr-2 size-4 text-muted-foreground"
+                        className={cn("mr-2 size-4", option.className)}
                         aria-hidden="true"
                       />
                     )}

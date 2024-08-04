@@ -1,7 +1,7 @@
 import {
-  ChevronsDownIcon,
+  ArrowUpAZIcon,
   ChevronsUpDownIcon,
-  ChevronsUpIcon,
+  ArrowDownAZIcon,
   EyeOffIcon,
 } from "lucide-react"
 import { type Column } from "@tanstack/react-table"
@@ -49,9 +49,9 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <span>{title}</span>
             {column.getCanSort() && column.getIsSorted() === "desc" ? (
-              <ChevronsDownIcon className="ml-2 size-4" aria-hidden="true" />
+              <ArrowUpAZIcon className="ml-2 size-4" aria-hidden="true" />
             ) : column.getIsSorted() === "asc" ? (
-              <ChevronsUpIcon className="ml-2 size-4" aria-hidden="true" />
+              <ArrowDownAZIcon className="ml-2 size-4" aria-hidden="true" />
             ) : (
               <ChevronsUpDownIcon className="ml-2 size-4" aria-hidden="true" />
             )}
@@ -64,7 +64,7 @@ export function DataTableColumnHeader<TData, TValue>({
                 aria-label="Sort ascending"
                 onClick={() => column.toggleSorting(false)}
               >
-                <ChevronsUpIcon
+                <ArrowDownAZIcon
                   className="text-muted-foreground/70 mr-2 size-3.5"
                   aria-hidden="true"
                 />
@@ -74,7 +74,7 @@ export function DataTableColumnHeader<TData, TValue>({
                 aria-label="Sort descending"
                 onClick={() => column.toggleSorting(true)}
               >
-                <ChevronsDownIcon
+                <ArrowUpAZIcon
                   className="text-muted-foreground/70 mr-2 size-3.5"
                   aria-hidden="true"
                 />

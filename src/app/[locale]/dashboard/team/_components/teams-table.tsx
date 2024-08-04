@@ -42,11 +42,15 @@ export function TeamsTable({ teamsPromise }: TeamsTableProps) {
     {
       label: "Status",
       value: "status",
-      options: status.map((s) => ({
-        label: s.label.toUpperCase(),
-        value: s.label,
-        icon: getStatusIcon(s.label),
-      })),
+      options: status.map((s) => {
+        const { icon: Icon, className } = getStatusIcon(s.label)
+        return {
+          label: s.label.toUpperCase(),
+          value: s.label,
+          icon: Icon,
+          className: className,
+        }
+      }),
     },
   ]
 

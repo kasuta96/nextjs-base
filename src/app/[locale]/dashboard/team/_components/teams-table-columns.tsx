@@ -29,6 +29,7 @@ import { getStatusIcon, status as statusOpt } from "@/lib/constants/option"
 import Moment from "react-moment"
 import { GripHorizontalIcon } from "lucide-react"
 import { updateTeam } from "@/lib/services/team"
+import { cn } from "@/lib/utils"
 
 export function getColumns(): ColumnDef<Team>[] {
   return [
@@ -98,14 +99,11 @@ export function getColumns(): ColumnDef<Team>[] {
 
         if (!status) return null
 
-        const Icon = getStatusIcon(status.value)
+        const { icon: Icon, className } = getStatusIcon(status.value)
 
         return (
           <div className="flex w-[6.25rem] items-center">
-            <Icon
-              className="mr-2 size-4 text-muted-foreground"
-              aria-hidden="true"
-            />
+            <Icon className={cn("mr-2 size-4", className)} aria-hidden="true" />
             <span className="capitalize">{status.label}</span>
           </div>
         )

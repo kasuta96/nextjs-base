@@ -38,6 +38,7 @@ import { Team } from "@prisma/client"
 import { status as statusOpt } from "@/lib/constants/option"
 import { RotateCwIcon } from "lucide-react"
 import { updateTeam } from "@/lib/services/team"
+import { Input } from "@/components/ui/input"
 
 interface UpdateTeamSheetProps
   extends React.ComponentPropsWithRef<typeof Sheet> {
@@ -55,6 +56,15 @@ export function UpdateTeamSheet({ team, ...props }: UpdateTeamSheetProps) {
       status: team.status,
     },
   })
+
+  React.useEffect(() => {
+    form.reset({
+      name: team.name ?? "",
+      description: team.description ?? "",
+      status: team.status,
+    })
+    console.log("team", team)
+  }, [form, team])
 
   function onSubmit(input: UpdateTeamSchema) {
     startUpdateTransition(async () => {
@@ -95,7 +105,7 @@ export function UpdateTeamSheet({ team, ...props }: UpdateTeamSheetProps) {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Textarea
+                    <Input
                       placeholder="Team name"
                       className="resize-none"
                       {...field}
