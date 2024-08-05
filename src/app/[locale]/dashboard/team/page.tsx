@@ -14,9 +14,13 @@ export const metadata = {
 }
 export interface IndexPageProps {
   searchParams: SearchParams
+  params: { locale: string }
 }
 
-export default async function TeamPage({ searchParams }: IndexPageProps) {
+export default async function TeamPage({
+  searchParams,
+  params: { locale },
+}: IndexPageProps) {
   const { read, write } = await checkPermission("team")
   if (!read) return <NoReadPermission />
 
@@ -25,16 +29,14 @@ export default async function TeamPage({ searchParams }: IndexPageProps) {
 
   return (
     <>
-      {/**
-       * The `DateRangePicker` component is used to render the date range picker UI.
-       * It is used to filter the Teams based on the selected date range it was created at.
-       * The business logic for filtering the Teams based on the selected date range is handled inside the component.
-       */}
       <React.Suspense fallback={<Skeleton className="h-7 w-52" />}>
         <DateRangePicker
           triggerSize="sm"
-          triggerClassName="ml-auto w-56 sm:w-60"
+          triggerClassName="ml-auto w-52"
           align="end"
+          fromParam="from"
+          toParam="to"
+          locale={locale}
         />
       </React.Suspense>
       <React.Suspense

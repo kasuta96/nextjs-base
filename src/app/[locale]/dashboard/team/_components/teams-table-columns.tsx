@@ -124,6 +124,17 @@ export function getColumns(): ColumnDef<Team>[] {
       ),
     },
     {
+      accessorKey: "updatedAt",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Updated At" />
+      ),
+      cell: ({ cell }) => (
+        <div className="whitespace-nowrap">
+          <Moment format="YYYY-MM-DD HH:mm">{cell.getValue() as Date}</Moment>
+        </div>
+      ),
+    },
+    {
       id: "actions",
       cell: function Cell({ row }) {
         const [isUpdatePending, startUpdateTransition] = React.useTransition()

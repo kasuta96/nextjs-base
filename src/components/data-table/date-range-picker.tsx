@@ -14,6 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { enUS, ja, vi } from "date-fns/locale"
 
 interface DateRangePickerProps
   extends React.ComponentPropsWithoutRef<typeof PopoverContent> {
@@ -60,6 +61,9 @@ interface DateRangePickerProps
    * @type string
    */
   triggerClassName?: string
+  fromParam: string
+  toParam: string
+  locale?: string
 }
 
 export function DateRangePicker({
@@ -70,6 +74,9 @@ export function DateRangePicker({
   triggerSize = "default",
   triggerClassName,
   className,
+  fromParam,
+  toParam,
+  locale,
   ...props
 }: DateRangePickerProps) {
   const router = useRouter()
@@ -77,8 +84,8 @@ export function DateRangePicker({
   const searchParams = useSearchParams()
 
   const [date, setDate] = React.useState<DateRange | undefined>(() => {
-    const fromParam = searchParams.get("from")
-    const toParam = searchParams.get("to")
+    const fromParamValue = searchParams.get(fromParam)
+    const toParamValue = searchParams.get(toParam)
 
     let fromDay: Date | undefined
     let toDay: Date | undefined
@@ -92,8 +99,8 @@ export function DateRangePicker({
     }
 
     return {
-      from: fromParam ? new Date(fromParam) : fromDay,
-      to: toParam ? new Date(toParam) : toDay,
+      from: fromParamValue ? new Date(fromParamValue) : fromDay,
+      to: toParamValue ? new Date(toParamValue) : toDay,
     }
   })
 
@@ -101,15 +108,16 @@ export function DateRangePicker({
   React.useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams)
     if (date?.from) {
-      newSearchParams.set("from", format(date.from, "yyyy-MM-dd"))
+      newSearchParams.set(fromParam, date.from.toISOString())
     } else {
-      newSearchParams.delete("from")
+      newSearchParams.delete(fromParam)
     }
 
     if (date?.to) {
-      newSearchParams.set("to", format(date.to, "yyyy-MM-dd"))
+      date.to.setHours(23, 59, 59, 999)
+      newSearchParams.set(toParam, date.to.toISOString())
     } else {
-      newSearchParams.delete("to")
+      newSearchParams.delete(toParam)
     }
 
     router.replace(`${pathname}?${newSearchParams.toString()}`, {
@@ -136,11 +144,11 @@ export function DateRangePicker({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
+                  {format(date.from, "yyyy-MM-dd")} ~{" "}
+                  {format(date.to, "yyyy-MM-dd")}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(date.from, "yyyy-MM-dd")
               )
             ) : (
               <span>{placeholder}</span>
@@ -155,6 +163,7 @@ export function DateRangePicker({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            locale={locale == "ja" ? ja : locale == "vi" ? vi : enUS}
           />
         </PopoverContent>
       </Popover>

@@ -63,7 +63,6 @@ export function UpdateTeamSheet({ team, ...props }: UpdateTeamSheetProps) {
       description: team.description ?? "",
       status: team.status,
     })
-    console.log("team", team)
   }, [form, team])
 
   function onSubmit(input: UpdateTeamSchema) {
