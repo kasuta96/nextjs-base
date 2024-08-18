@@ -22,6 +22,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { status as statusOpt } from "@/lib/constants/option"
 import { type CreateTeamSchema } from "@/lib/validations/team"
+import { cn } from "@/lib/utils"
 
 interface CreateTeamFormProps
   extends Omit<React.ComponentPropsWithRef<"form">, "onSubmit"> {
@@ -34,12 +35,13 @@ export function CreateTeamForm({
   form,
   onSubmit,
   children,
+  className,
 }: CreateTeamFormProps) {
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
+        className={cn("flex flex-col gap-4", className)}
       >
         <FormField
           control={form.control}

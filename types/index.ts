@@ -13,12 +13,21 @@ export interface Option {
   withCount?: boolean
 }
 
-export interface DataTableFilterField<TData> {
+interface BaseFilterField<TData> {
   label: string
   value: keyof TData
   placeholder?: string
-  options?: Option[]
 }
+
+export type DataTableFilterField<TData> =
+  | (BaseFilterField<TData> & {
+      type: "input" | "dateRange"
+      // options?: never
+    })
+  | (BaseFilterField<TData> & {
+      type: "select"
+      options: Option[]
+    })
 
 export interface DataTableFilterOption<TData> {
   id: string

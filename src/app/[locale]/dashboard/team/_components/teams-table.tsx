@@ -17,9 +17,10 @@ import { type getTeams } from "@/lib/services/team"
 
 interface TeamsTableProps {
   teamsPromise: ReturnType<typeof getTeams>
+  locale: string
 }
 
-export function TeamsTable({ teamsPromise }: TeamsTableProps) {
+export function TeamsTable({ teamsPromise, locale }: TeamsTableProps) {
   // Feature flags for showcasing some additional features. Feel free to remove them.
   const useFloatingBar = true
 
@@ -30,16 +31,19 @@ export function TeamsTable({ teamsPromise }: TeamsTableProps) {
 
   const filterFields: DataTableFilterField<Team>[] = [
     {
+      type: "input",
       label: "Title",
       value: "name",
       placeholder: "Filter titles...",
     },
     {
+      type: "input",
       label: "Description",
       value: "description",
       placeholder: "Filter descriptions...",
     },
     {
+      type: "select",
       label: "Status",
       value: "status",
       options: status.map((s) => {
@@ -51,6 +55,11 @@ export function TeamsTable({ teamsPromise }: TeamsTableProps) {
           className: className,
         }
       }),
+    },
+    {
+      type: "dateRange",
+      label: "Created At",
+      value: "createdAt",
     },
   ]
 
@@ -75,7 +84,11 @@ export function TeamsTable({ teamsPromise }: TeamsTableProps) {
         useFloatingBar ? <TeamsTableFloatingBar table={table} /> : null
       }
     >
-      <DataTableToolbar table={table} filterFields={filterFields}>
+      <DataTableToolbar
+        table={table}
+        filterFields={filterFields}
+        locale={locale}
+      >
         <TeamsTableToolbarActions table={table} />
       </DataTableToolbar>
     </DataTable>

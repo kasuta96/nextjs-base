@@ -10,11 +10,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
+import { DateRangePicker } from "./date-range-picker"
 
 interface DataTableToolbarProps<TData>
   extends React.HTMLAttributes<HTMLDivElement> {
   table: Table<TData>
   filterFields?: DataTableFilterField<TData>[]
+  locale: string
 }
 
 export function DataTableToolbar<TData>({
@@ -22,17 +24,10 @@ export function DataTableToolbar<TData>({
   filterFields = [],
   children,
   className,
+  locale,
   ...props
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-
-  // Memoize computation of searchableColumns and filterableColumns
-  const { searchableColumns, filterableColumns } = React.useMemo(() => {
-    return {
-      searchableColumns: filterFields.filter((field) => !field.options),
-      filterableColumns: filterFields.filter((field) => field.options),
-    }
-  }, [filterFields])
 
   return (
     <div
@@ -43,41 +38,52 @@ export function DataTableToolbar<TData>({
       {...props}
     >
       <div className="flex flex-1 items-center space-x-2">
-        {searchableColumns.length > 0 &&
-          searchableColumns.map(
-            (column) =>
-              table.getColumn(column.value ? String(column.value) : "") && (
+        {filterFields.map((field) => {
+          const column = table.getColumn(String(field.value) || "")
+          if (!column) return null
+
+          switch (field.type) {
+            case "input":
+              return (
                 <Input
-                  key={String(column.value)}
-                  placeholder={column.placeholder}
-                  value={
-                    (table
-                      .getColumn(String(column.value))
-                      ?.getFilterValue() as string) ?? ""
-                  }
+                  key={String(field.value)}
+                  placeholder={field.placeholder}
+                  value={(column.getFilterValue() as string) ?? ""}
                   onChange={(event) =>
-                    table
-                      .getColumn(String(column.value))
-                      ?.setFilterValue(event.target.value)
+                    column.setFilterValue(event.target.value)
                   }
-                  className="h-8 w-40 lg:w-64"
+                  className="h-8 w-40 xl:w-64"
                 />
               )
-          )}
-        {filterableColumns.length > 0 &&
-          filterableColumns.map(
-            (column) =>
-              table.getColumn(column.value ? String(column.value) : "") && (
+
+            case "select":
+              return (
                 <DataTableFacetedFilter
-                  key={String(column.value)}
-                  column={table.getColumn(
-                    column.value ? String(column.value) : ""
-                  )}
-                  title={column.label}
-                  options={column.options ?? []}
+                  key={String(field.value)}
+                  column={column}
+                  title={field.label}
+                  options={field.options ?? []}
                 />
               )
-          )}
+
+            case "dateRange":
+              return (
+                <DateRangePicker
+                  key={String(field.value)}
+                  column={column}
+                  triggerSize="sm"
+                  align="end"
+                  paramName={String(field.value)}
+                  title={field.label}
+                  locale={locale}
+                />
+              )
+
+            default:
+              return null
+          }
+        })}
+
         {isFiltered && (
           <Button
             aria-label="Reset filters"

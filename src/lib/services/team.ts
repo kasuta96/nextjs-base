@@ -8,7 +8,7 @@ import {
 } from "@/lib/validations/team"
 import { Prisma, Status, Team } from "@prisma/client"
 import { unstable_noStore as noStore, revalidatePath } from "next/cache"
-import { getErrorMessage, showErrorToast } from "@/lib/handle-error"
+import { getErrorMessage } from "@/lib/handle-error"
 import { checkPermission } from "./permission"
 
 export async function getTeams(input: GetTeamsSchema) {
@@ -18,8 +18,7 @@ export async function getTeams(input: GetTeamsSchema) {
     per_page,
     sort,
     operator,
-    from,
-    to,
+    createdAt,
     name,
     description,
     status,
@@ -39,8 +38,9 @@ export async function getTeams(input: GetTeamsSchema) {
       : undefined
 
     // Convert the date strings to date objects
+    const [from, to] = createdAt ? createdAt.split("~", 2) : []
     const fromDay = from ? new Date(from) : undefined
-    const toDay = to ? new Date(to) : undefined
+    const toDay = to ? new Date(to) : new Date()
 
     // Construct where conditions
     const conditions: Prisma.TeamWhereInput[] = [

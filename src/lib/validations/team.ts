@@ -6,6 +6,7 @@ export const searchTeamParams = searchParamsCommon.extend({
   name: z.string().optional(),
   description: z.string().optional(),
   status: z.string().optional(),
+  createdAt: z.string().optional(),
 })
 
 export type GetTeamsSchema = z.infer<typeof searchTeamParams>

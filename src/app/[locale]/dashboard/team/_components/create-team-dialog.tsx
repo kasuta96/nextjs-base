@@ -60,9 +60,13 @@ export function CreateTeamDialog() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-sky-600 hover:bg-sky-foreground"
+          >
             <PlusIcon className="mr-2 size-4" aria-hidden="true" />
-            New team
+            Create
           </Button>
         </DialogTrigger>
         <DialogContent>
@@ -97,9 +101,13 @@ export function CreateTeamDialog() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-sky-600 hover:bg-sky-foreground"
+        >
           <PlusIcon className="mr-2 size-4" aria-hidden="true" />
-          New team
+          Create
         </Button>
       </DrawerTrigger>
 
@@ -110,20 +118,22 @@ export function CreateTeamDialog() {
             Fill in the details below to create a new team.
           </DrawerDescription>
         </DrawerHeader>
-        <DrawerFooter className="gap-2 sm:space-x-0">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-          <Button disabled={isCreatePending}>
-            {isCreatePending && (
-              <RotateCwIcon
-                className="mr-2 size-4 animate-spin"
-                aria-hidden="true"
-              />
-            )}
-            Create
-          </Button>
-        </DrawerFooter>
+        <CreateTeamForm form={form} onSubmit={onSubmit} className="px-4">
+          <DrawerFooter className="gap-2 sm:space-x-0">
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+            <Button disabled={isCreatePending}>
+              {isCreatePending && (
+                <RotateCwIcon
+                  className="mr-2 size-4 animate-spin"
+                  aria-hidden="true"
+                />
+              )}
+              Create
+            </Button>
+          </DrawerFooter>
+        </CreateTeamForm>
       </DrawerContent>
     </Drawer>
   )

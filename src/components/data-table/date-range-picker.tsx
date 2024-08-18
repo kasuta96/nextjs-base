@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Column } from "@tanstack/react-table"
 import { CalendarSearchIcon } from "lucide-react"
 import { addDays, format } from "date-fns"
 import type { DateRange } from "react-day-picker"
@@ -14,16 +14,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Separator } from "@/components/ui/separator"
 import { enUS, ja, vi } from "date-fns/locale"
 
-interface DateRangePickerProps
+interface DateRangePickerProps<TData, TValue>
   extends React.ComponentPropsWithoutRef<typeof PopoverContent> {
-  /**
-   * The selected date range.
-   * @default undefined
-   * @type DateRange
-   * @example { from: new Date(), to: new Date() }
-   */
+  column?: Column<TData, TValue>
+  title?: string
   dateRange?: DateRange
 
   /**
@@ -61,12 +58,13 @@ interface DateRangePickerProps
    * @type string
    */
   triggerClassName?: string
-  fromParam: string
-  toParam: string
+  paramName: string
   locale?: string
 }
 
-export function DateRangePicker({
+export function DateRangePicker<TData, TValue>({
+  column,
+  title,
   dateRange,
   dayCount,
   placeholder = "Pick a date",
@@ -74,18 +72,17 @@ export function DateRangePicker({
   triggerSize = "default",
   triggerClassName,
   className,
-  fromParam,
-  toParam,
+  paramName,
   locale,
   ...props
-}: DateRangePickerProps) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+}: DateRangePickerProps<TData, TValue>) {
+  const localeValue = locale ? { ja, vi, en: enUS }[locale] : undefined
+  const rangeValue = new Set(column?.getFilterValue() as string)
+  const rvStr = Array.from(rangeValue).pop() ?? ""
 
   const [date, setDate] = React.useState<DateRange | undefined>(() => {
-    const fromParamValue = searchParams.get(fromParam)
-    const toParamValue = searchParams.get(toParam)
+    // Get from & to date from the Set
+    const [fromParam, toParam] = rvStr ? rvStr.split("~", 2) : []
 
     let fromDay: Date | undefined
     let toDay: Date | undefined
@@ -99,33 +96,28 @@ export function DateRangePicker({
     }
 
     return {
-      from: fromParamValue ? new Date(fromParamValue) : fromDay,
-      to: toParamValue ? new Date(toParamValue) : toDay,
+      from: fromParam ? new Date(fromParam) : fromDay,
+      to: toParam ? new Date(toParam) : toDay,
     }
   })
 
-  // Update query string
   React.useEffect(() => {
-    const newSearchParams = new URLSearchParams(searchParams)
+    let paramValue = ""
     if (date?.from) {
-      newSearchParams.set(fromParam, date.from.toISOString())
-    } else {
-      newSearchParams.delete(fromParam)
+      paramValue += date.from.toISOString()
     }
-
     if (date?.to) {
-      date.to.setHours(23, 59, 59, 999)
-      newSearchParams.set(toParam, date.to.toISOString())
-    } else {
-      newSearchParams.delete(toParam)
+      date?.to.setHours(23, 59, 59, 999)
+      paramValue += "~" + date?.to.toISOString()
     }
+    column?.setFilterValue(paramValue || undefined)
+  }, [date, column])
 
-    router.replace(`${pathname}?${newSearchParams.toString()}`, {
-      scroll: false,
-    })
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date?.from, date?.to])
+  React.useEffect(() => {
+    if (!rvStr) {
+      setDate(undefined)
+    }
+  }, [rvStr])
 
   return (
     <div className="grid gap-2">
@@ -134,22 +126,13 @@ export function DateRangePicker({
           <Button
             variant={triggerVariant}
             size={triggerSize}
-            className={cn(
-              "w-full justify-start truncate text-left font-normal",
-              !date && "text-muted-foreground",
-              triggerClassName
-            )}
+            className={cn(!date && "text-muted-foreground", triggerClassName)}
           >
             <CalendarSearchIcon className="mr-2 size-4" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "yyyy-MM-dd")} ~{" "}
-                  {format(date.to, "yyyy-MM-dd")}
-                </>
-              ) : (
-                format(date.from, "yyyy-MM-dd")
-              )
+            {title}
+            <Separator orientation="vertical" className="mx-2 h-4" />
+            {rangeValue.size > 0 ? (
+              `${date?.from ? format(date.from, "yyyy-MM-dd") + " ~" : ""}${date?.to ? ` ${format(date.to, "yyyy-MM-dd")}` : ""}`
             ) : (
               <span>{placeholder}</span>
             )}
@@ -163,7 +146,7 @@ export function DateRangePicker({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
-            locale={locale == "ja" ? ja : locale == "vi" ? vi : enUS}
+            locale={localeValue}
           />
         </PopoverContent>
       </Popover>
